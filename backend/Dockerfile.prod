@@ -1,0 +1,73 @@
+# Production image for the NoYou API.
+#
+# Multi-stage build:
+#   1) "builder" compiles wheels for our deps (needs gcc/libpq-dev).
+#   2) the final stage installs those wheels into a slim runtime image with no
+#      build toolchain, runs as a non-root user, and launches Gunicorn with
+#      Uvicorn workers.
+#
+# Only the backend is copied in (code lives at /app/app). The frontend is NOT
+# baked in; it is mounted read-only at /frontend by docker-compose.prod.yml,
+# which is exactly where app/main.py resolves it (parent.parent.parent/"frontend"
+# == "/frontend" because WORKDIR is /app). On platforms where you cannot mount a
+# volume (e.g. Render/Fly), the app still boots and serves the JSON API; the "/"
+# route just returns a small JSON message instead of the dashboard.
+
+# ----------------------------------------------------------------------------
+# Stage 1 — build wheels
+# ----------------------------------------------------------------------------
+FROM python:3.11-slim AS builder
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /build
+
+# Build deps for psycopg2 / bcrypt native wheels.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc libpq-dev && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+# Pre-build wheels so the runtime stage installs without a compiler.
+RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
+
+# ----------------------------------------------------------------------------
+# Stage 2 — runtime
+# ----------------------------------------------------------------------------
+FROM python:3.11-slim AS runtime
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    ENVIRONMENT=production
+
+WORKDIR /app
+
+# libpq is needed at runtime by psycopg2 (the build toolchain is not).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 && rm -rf /var/lib/apt/lists/*
+
+# Install the pre-built wheels, then drop them.
+COPY --from=builder /wheels /wheels
+COPY requirements.txt .
+RUN pip install --no-cache-dir --no-index --find-links=/wheels -r requirements.txt \
+    && rm -rf /wheels
+
+# Copy the backend application code (this includes gunicorn_conf.py at /app).
+COPY . .
+
+# Create and switch to an unprivileged user. Done after COPY so the files are
+# owned by root and not writable by the app user (defence in depth).
+RUN groupadd --system noyou && useradd --system --gid noyou --no-create-home noyou
+USER noyou
+
+EXPOSE 8000
+
+# Lightweight container healthcheck hitting the app's /health endpoint.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+    CMD python -c "import urllib.request,sys; sys.exit(0) if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=4).status == 200 else sys.exit(1)"
+
+# Gunicorn (master) + Uvicorn workers (ASGI). Tunables come from gunicorn_conf.py
+# / environment variables. See backend/gunicorn_conf.py.
+CMD ["gunicorn", "app.main:app", "-k", "uvicorn.workers.UvicornWorker", "-c", "gunicorn_conf.py"]

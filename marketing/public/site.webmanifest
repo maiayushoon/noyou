@@ -1,0 +1,17 @@
+{
+  "name": "NoYou — AI Reputation & Digital Identity Management",
+  "short_name": "NoYou",
+  "description": "AI-powered digital identity and reputation management. Monitor mentions, score your reputation, catch risks, and shape how AI engines describe you.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1f4e79",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+Alembic migrations for NoYou.
+
+The database URL and ORM metadata are read from the application at runtime
+(see env.py): alembic.ini leaves sqlalchemy.url blank and env.py injects
+app.core.config.settings.database_url, with target_metadata = Base.metadata.
+
+Common commands (run from backend/ with the venv active):
+
+    alembic revision --autogenerate -m "describe change"
+    alembic upgrade head
+    alembic downgrade -1
+    alembic current
+    alembic history
+
+render_as_batch=True is enabled so ALTER operations also work on SQLite.
+See ../../DEPLOYMENT.md ("Database migrations (Alembic)") for the deploy flow.

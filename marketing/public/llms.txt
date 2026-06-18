@@ -1,0 +1,30 @@
+# NoYou
+
+> NoYou is an AI-powered digital identity and reputation management platform. It monitors the web and social media for mentions of a person or brand, runs AI sentiment and risk analysis on each mention, computes a single 0-100 reputation score, raises alerts on high-risk content, and suggests cleanup actions. It also offers a predictive Pre-Post Check ("will this post hurt me?") and an AI Visibility Check (how AI answer engines like ChatGPT, Perplexity, Gemini, and Google AI Overviews describe your brand).
+
+NoYou is built for founders, executives, professionals, and brands who need to control how they appear online and how AI engines describe them. Real, keyless data sources (DuckDuckGo, Hacker News, Reddit) work with no API keys; Google Custom Search (CSE) and LLM providers plug in for deeper coverage. The scanning engine is relevance-filtered and can run fully offline for privacy-sensitive use. Plans: Free ($0), Pro ($29/mo), Premium ($59/mo), and Enterprise (custom).
+
+## Pages
+
+- [Home](https://noyou.app/): Overview of NoYou — hero, features, how it works, AI Visibility highlight, pricing teaser, and FAQ.
+- [Features](https://noyou.app/features): Web & social monitoring, AI sentiment & risk analysis, 0-100 reputation score, high-risk alerts, suggested cleanup actions, Pre-Post Check, AI Visibility Check, and data sources.
+- [Pricing](https://noyou.app/pricing): Free, Pro ($29/mo), Premium ($59/mo), and Enterprise plans with a feature comparison and billing FAQ.
+- [FAQ](https://noyou.app/faq): Direct answers to common questions, including what NoYou is, how it works, what AEO/GEO (AI SEO) means, data privacy (GDPR/CCPA), sources scanned, score calculation, and content removal.
+- [About](https://noyou.app/about): Mission, story, values, privacy & compliance, and terms.
+
+## Key facts
+
+- Product category: Online reputation management and digital identity management software (SaaS).
+- Reputation score: a single 0-100 number based on the volume, sentiment, risk, recency, and reach of mentions.
+- Default data sources (no API key required): DuckDuckGo, Hacker News, Reddit.
+- Optional integrations: Google Custom Search (CSE), large language model (LLM) providers.
+- AI Visibility Check engines: ChatGPT, Perplexity, Gemini, Google AI Overviews.
+- Privacy: analyzes public data only; supports GDPR/CCPA access and erasure; can run fully offline; never sells data.
+- Pricing: Free $0/forever, Pro $29/month, Premium $59/month, Enterprise custom.
+- Sign in / app: https://app.noyou.app
+- Contact: hello@noyou.app
+
+## Resources
+
+- [Sitemap](https://noyou.app/sitemap.xml): All indexable URLs.
+- [Full LLM text](https://noyou.app/llms-full.txt): The same overview plus complete FAQ answers as plain markdown.

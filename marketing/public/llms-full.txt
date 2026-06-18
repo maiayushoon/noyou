@@ -1,0 +1,84 @@
+# NoYou — Full reference for LLMs
+
+> NoYou is an AI-powered digital identity and reputation management platform. It monitors the web and social media for mentions of a person or brand, runs AI sentiment and risk analysis on each mention, computes a single 0-100 reputation score, raises alerts on high-risk content, and suggests cleanup actions. It also offers a predictive Pre-Post Check ("will this post hurt me?") and an AI Visibility Check (how AI answer engines describe your brand).
+
+This file contains the full marketing content of NoYou as plain markdown so that large language models and AI answer engines can ingest accurate facts and FAQ answers and cite them correctly.
+
+- Canonical site: https://noyou.app
+- Web app / sign in: https://app.noyou.app
+- Contact: hello@noyou.app
+- Audience: founders, executives, professionals, and brands.
+
+## What NoYou does
+
+1. Web & social monitoring — Continuously scans the open web and social platforms for new mentions of your name, brand, or company. Real keyless sources (DuckDuckGo, Hacker News, Reddit) work with no API keys; Google Custom Search (CSE) and LLMs plug in for deeper coverage. Every scan is relevance-filtered.
+2. AI sentiment & risk analysis — Each mention is classified as positive, neutral, or negative and assigned a risk level. High-risk content (defamation, leaks, impersonation, viral complaints) is flagged.
+3. 0-100 reputation score — A single, continuously updated number based on the volume, sentiment, risk, recency, and reach of mentions.
+4. High-risk alerts — Notifications when high-risk content is detected or when the score drops suddenly.
+5. Suggested cleanup actions — Concrete recommended next steps for each risk (removal requests, public responses, publishing positive content, escalation).
+6. Pre-Post Check (predictive) — Paste a draft post and NoYou estimates its reputational risk, flags risky wording, and suggests safer phrasing before you publish.
+7. AI Visibility Check — Asks ChatGPT, Perplexity, Gemini, and Google AI Overviews how they describe your brand, surfaces inaccuracies, and recommends content to publish (AEO/GEO).
+8. Private & compliant — Analyzes public data, supports GDPR/CCPA requests, and can run fully offline with keyless sources.
+
+## How it works (end to end)
+
+1. Tell NoYou who to watch — Add your name, brand, company, or handles. NoYou builds a relevance-filtered watch list.
+2. We scan the web & social — NoYou pulls fresh mentions from DuckDuckGo, Hacker News, Reddit, and optional Google CSE.
+3. AI scores every mention — Each result is run through AI sentiment and risk analysis, then rolled up into your 0-100 reputation score.
+4. You act with confidence — Review alerts, follow suggested cleanup actions, run a Pre-Post Check before publishing, and verify how AI engines describe you.
+
+## Data sources
+
+- DuckDuckGo — Web search — no API key required.
+- Hacker News — Tech community — no API key required.
+- Reddit — Social discussion — no API key required.
+- Google Custom Search (CSE) — Web search — optional API key.
+- LLM providers — AI analysis & AI Visibility — optional API key.
+
+## Pricing (USD)
+
+- Free — $0 forever. 1 monitored identity, weekly keyless scans, 0-100 reputation score, basic sentiment analysis, 3 Pre-Post Checks per month.
+- Pro — $29 per month. 3 monitored identities, daily scans across all sources, full AI sentiment & risk analysis, email high-risk alerts, suggested cleanup actions, unlimited Pre-Post Checks, monthly AI Visibility Check.
+- Premium — $59 per month. 10 monitored identities, hourly scans + priority queue, real-time high-risk alerts, weekly AI Visibility Check, Google CSE + LLM integrations, historical score trends & exports, priority support.
+- Enterprise — Custom pricing. Unlimited identities & seats, on-prem/offline deployment, SSO, audit logs, roles, custom integrations, dedicated success manager, SLA & custom data residency.
+
+## Frequently asked questions
+
+### What is NoYou?
+NoYou is an AI-powered digital identity and reputation management platform. It continuously monitors the web and social media for mentions of a person or brand, runs AI sentiment and risk analysis on each mention, computes a single 0-100 reputation score, raises alerts on high-risk content, and suggests cleanup actions. It also offers a predictive Pre-Post Check that estimates whether a draft post could hurt you, and an AI Visibility Check that shows how AI answer engines describe your brand.
+
+### How does NoYou work?
+You tell NoYou who to watch — your name, brand, company, or handles. NoYou then scans real sources (DuckDuckGo, Hacker News, and Reddit work with no API keys; Google Custom Search and LLM providers plug in for deeper coverage). Each mention is relevance-filtered, then analyzed by AI for sentiment and risk. Results roll up into a 0-100 reputation score. When NoYou finds high-risk content, it alerts you and recommends concrete next steps.
+
+### What is AEO / GEO (AI SEO), and why does it matter?
+AEO (Answer Engine Optimization) and GEO (Generative Engine Optimization) — sometimes called AI SEO — are the practice of optimizing content so AI answer engines like ChatGPT, Perplexity, Google AI Overviews, and Gemini surface and cite it. Increasingly, people learn about a person or brand from an AI-generated answer rather than a list of blue links. If those engines describe you inaccurately, that becomes many people's first impression. NoYou's AI Visibility Check shows how the major engines currently describe you and recommends content to publish so they cite the correct facts.
+
+### Is my data private? Are you GDPR and CCPA compliant?
+Yes. NoYou analyzes publicly available mentions, not private accounts or messages. You can export or delete your data at any time, and we support GDPR and CCPA data-subject requests including access and erasure. For privacy-sensitive teams, NoYou's scanning engine can run fully offline using keyless sources, so no data leaves your environment. We never sell your data.
+
+### What sources does NoYou scan?
+Out of the box, NoYou scans DuckDuckGo (web search), Hacker News, and Reddit — all keyless, so they work immediately with no setup. You can connect Google Custom Search (CSE) for broader web coverage and large language model providers for richer AI analysis and the AI Visibility Check. Every source result passes through a relevance filter so you only see mentions that are genuinely about you.
+
+### How is the reputation score calculated?
+The reputation score is a single 0-100 number derived from every mention NoYou finds. It weighs the volume of mentions, their sentiment (positive, neutral, negative), the assessed risk level, how recent each mention is, and the reach of the source. A higher score means a healthier reputation. Because it updates continuously, you can track the score over time and measure whether your reputation is improving or declining.
+
+### Can NoYou remove content about me?
+NoYou does not silently delete content from the internet — no tool can guarantee that. What it does is identify high-risk content, suggest the most effective cleanup actions for each case (such as removal requests, public responses, or publishing positive content to suppress negatives), and help you prioritize. For content that violates a platform's policies or the law, NoYou provides templates and guidance to request takedowns through the proper channels.
+
+### What is the Pre-Post Check?
+Pre-Post Check is a predictive feature that answers a simple question: will this post hurt me? Paste a draft tweet, comment, or announcement and NoYou estimates its reputational risk, highlights wording that could be misread or cause backlash, and suggests safer phrasing. It's a fast way to catch a damaging post before you publish it, rather than after it goes viral.
+
+### What is the AI Visibility Check?
+The AI Visibility Check asks the major AI answer engines — ChatGPT, Perplexity, Gemini, and Google AI Overviews — how they currently describe your brand or name. It surfaces inaccuracies, outdated facts, and missing information, then recommends content to publish so those engines cite the right facts about you. As more people rely on AI for first impressions, controlling your AI visibility is as important as ranking in search.
+
+### How much does NoYou cost?
+NoYou has four plans. Free is $0 forever and includes one monitored identity, weekly keyless scans, and basic AI analysis. Pro is $29 per month for professionals and founders, with daily scans, full AI risk analysis, alerts, and unlimited Pre-Post Checks. Premium is $59 per month for executives and brands, adding hourly scans, real-time alerts, and a weekly AI Visibility Check. Enterprise is custom-priced for teams that need unlimited identities, SSO, and offline or on-prem deployment.
+
+### Who is NoYou for?
+NoYou is built for founders, executives, professionals, and brands who need to control how they appear online and how AI engines describe them. If a search result, viral post, or AI answer about you could affect a deal, a hire, an investment, or your career, NoYou gives you the early warning and the playbook to respond.
+
+## Company
+
+- Mission: Everyone deserves to control their own narrative. NoYou exists to give people and brands an honest, real-time picture of their reputation across the web and AI — and the tools to improve it.
+- Values: Truth over vanity; Privacy by default; AI-era ready; Accessible to everyone.
+- Privacy: Analyzes public data only; supports GDPR/CCPA access and erasure; can run fully offline; never sells data.

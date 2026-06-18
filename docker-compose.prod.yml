@@ -1,0 +1,96 @@
+# Production stack for NoYou — one command to go live with automatic HTTPS.
+#
+#   docker compose -f docker-compose.prod.yml up -d --build
+#
+# Components:
+#   * db    — Postgres 16 (persistent volume).
+#   * api   — the FastAPI app, built from backend/Dockerfile.prod, served by
+#             Gunicorn + Uvicorn workers. NOT published to the host directly;
+#             only Caddy can reach it over the internal compose network.
+#   * caddy — reverse proxy on 80/443 that fetches & renews TLS certificates
+#             automatically (Let's Encrypt / ZeroSSL) for $DOMAIN and proxies
+#             traffic to api:8000.
+#
+# All secrets/config come from the .env file in this directory (copy it from
+# .env.production.example). See DEPLOYMENT.md for the full go-live guide.
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-noyou}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-noyou}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # Not published to the host: only the api service reaches Postgres over the
+    # internal network. Remove this comment + add a "ports" mapping only if you
+    # truly need external DB access (and then firewall it).
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-noyou}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    # Read every runtime setting from .env (DATABASE_URL, SECRET_KEY, SMTP_*,
+    # CONNECTORS, CORS_ORIGINS, FRONTEND_URL, etc.). env_file keeps secrets out
+    # of this committed file.
+    env_file:
+      - .env
+    environment:
+      # Sensible production defaults; anything in .env overrides these because
+      # env_file is read first and explicit "environment" wins on conflicts only
+      # if set here — so we leave overridable knobs out and pin just the basics.
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+    # Mount the frontend read-only at /frontend — this is exactly where
+    # app/main.py looks (parent.parent.parent/"frontend"; WORKDIR is /app so the
+    # path resolves to /frontend). Without this mount the API still runs and
+    # serves JSON; with it, the dashboard UI is served at "/".
+    volumes:
+      - ./frontend:/frontend:ro
+    expose:
+      # Visible to other compose services (Caddy) but NOT published to the host.
+      - "8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0) if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=4).status==200 else sys.exit(1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"   # HTTP/3 (QUIC)
+    environment:
+      # Used inside the Caddyfile. Set DOMAIN in .env to your real hostname to
+      # get a publicly trusted certificate; leave it as :80 / localhost for a
+      # plain-HTTP test (see Caddyfile for details).
+      DOMAIN: ${DOMAIN:-localhost}
+      # Email Let's Encrypt uses for expiry notices (optional but recommended).
+      ACME_EMAIL: ${ACME_EMAIL:-}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # Persist issued certificates + ACME account so restarts don't re-request
+      # certs and hit rate limits.
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

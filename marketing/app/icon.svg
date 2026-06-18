@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="NoYou logo">
+  <rect width="64" height="64" rx="14" fill="#1f4e79"/>
+  <path d="M18 46V18h6.2l13.2 17.6V18H44v28h-6.1L24.6 28.3V46H18Z" fill="#ffffff"/>
+  <circle cx="48" cy="20" r="6" fill="#16b8a6"/>
+</svg>

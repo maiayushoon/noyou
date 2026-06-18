@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "noyou",
+      "runtimeExecutable": "C:\\ayush\\noyou\\backend\\venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-m", "uvicorn", "app.main:app", "--app-dir", "backend", "--port", "8000"],
+      "port": 8000
+    },
+    {
+      "name": "noyou-frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3002,
+      "autoPort": false,
+      "cwd": "C:\\ayush\\noyou\\frontend"
+    }
+  ]
+}

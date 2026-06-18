@@ -1,0 +1,57 @@
+# Caddy reverse proxy for NoYou.
+#
+# Caddy gets a free, auto-renewing TLS certificate from Let's Encrypt for your
+# domain and proxies HTTPS traffic to the API container on port 8000. There is
+# nothing to run by hand: point your domain's DNS A/AAAA record at this server,
+# set DOMAIN (and optionally ACME_EMAIL) in .env, and start the stack.
+#
+# How the {$DOMAIN} placeholder works:
+#   * Set DOMAIN=example.com           -> Caddy serves https://example.com with
+#                                         a publicly trusted cert (auto HTTPS),
+#                                         and redirects http://example.com to it.
+#   * Leave DOMAIN=localhost (default) -> Caddy serves https://localhost with a
+#                                         local self-signed cert (handy for a
+#                                         quick test on the box itself).
+#   * Set DOMAIN=:80                   -> plain HTTP only, no TLS (use only
+#                                         behind another TLS terminator / for
+#                                         throwaway testing).
+#
+# Caddy substitutes {$DOMAIN} / {$ACME_EMAIL} from the environment at startup
+# (passed through by docker-compose.prod.yml).
+
+{
+	# ACME contact email for certificate expiry notices. Harmless if empty.
+	email {$ACME_EMAIL}
+	# To debug TLS issuance against Let's Encrypt's staging CA, uncomment:
+	# acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+{$DOMAIN} {
+	# Reverse-proxy all traffic to the API service (compose service name "api").
+	reverse_proxy api:8000
+
+	# gzip/zstd compress responses for faster page loads.
+	encode zstd gzip
+
+	# Security headers applied to every response.
+	header {
+		# Force HTTPS for a year, including subdomains. Only sent over HTTPS.
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+		# Disable MIME-type sniffing.
+		X-Content-Type-Options "nosniff"
+		# Don't let the site be framed (clickjacking protection).
+		X-Frame-Options "DENY"
+		# Send no referrer to other origins.
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# Lock down powerful browser features we don't use.
+		Permissions-Policy "geolocation=(), microphone=(), camera=()"
+		# Don't advertise the server software.
+		-Server
+	}
+
+	# Structured access logs to stdout (collected by `docker logs caddy`).
+	log {
+		output stdout
+		format console
+	}
+}
