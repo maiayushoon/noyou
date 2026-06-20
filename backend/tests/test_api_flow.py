@@ -54,7 +54,7 @@ def test_full_scan_pipeline(auth_client):
     dash = auth_client.get("/api/v1/dashboard").json()
     assert dash["total_mentions"] > 0
     assert 0 <= dash["reputation_score"] <= 100
-    assert dash["band"] in ("low", "medium", "high", "critical")
+    assert dash["band"] in ("excellent", "high", "medium", "low", "critical")
 
     # Mentions have analysis attached.
     mentions = auth_client.get("/api/v1/mentions").json()

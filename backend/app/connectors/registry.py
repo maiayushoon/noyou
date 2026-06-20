@@ -9,6 +9,7 @@ from .free_web import (
     HackerNewsConnector,
     RedditPublicConnector,
 )
+from .news_rss import BingNewsConnector, GoogleNewsConnector
 from .providers import (
     GoogleConnector,
     LinkedInConnector,
@@ -23,6 +24,8 @@ _REGISTRY: dict[str, type[BaseConnector]] = {
     HackerNewsConnector.name: HackerNewsConnector,      # "hackernews"
     RedditPublicConnector.name: RedditPublicConnector,  # "reddit_public"
     DuckDuckGoConnector.name: DuckDuckGoConnector,       # "web"
+    GoogleNewsConnector.name: GoogleNewsConnector,       # "googlenews" (keyless Google News RSS)
+    BingNewsConnector.name: BingNewsConnector,           # "bing" (keyless Bing News RSS)
     # Keyed connectors (activate when credentials are configured):
     GoogleConnector.name: GoogleConnector,
     TwitterConnector.name: TwitterConnector,

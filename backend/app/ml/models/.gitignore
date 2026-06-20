@@ -1,0 +1,3 @@
+# Built model artifacts are not committed — regenerate with `python -m app.ml.train`.
+*
+!.gitignore

@@ -118,7 +118,12 @@ export interface CleanupAction {
   created_at: string;
 }
 
-export type DashboardBand = "low" | "medium" | "high" | "critical";
+export type DashboardBand =
+  | "excellent"
+  | "high"
+  | "medium"
+  | "low"
+  | "critical";
 
 export interface SentimentCounts {
   positive: number;
@@ -585,8 +590,8 @@ export const api = {
   },
 
   /* ---- reports / trends ---- */
-  reports(): Promise<Report> {
-    return request<Report>("/reports");
+  reports(params?: { days?: number }): Promise<Report> {
+    return request<Report>("/reports", { query: params });
   },
 
   /* ---- privacy ---- */

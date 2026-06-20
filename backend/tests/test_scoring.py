@@ -1,6 +1,11 @@
 from datetime import datetime, timezone
 
-from app.services.scoring import ScoredMention, compute_score, risk_band
+from app.services.scoring import (
+    ScoredMention,
+    compute_score,
+    reputation_band,
+    risk_band,
+)
 
 NOW = datetime(2025, 1, 1, tzinfo=timezone.utc)
 
@@ -48,3 +53,20 @@ def test_bands():
     assert risk_band(70) == "medium"
     assert risk_band(50) == "high"
     assert risk_band(20) == "critical"
+
+
+def test_reputation_band_is_quality_oriented():
+    # Higher score = better band. A perfect score must read as excellent, never "at risk".
+    assert reputation_band(100) == "excellent"
+    assert reputation_band(85) == "excellent"
+    assert reputation_band(75) == "high"
+    assert reputation_band(60) == "medium"
+    assert reputation_band(40) == "low"
+    assert reputation_band(10) == "critical"
+
+
+def test_reputation_band_is_monotonic():
+    order = ["critical", "low", "medium", "high", "excellent"]
+    seen = [reputation_band(s) for s in range(0, 101, 5)]
+    indices = [order.index(b) for b in seen]
+    assert indices == sorted(indices)  # never gets worse as score rises

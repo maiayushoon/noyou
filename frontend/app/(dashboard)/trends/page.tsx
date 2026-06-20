@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import useSWR from "swr";
 import {
   Area,
@@ -14,7 +15,7 @@ import {
 } from "recharts";
 import { TrendingUp } from "lucide-react";
 import { api, type Report } from "@/lib/api";
-import { formatDate, humanize } from "@/lib/utils";
+import { cn, formatDate, humanize } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -32,13 +33,26 @@ const SENTIMENT_COLORS: Record<string, string> = {
   negative: "#ef4444",
 };
 
+const RANGE_OPTIONS: { days: number; label: string }[] = [
+  { days: 90, label: "90 Days" },
+  { days: 365, label: "1 Year" },
+  { days: 1825, label: "5 Years" },
+];
+
 export default function TrendsPage() {
-  const { data, error, isLoading } = useSWR<Report>("reports", () => api.reports());
+  const [days, setDays] = useState(90);
+  const { data, error, isLoading } = useSWR<Report>(`reports:${days}`, () =>
+    api.reports({ days })
+  );
 
   if (isLoading || !data) {
     return (
       <div>
-        <PageHeader title="Trends" description="Score history, sentiment over time, and risk by category." />
+        <PageHeader
+          title="Trends"
+          description="Score history, sentiment over time, and risk by category."
+          actions={<RangePills days={days} onChange={setDays} />}
+        />
         {error ? (
           <Card>
             <EmptyState
@@ -80,10 +94,13 @@ export default function TrendsPage() {
         title="Trends"
         description="Score history, sentiment over time, and risk broken down by category."
         actions={
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-            <TrendingUp className="h-3.5 w-3.5" aria-hidden />
-            Score {data.reputation_score}
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <RangePills days={days} onChange={setDays} />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+              <TrendingUp className="h-3.5 w-3.5" aria-hidden />
+              Score {data.reputation_score}
+            </span>
+          </div>
         }
       />
 
@@ -226,6 +243,34 @@ export default function TrendsPage() {
           </FadeIn>
         </div>
       </div>
+    </div>
+  );
+}
+
+function RangePills({
+  days,
+  onChange,
+}: {
+  days: number;
+  onChange: (days: number) => void;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      {RANGE_OPTIONS.map((r) => (
+        <button
+          key={r.days}
+          type="button"
+          onClick={() => onChange(r.days)}
+          className={cn(
+            "rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
+            days === r.days
+              ? "bg-ai-gradient text-white shadow-ai"
+              : "bg-white text-slate-600 ring-1 ring-inset ring-hairline hover:bg-slate-50"
+          )}
+        >
+          {r.label}
+        </button>
+      ))}
     </div>
   );
 }

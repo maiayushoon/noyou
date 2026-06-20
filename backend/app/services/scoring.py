@@ -55,12 +55,36 @@ def _recency_weight(published_at: datetime | None, now: datetime) -> float:
 
 
 def risk_band(score: float) -> str:
+    """RISK band — *low* risk is good. Used internally where risk semantics are wanted.
+
+    Note: this is the inverse of how a user reads a reputation score, so it must NOT
+    be sent to the UI as a quality label. Use :func:`reputation_band` for anything the
+    dashboard renders.
+    """
     if score >= 80:
         return "low"
     if score >= 60:
         return "medium"
     if score >= 40:
         return "high"
+    return "critical"
+
+
+def reputation_band(score: float) -> str:
+    """QUALITY band for a 0-100 reputation score — *higher is better*.
+
+    This is what the UI shows. The keys line up with the dashboard's color/label map:
+    ``excellent``/``high`` are green (strong), ``medium`` amber (fair), ``low`` orange
+    (at risk), ``critical`` red. A score of 100 reads as "Excellent", not "At risk".
+    """
+    if score >= 85:
+        return "excellent"
+    if score >= 70:
+        return "high"
+    if score >= 50:
+        return "medium"
+    if score >= 30:
+        return "low"
     return "critical"
 
 
@@ -104,7 +128,7 @@ def score_breakdown(mentions: list[ScoredMention], now: datetime | None = None) 
     score = compute_score(mentions, now)
     return {
         "score": score,
-        "band": risk_band(score),
+        "band": reputation_band(score),
         "total_mentions": total,
         "sentiment_counts": counts,
         "high_risk_count": high_risk,

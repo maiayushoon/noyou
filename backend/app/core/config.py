@@ -55,11 +55,15 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:8000,http://localhost:3000,http://127.0.0.1:8000"
 
     # --- AI analysis ---
-    analyzer: str = "rule_based"          # rule_based | llm
+    analyzer: str = "rule_based"          # rule_based | trained | llm
     llm_provider: str = "openai"          # openai | anthropic | huggingface
     openai_api_key: str = ""
     anthropic_api_key: str = ""
     huggingface_api_key: str = ""
+
+    # Directory holding the trained sentiment model (sentiment.joblib). Empty =>
+    # the package's app/ml/models/ dir. Set this to mount a model in production.
+    ml_model_dir: str = ""
 
     # --- Connectors ---
     connectors: str = "demo"              # comma list: demo,google,twitter,...

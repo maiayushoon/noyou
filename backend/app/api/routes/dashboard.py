@@ -12,7 +12,7 @@ from ...models.mention import Mention
 from ...models.scan import Scan
 from ...models.user import User
 from ...schemas.dashboard import DashboardSummary
-from ...services.scoring import risk_band
+from ...services.scoring import reputation_band
 from ..deps import get_current_user
 
 router = APIRouter(prefix="/dashboard", tags=["dashboard"])
@@ -82,7 +82,7 @@ def get_dashboard(
 
     return DashboardSummary(
         reputation_score=current_user.reputation_score,
-        band=risk_band(current_user.reputation_score),
+        band=reputation_band(current_user.reputation_score),
         total_mentions=total_mentions,
         sentiment_counts=sentiment_counts,
         high_risk_count=high_risk_count,

@@ -12,6 +12,12 @@ from .rule_based import RuleBasedAnalyzer
 def get_analyzer() -> BaseAnalyzer:
     choice = (settings.analyzer or "rule_based").lower()
 
+    if choice == "trained":
+        # Our own trained model. Safe even if untrained — it falls back to rules.
+        from .trained import TrainedModelAnalyzer
+
+        return TrainedModelAnalyzer()
+
     if choice == "llm":
         key_present = any(
             [settings.openai_api_key, settings.anthropic_api_key, settings.huggingface_api_key]

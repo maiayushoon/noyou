@@ -11,7 +11,7 @@ from ..models.analysis import Analysis
 from ..models.mention import Mention
 from ..models.scan import Scan
 from ..models.user import User
-from .scoring import risk_band
+from .scoring import reputation_band
 
 
 def sentiment_distribution(db: Session, user: User) -> dict[str, int]:
@@ -46,11 +46,17 @@ def mentions_by_source(db: Session, user: User) -> dict[str, int]:
     return dict(dist)
 
 
-def score_history(db: Session, user: User, limit: int = 30) -> list[dict]:
+def score_history(db: Session, user: User, limit: int = 30, days: int = 90) -> list[dict]:
     """Score-after over recent completed scans, oldest→newest, for the trend line."""
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     scans = db.scalars(
         select(Scan)
-        .where(Scan.user_id == user.id, Scan.status == "completed", Scan.score_after.is_not(None))
+        .where(
+            Scan.user_id == user.id,
+            Scan.status == "completed",
+            Scan.score_after.is_not(None),
+            Scan.started_at >= cutoff,
+        )
         .order_by(Scan.started_at.desc())
         .limit(limit)
     ).all()
@@ -59,7 +65,7 @@ def score_history(db: Session, user: User, limit: int = 30) -> list[dict]:
         {
             "date": s.finished_at.isoformat() if s.finished_at else s.started_at.isoformat(),
             "score": s.score_after,
-            "band": risk_band(s.score_after),
+            "band": reputation_band(s.score_after),
         }
         for s in scans
     ]
@@ -79,14 +85,14 @@ def mentions_over_time(db: Session, user: User, days: int = 90) -> list[dict]:
     return [{"date": d, "count": c} for d, c in sorted(buckets.items())]
 
 
-def full_report(db: Session, user: User) -> dict:
+def full_report(db: Session, user: User, days: int = 90) -> dict:
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "reputation_score": user.reputation_score,
-        "band": risk_band(user.reputation_score),
+        "band": reputation_band(user.reputation_score),
         "sentiment_distribution": sentiment_distribution(db, user),
         "risk_by_category": risk_by_category(db, user),
         "mentions_by_source": mentions_by_source(db, user),
-        "score_history": score_history(db, user),
-        "mentions_over_time": mentions_over_time(db, user),
+        "score_history": score_history(db, user, days=days),
+        "mentions_over_time": mentions_over_time(db, user, days=days),
     }

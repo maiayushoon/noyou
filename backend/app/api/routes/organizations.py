@@ -29,7 +29,7 @@ from ...services.organization import (
     list_orgs_for,
     resolve_owner,
 )
-from ...services.scoring import risk_band
+from ...services.scoring import reputation_band
 from ..deps import get_current_user
 
 router = APIRouter(prefix="/orgs", tags=["orgs"])
@@ -116,7 +116,7 @@ def _build_dashboard_summary(db: Session, owner: User) -> DashboardSummary:
 
     return DashboardSummary(
         reputation_score=owner.reputation_score,
-        band=risk_band(owner.reputation_score),
+        band=reputation_band(owner.reputation_score),
         total_mentions=total_mentions,
         sentiment_counts=sentiment_counts,
         high_risk_count=high_risk_count,

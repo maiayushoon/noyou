@@ -71,13 +71,25 @@ export default function OverviewPage() {
                 )}
               </h2>
               <p className="mt-1.5 max-w-lg text-sm text-slate-500">
-                A live measure of how the web and AI engines portray you, updated
-                with every scan.
+                A <strong className="font-semibold text-slate-600">0–100</strong>{" "}
+                measure of how the web and AI engines portray you —{" "}
+                <span className="font-medium text-slate-600">higher is safer</span>.
+                It blends the sentiment, risk, and recency of every mention we find,
+                and updates with each scan.
               </p>
-              <p className="mt-4 text-xs text-slate-400">
-                Last scan{" "}
-                {isLoading || !data ? "…" : timeAgo(data.last_scan_at)}
-              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-400">
+                <span>
+                  Last scan {isLoading || !data ? "…" : timeAgo(data.last_scan_at)}
+                </span>
+                <span className="hidden h-3 w-px bg-hairline sm:inline-block" aria-hidden />
+                <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <ScaleDot className="bg-emerald-500" label="85–100 Excellent" />
+                  <ScaleDot className="bg-emerald-400" label="70–84 Strong" />
+                  <ScaleDot className="bg-amber-500" label="50–69 Fair" />
+                  <ScaleDot className="bg-orange-500" label="30–49 At risk" />
+                  <ScaleDot className="bg-red-500" label="0–29 Critical" />
+                </span>
+              </div>
             </div>
           </div>
         </Card>
@@ -319,6 +331,15 @@ function SentimentMix({
         ))}
       </ul>
     </div>
+  );
+}
+
+function ScaleDot({ className, label }: { className: string; label: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <span className={cn("h-2 w-2 rounded-full", className)} aria-hidden />
+      {label}
+    </span>
   );
 }
 

@@ -26,7 +26,7 @@ from ..models.competitor import Competitor
 from ..models.mention import Mention
 from ..models.user import User
 from .relevance import is_relevant
-from .scoring import ScoredMention, compute_score, risk_band
+from .scoring import ScoredMention, compute_score, reputation_band
 
 logger = logging.getLogger("noyou.benchmark")
 
@@ -75,7 +75,7 @@ def _user_entry(db: Session, user: User) -> dict:
         "name": user.full_name or user.email.split("@")[0],
         "is_you": True,
         "reputation_score": score,
-        "band": risk_band(score),
+        "band": reputation_band(score),
         "total_mentions": sum(sentiment.values()),
         "sentiment": sentiment,
     }
@@ -134,7 +134,7 @@ def _competitor_entry(name: str) -> dict:
         "name": name,
         "is_you": False,
         "reputation_score": score,
-        "band": risk_band(score),
+        "band": reputation_band(score),
         "total_mentions": sum(sentiment.values()),
         "sentiment": sentiment,
     }

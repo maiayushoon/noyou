@@ -27,6 +27,11 @@ alembic==1.18.4
 # HTTP client (real connectors / LLM providers)
 httpx==0.28.1
 
+# Machine learning — the trainable, offline reputation model (no GPU, no API keys).
+# TF-IDF + linear classifier; retrain with `python -m app.ml.train`.
+scikit-learn==1.5.2
+joblib==1.4.2
+
 # Config
 python-dotenv==1.0.1
 
