@@ -149,9 +149,9 @@ def list_my_orgs(
 def create_organization(
     payload: OrgIn,
     db: Session = Depends(get_db),
-    current_user: User = Depends(require_plan("premium", "enterprise")),
+    current_user: User = Depends(require_plan("pro", "premium", "enterprise")),
 ):
-    """Create an organization (premium/enterprise only)."""
+    """Create an organization (paid tiers — Teams is surfaced as a Pro feature)."""
     org = create_org(db, current_user, payload.name)
     return OrgOut(
         id=org.id,

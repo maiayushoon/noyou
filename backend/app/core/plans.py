@@ -55,7 +55,8 @@ PLAN_LIMITS: dict[str, dict[str, Any]] = {
         # premium/enterprise get it implicitly via "all".
         "connectors": ["demo", "web", "hackernews", "reddit_public", "google", "twitter", "reddit", "youtube", "owned"],
         "predictive": True,
-        "benchmarking": False,
+        # Benchmarking + Teams are surfaced as Pro features in the UI, so Pro unlocks them.
+        "benchmarking": True,
         "api_access": False,
     },
     "premium": {
