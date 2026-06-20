@@ -29,6 +29,7 @@ from ..analysis import get_analyzer
 from ..analysis.base import AnalysisInput
 from ..connectors import get_active_connectors
 from ..connectors.demo import DemoConnector
+from ..connectors.owned import OwnedContentConnector
 from ..core.config import settings
 from ..core.database import SessionLocal
 from ..core.plans import plan_allows_connector
@@ -59,9 +60,23 @@ def _safe_url(url: str | None) -> str | None:
         return None
 
 
-def _connectors_for(user: User):
-    """Active connectors filtered to those the user's plan permits (demo fallback)."""
+def _connectors_for(db: Session, user: User):
+    """Active connectors filtered to those the user's plan permits (demo fallback).
+
+    Appends the user-scoped :class:`OwnedContentConnector` when the user's plan
+    allows the ``owned`` connector and they have at least one connected account, so
+    a scan also pulls the user's OWN posts from their linked platforms.
+    """
     allowed = [c for c in get_active_connectors() if plan_allows_connector(user.plan, c.name)]
+
+    # Owned-content connector is user-scoped (reads this user's LinkedAccounts), so
+    # it's built per-user here rather than via the stateless registry. Only added
+    # when the plan permits it AND the user actually has connected accounts.
+    if plan_allows_connector(user.plan, OwnedContentConnector.name):
+        owned = OwnedContentConnector(db, user)
+        if owned.is_configured():
+            allowed.append(owned)
+
     return allowed or [DemoConnector()]
 
 
@@ -125,7 +140,7 @@ def run_scan(db: Session, user: User, *, trigger: str = "manual") -> Scan:
 
 
 def _run_pipeline(db: Session, user: User, scan: Scan) -> None:
-    connectors = _connectors_for(user)
+    connectors = _connectors_for(db, user)
     analyzer = get_analyzer()
 
     scan.status = "running"
@@ -163,10 +178,13 @@ def _run_pipeline(db: Session, user: User, scan: Scan) -> None:
                     # Relevance gate: broad keyless sources fuzzy-match junk
                     # ("precourt", "Michael Jordan", ...). Drop mentions whose
                     # text isn't actually about the query. The synthetic 'demo'
-                    # connector always bypasses so the offline demo populates.
+                    # connector always bypasses so the offline demo populates, and
+                    # owned content (sources like 'reddit_owned'/'youtube_owned')
+                    # bypasses too — the user's OWN posts are always relevant.
                     if (
                         settings.relevance_filter
                         and raw.source != "demo"
+                        and not raw.source.endswith("_owned")
                         and not is_relevant(query, f"{raw.title or ''} {raw.content or ''}")
                     ):
                         filtered_count += 1

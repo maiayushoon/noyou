@@ -14,6 +14,7 @@ from .routes import (
     billing,
     cleanup,
     cleanup_auto,
+    connections,
     dashboard,
     mentions,
     organizations,
@@ -26,6 +27,7 @@ api_router = APIRouter()
 api_router.include_router(auth.router)
 api_router.include_router(auth_extra.router)  # must follow auth.router (shared /auth prefix)
 api_router.include_router(accounts.router)
+api_router.include_router(connections.router)  # OAuth account-linking (after accounts.router)
 api_router.include_router(scans.router)
 api_router.include_router(mentions.router)
 api_router.include_router(analyze.router)

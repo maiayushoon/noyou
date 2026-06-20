@@ -51,7 +51,9 @@ PLAN_LIMITS: dict[str, dict[str, Any]] = {
     "pro": {
         "max_accounts": 5,
         "scans_per_day": 50,
-        "connectors": ["demo", "web", "hackernews", "reddit_public", "google", "twitter", "reddit", "youtube"],
+        # "owned" enables the user's own linked-account content (OAuth connections).
+        # premium/enterprise get it implicitly via "all".
+        "connectors": ["demo", "web", "hackernews", "reddit_public", "google", "twitter", "reddit", "youtube", "owned"],
         "predictive": True,
         "benchmarking": False,
         "api_access": False,

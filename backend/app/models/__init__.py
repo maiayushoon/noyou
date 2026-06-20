@@ -3,6 +3,7 @@ from .account import Account
 from .alert import Alert
 from .analysis import Analysis
 from .cleanup import CleanupAction
+from .linked_account import LinkedAccount
 from .mention import Mention
 from .competitor import Competitor
 from .organization import Organization, OrganizationMember
@@ -18,6 +19,7 @@ __all__ = [
     "Alert",
     "Scan",
     "CleanupAction",
+    "LinkedAccount",
     "VerificationToken",
     "Competitor",
     "Organization",

@@ -75,6 +75,28 @@ class Settings(BaseSettings):
     reddit_user_agent: str = "noyou/1.0"
     youtube_api_key: str = ""
 
+    # --- OAuth account-linking (Connections) ---
+    # Tokens for the user's OWN accounts, stored encrypted. Distinct from the
+    # keyless/public connectors above (e.g. GOOGLE_API_KEY, REDDIT_CLIENT_ID).
+    # Each redirect URI must be {FRONTEND_URL}/api/v1/connections/{provider}/callback.
+    # Mastodon needs NO global credentials — it self-registers per instance.
+    google_oauth_client_id: str = ""
+    google_oauth_client_secret: str = ""
+    reddit_oauth_client_id: str = ""
+    reddit_oauth_client_secret: str = ""
+    threads_app_id: str = ""
+    threads_app_secret: str = ""
+    instagram_app_id: str = ""
+    instagram_app_secret: str = ""
+    mastodon_app_name: str = "NoYou"
+    # Optional Fernet key override decoupling token encryption from SECRET_KEY
+    # (urlsafe-base64 32 bytes). Empty => key is derived from SECRET_KEY.
+    token_encryption_key: str = ""
+    # Public base URL of THIS backend (where the OAuth callback lives), e.g.
+    # https://api.noyou.app. The provider redirect_uri is built from this, NOT
+    # FRONTEND_URL. Empty => auto-detected from the incoming request's origin.
+    oauth_callback_base_url: str = ""
+
     # Drop fuzzy-junk mentions whose text isn't actually about the search
     # subject (broad keyless sources match "precourt"/"prcount"/"court"/...).
     # When False, keep all mentions (old, pre-filter behavior).

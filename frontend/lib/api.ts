@@ -265,6 +265,35 @@ export interface OrgMember {
   status: MemberStatus;
 }
 
+/* ----------------------- Connections (account linking) ------------------- */
+
+export type ConnectionStatus = "connected" | "expired" | "revoked" | "error";
+
+export interface Connection {
+  id: string;
+  provider: string;
+  status: ConnectionStatus;
+  external_handle: string | null;
+  display_name: string | null;
+  avatar_url: string | null;
+  instance_url: string | null;
+  scopes: string[];
+  last_synced_at: string | null;
+  created_at: string;
+}
+
+export interface ConnectionProvider {
+  provider: string;
+  label: string;
+  configured: boolean;
+  connected: boolean;
+  scopes_requested: string[];
+}
+
+export interface ConnectAuthorize {
+  authorize_url: string;
+}
+
 /* --------------------------- Automated cleanup --------------------------- */
 
 export type CleanupOutcome = "executed" | "drafted" | "skipped" | string;
@@ -509,6 +538,26 @@ export const api = {
   },
   deleteAccount(id: number | string): Promise<void> {
     return request<void>(`/accounts/${id}`, { method: "DELETE" });
+  },
+
+  /* ---- connections (account linking) ---- */
+  listConnections(): Promise<Connection[]> {
+    return request<Connection[]>("/connections");
+  },
+  connectionProviders(): Promise<ConnectionProvider[]> {
+    return request<ConnectionProvider[]>("/connections/providers");
+  },
+  connectProvider(
+    provider: string,
+    instanceUrl?: string
+  ): Promise<ConnectAuthorize> {
+    return request<ConnectAuthorize>(`/connections/${provider}/connect`, {
+      method: "POST",
+      body: { instance_url: instanceUrl },
+    });
+  },
+  disconnect(id: number | string): Promise<void> {
+    return request<void>(`/connections/${id}`, { method: "DELETE" });
   },
 
   /* ---- scans ---- */

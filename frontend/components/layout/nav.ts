@@ -10,6 +10,7 @@ import {
   CreditCard,
   BarChart3,
   Users,
+  Link2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Benchmark", href: "/benchmark", icon: BarChart3 },
   { label: "Trends", href: "/trends", icon: TrendingUp },
   { label: "Teams", href: "/teams", icon: Users },
+  { label: "Connections", href: "/connections", icon: Link2 },
   { label: "Accounts", href: "/accounts", icon: UserRound },
   { label: "Billing", href: "/billing", icon: CreditCard },
 ];

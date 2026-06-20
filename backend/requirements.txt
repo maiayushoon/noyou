@@ -12,6 +12,8 @@ email-validator==2.2.0
 bcrypt==4.2.1
 pyjwt==2.10.1
 python-multipart==0.0.20
+# Fernet encryption for at-rest OAuth tokens (Connections feature)
+cryptography==44.0.0
 
 # Background jobs
 apscheduler==3.11.0

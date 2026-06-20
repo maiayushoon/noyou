@@ -5,6 +5,7 @@ warnings, and PyJWT for tokens. bcrypt's 72-byte input limit is handled explicit
 """
 from __future__ import annotations
 
+import secrets
 from datetime import datetime, timedelta, timezone
 
 import bcrypt
@@ -43,3 +44,50 @@ def decode_access_token(token: str) -> dict | None:
         return jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
     except jwt.PyJWTError:
         return None
+
+
+# --- OAuth CSRF state tokens -------------------------------------------------
+# The OAuth ``state`` parameter is a short-TTL, HMAC-signed JWT. The signature
+# binds the caller's identity, the target provider, and (for PKCE) the code
+# verifier, so a forged or replayed callback fails verification. No server-side
+# session store is needed: everything the callback needs travels inside the
+# signed token. These reuse the project's existing HS256/SECRET_KEY JWT stack.
+
+_OAUTH_STATE_TYP = "oauth_state"
+
+
+def create_state_token(payload: dict, ttl_seconds: int = 600) -> str:
+    """Sign an OAuth ``state`` payload into a short-lived JWT.
+
+    Adds a random ``nonce`` (CSRF), a ``typ`` of ``oauth_state``, and ``exp``/``iat``.
+    Never put secrets that must stay confidential in here — it is signed, not
+    encrypted (PKCE verifiers are fine: they are single-use, short-lived, and the
+    signature prevents tampering).
+    """
+    now = datetime.now(timezone.utc)
+    claims = dict(payload)
+    claims.update(
+        {
+            "typ": _OAUTH_STATE_TYP,
+            "nonce": secrets.token_urlsafe(16),
+            "iat": now,
+            "exp": now + timedelta(seconds=ttl_seconds),
+        }
+    )
+    return jwt.encode(claims, settings.secret_key, algorithm=settings.algorithm)
+
+
+def verify_state_token(token: str) -> dict | None:
+    """Decode + validate an OAuth ``state`` token.
+
+    Returns the original payload (claims) on success, or ``None`` if the token is
+    expired, tampered, or not of ``typ=oauth_state``. Enforcing ``exp`` and ``typ``
+    here defeats CSRF, replay, and cross-token confusion.
+    """
+    try:
+        claims = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+    except jwt.PyJWTError:
+        return None
+    if claims.get("typ") != _OAUTH_STATE_TYP:
+        return None
+    return claims

@@ -57,3 +57,8 @@ class User(Base):
     scans: Mapped[list["Scan"]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
+    # OAuth-linked accounts (the user's OWN connected platforms). Cascade ensures
+    # deleting a user (privacy/account deletion) also drops their stored tokens.
+    linked_accounts: Mapped[list["LinkedAccount"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
