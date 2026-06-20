@@ -26,22 +26,53 @@ MODEL_VERSION = 1
 
 
 def build_pipeline() -> Pipeline:
-    """The model architecture. Bigrams + sublinear TF capture short reputation phrases."""
-    return Pipeline(
+    """The model architecture. Word + char n-grams over sublinear TF capture short
+    reputation phrases, their morphology (great/greatly), and misspellings. A
+    ``FeatureUnion`` of word and character features generalises better on the kind of
+    terse, noisy text seen in reviews and social posts, while staying CPU-only and fast.
+    """
+    from sklearn.pipeline import FeatureUnion
+
+    features = FeatureUnion(
         [
+            # Word-level: unigrams + bigrams over the curated phrasing.
             (
-                "tfidf",
+                "word",
                 TfidfVectorizer(
+                    analyzer="word",
                     ngram_range=(1, 2),
                     min_df=1,
                     sublinear_tf=True,
                     stop_words="english",
                     strip_accents="unicode",
+                    lowercase=True,
                 ),
             ),
+            # Char-level (within word boundaries): robust to suffixes and typos
+            # (scam/scammed/scammer all share strong negative character n-grams).
+            (
+                "char",
+                TfidfVectorizer(
+                    analyzer="char_wb",
+                    ngram_range=(3, 5),
+                    min_df=2,
+                    sublinear_tf=True,
+                    strip_accents="unicode",
+                    lowercase=True,
+                ),
+            ),
+        ]
+    )
+    return Pipeline(
+        [
+            ("tfidf", features),
             (
                 "clf",
-                LogisticRegression(max_iter=1000, C=4.0, class_weight="balanced"),
+                LogisticRegression(
+                    max_iter=2000,
+                    C=8.0,
+                    class_weight="balanced",
+                ),
             ),
         ]
     )

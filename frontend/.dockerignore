@@ -1,0 +1,16 @@
+# Keep the Next.js build context lean — these are regenerated inside the image.
+node_modules/
+.next/
+out/
+npm-debug.log*
+
+# Local env / secrets (NEXT_PUBLIC_API_URL is passed as a build arg instead).
+.env
+.env.local
+*.env
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -62,6 +62,12 @@ def _normalize_instance(instance_url: str | None) -> str:
     to private, loopback, link-local, reserved, or otherwise non-public addresses so
     a user can't point us at cloud metadata (169.254.169.254) or internal services.
     Callers already treat ``""`` as a hard failure.
+
+    Residual: this validates the host's resolved IPs but httpx re-resolves at connect
+    time, so a determined attacker controlling DNS could rebind between check and use.
+    The robust closure is network-level egress control (deny the backend's egress to
+    RFC-1918 / link-local ranges via firewall or an egress proxy) — recommended for
+    production; see DEPLOY.md.
     """
     if not instance_url:
         return ""

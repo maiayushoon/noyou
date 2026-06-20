@@ -89,6 +89,16 @@ export interface Mention {
   analysis: MentionAnalysis | null;
 }
 
+/** AI-suggested fix for a flagged mention. */
+export type FixSuggestionKind = "rewrite" | "response";
+
+export interface FixSuggestion {
+  /** "rewrite" for the user's own connected-account posts, "response" otherwise. */
+  kind: FixSuggestionKind;
+  suggestion: string;
+  rationale: string;
+}
+
 export type AlertSeverity = "low" | "medium" | "high" | "critical";
 
 export interface Alert {
@@ -601,6 +611,12 @@ export const api = {
     return request<Mention>(`/mentions/${id}/status`, {
       method: "PATCH",
       body: { status },
+    });
+  },
+  /** AI-suggested fix for a flagged mention (Pro+). 402 -> PlanError. */
+  suggestFix(id: number | string): Promise<FixSuggestion> {
+    return request<FixSuggestion>(`/mentions/${id}/suggest`, {
+      method: "POST",
     });
   },
 

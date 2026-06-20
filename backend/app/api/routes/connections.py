@@ -15,9 +15,13 @@ Security model (see the architect design — ``oauthFlow`` / ``security``):
     the API (the ``ConnectionOut`` schema excludes the ``*_enc`` columns).
   * The callback NEVER 500s — any failure 302s the browser back to the frontend
     with an ``?error=`` query param so the user gets a clean message.
-"""
-from __future__ import annotations
 
+NOTE: deliberately no ``from __future__ import annotations`` here — the
+``@limiter.limit`` decorator on ``connect``/``callback`` wraps the route, and
+FastAPI must resolve the ``request: Request`` annotation to wire the dependency.
+Real annotation objects (not deferred strings) keep that resolution working, the
+same way the auth routes do it.
+"""
 import logging
 import uuid
 
@@ -30,6 +34,7 @@ from ...core.config import settings
 from ...core.crypto import decrypt_token, encrypt_token
 from ...core.database import get_db
 from ...core.plans import require_plan
+from ...core.ratelimit import CONNECT_LIMIT, limiter
 from ...core.security import create_state_token, verify_state_token
 from ...models.linked_account import LinkedAccount
 from ...models.user import User
@@ -121,6 +126,7 @@ def list_connection_providers(
 
 
 @router.post("/{provider}/connect", response_model=ConnectStartOut)
+@limiter.limit(CONNECT_LIMIT)
 def start_connection(
     provider: str,
     request: Request,
@@ -164,7 +170,10 @@ def start_connection(
         "provider": adapter.name,
     }
     if code_verifier:
-        state_payload["code_verifier"] = code_verifier
+        # The state JWT is echoed back in the redirect URL (visible in proxy/access
+        # logs, history, Referer). The signed JWT is only integrity-protected, not
+        # confidential, so encrypt the PKCE verifier rather than leaving it readable.
+        state_payload["code_verifier"] = encrypt_token(code_verifier)
     if instance_url:
         state_payload["instance_url"] = instance_url
 
@@ -187,6 +196,7 @@ def start_connection(
 
 
 @router.get("/{provider}/callback")
+@limiter.limit(CONNECT_LIMIT)
 def oauth_callback(
     provider: str,
     request: Request,
@@ -226,7 +236,8 @@ def oauth_callback(
     if adapter is None:
         return _frontend_return(error="unknown_provider")
 
-    code_verifier = payload.get("code_verifier")
+    # The verifier was encrypted into the state (it travels in the redirect URL).
+    code_verifier = decrypt_token(payload["code_verifier"]) if payload.get("code_verifier") else None
     instance_url = payload.get("instance_url")
     redirect_uri = _callback_redirect_uri(provider, request)
 

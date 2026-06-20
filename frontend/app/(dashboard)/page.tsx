@@ -406,7 +406,7 @@ function ScoreDeltaPill({
       <span className="tabular-nums">
         {rounded === 0 ? "No change" : `${sign}${magnitude}`}
       </span>
-      <span className="font-normal opacity-70">since last scan</span>
+      <span className="font-normal opacity-70">this scan</span>
     </span>
   );
 }

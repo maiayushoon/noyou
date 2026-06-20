@@ -93,7 +93,13 @@ def get_valid_token(db: Session, linked: LinkedAccount) -> str:
     linked.access_token_enc = encrypt_token(bundle.access_token)
     if bundle.refresh_token:
         linked.refresh_token_enc = encrypt_token(bundle.refresh_token)
-    linked.token_expires_at = bundle.expires_at()
+    expires_at = bundle.expires_at()
+    if expires_at is None and self_refresh:
+        # Self-refresh providers (Meta: ~60-day long-lived tokens) may omit
+        # expires_in on refresh. Without an expiry the token would never be
+        # proactively refreshed again; set a horizon so the cadence is preserved.
+        expires_at = datetime.now(timezone.utc) + timedelta(days=50)
+    linked.token_expires_at = expires_at
     if bundle.scopes:
         linked.scopes = bundle.scopes
     linked.status = "connected"

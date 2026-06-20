@@ -7,12 +7,16 @@ import {
   ExternalLink,
   Filter,
   MessageSquareText,
+  PenLine,
   RotateCcw,
   ShieldAlert,
+  Sparkles,
   Trash2,
 } from "lucide-react";
 import {
   api,
+  isPlanError,
+  type FixSuggestion,
   type Mention,
   type MentionStatus,
   type SentimentLabel,
@@ -197,6 +201,32 @@ function MentionRow({
   busy: boolean;
   onUpdate: (m: Mention, next: MentionStatus) => void;
 }) {
+  const toast = useToast();
+  const [suggesting, setSuggesting] = useState(false);
+  const [fix, setFix] = useState<FixSuggestion | null>(null);
+
+  async function getSuggestion() {
+    setSuggesting(true);
+    try {
+      const result = await api.suggestFix(m.id);
+      setFix(result);
+    } catch (err) {
+      if (isPlanError(err)) {
+        toast.error(
+          "Upgrade to get AI fixes",
+          "Suggested fixes are available on the Pro plan and above."
+        );
+      } else {
+        toast.error(
+          "Could not get a suggestion",
+          err instanceof Error ? err.message : undefined
+        );
+      }
+    } finally {
+      setSuggesting(false);
+    }
+  }
+
   return (
     <Card interactive className="p-4 sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
@@ -252,6 +282,15 @@ function MentionRow({
       <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-hairline pt-3">
         <StatusTag status={m.status} />
         <div className="ml-auto flex items-center gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            loading={suggesting}
+            onClick={getSuggestion}
+            leftIcon={<Sparkles className="h-3.5 w-3.5" />}
+          >
+            Suggest a fix
+          </Button>
           {m.status !== "archived" ? (
             <Button
               size="sm"
@@ -287,7 +326,33 @@ function MentionRow({
           ) : null}
         </div>
       </div>
+
+      {fix ? <SuggestionPanel fix={fix} /> : null}
     </Card>
+  );
+}
+
+function SuggestionPanel({ fix }: { fix: FixSuggestion }) {
+  const isRewrite = fix.kind === "rewrite";
+  return (
+    <div className="mt-3 rounded-xl border border-ai-indigo/20 bg-ai-indigo/5 p-3.5">
+      <div className="flex items-center gap-2">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-ai-gradient px-2.5 py-0.5 text-xs font-semibold text-white shadow-ai">
+          {isRewrite ? (
+            <PenLine className="h-3 w-3" aria-hidden />
+          ) : (
+            <Sparkles className="h-3 w-3" aria-hidden />
+          )}
+          {isRewrite ? "Suggested rewrite" : "Suggested response"}
+        </span>
+      </div>
+      <p className="mt-2.5 whitespace-pre-wrap text-sm leading-relaxed text-slate-700">
+        {fix.suggestion}
+      </p>
+      <p className="mt-2.5 border-t border-ai-indigo/15 pt-2.5 text-xs text-slate-500">
+        {fix.rationale}
+      </p>
+    </div>
   );
 }
 

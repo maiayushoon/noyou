@@ -49,11 +49,20 @@ _CSP = "; ".join(
     ]
 )
 
+# Minimal Permissions-Policy: deny the powerful features the API/dashboard never
+# use, so an injected/embedded context can't reach for the camera, mic, or geo.
+_PERMISSIONS_POLICY = "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+
 # Static headers applied to every response regardless of environment.
 _STATIC_SECURITY_HEADERS = {
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY",
     "Referrer-Policy": "strict-origin-when-cross-origin",
+    # Explicitly disable the legacy XSS auditor: it's deprecated and its
+    # heuristics have themselves introduced vulnerabilities. CSP is the real
+    # defense; "0" tells supporting browsers to stand down rather than guess.
+    "X-XSS-Protection": "0",
+    "Permissions-Policy": _PERMISSIONS_POLICY,
     "Content-Security-Policy": _CSP,
 }
 

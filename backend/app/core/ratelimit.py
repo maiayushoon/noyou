@@ -33,6 +33,14 @@ limiter = Limiter(
 #: Apply per-route with ``@limiter.limit(AUTH_LIMIT)``.
 AUTH_LIMIT = f"{settings.auth_rate_limit_per_minute}/minute"
 
+#: Limit for the sensitive Connections OAuth endpoints (the POST ``connect`` that
+#: mints a signed state token and the GET ``callback`` that exchanges a provider
+#: code for tokens). Reuses the same modest per-minute budget as the auth routes —
+#: legitimate users only link an account a handful of times, while the callback is
+#: an unauthenticated, internet-exposed redirect target worth throttling.
+#: Apply per-route with ``@limiter.limit(CONNECT_LIMIT)``.
+CONNECT_LIMIT = f"{settings.auth_rate_limit_per_minute}/minute"
+
 
 def register_rate_limiting(app: FastAPI) -> None:
     """Attach the shared limiter, middleware, and 429 handler to ``app``.

@@ -36,3 +36,16 @@ class MentionOut(BaseModel):
 
 class MentionStatusUpdate(BaseModel):
     status: str  # active | archived | removal_requested | removed
+
+
+class FixSuggestionOut(BaseModel):
+    """An AI-suggested fix for a flagged mention.
+
+    ``kind`` is ``rewrite`` for the user's own connected-account posts (a safer
+    rewritten version of the post) or ``response`` for third-party mentions (a
+    polite correction / removal-request outline).
+    """
+
+    kind: str  # rewrite | response
+    suggestion: str
+    rationale: str

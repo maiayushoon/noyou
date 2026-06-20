@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import {
   api,
+  isPlanError,
   type Connection,
   type ConnectionProvider,
   type ConnectionStatus,
@@ -201,11 +202,26 @@ export default function ConnectionsPage() {
         </div>
       ) : providersError ? (
         <Card>
-          <EmptyState
-            icon={<Unplug className="h-5 w-5" />}
-            title="Could not load providers"
-            description="The API may be unreachable. Try refreshing the page."
-          />
+          {isPlanError(providersError) ? (
+            <EmptyState
+              icon={<Sparkles className="h-5 w-5" />}
+              title="Connecting accounts is a Pro feature"
+              description="Upgrade to link your own accounts and pull first-party signals into your scans."
+              action={
+                <Link href="/billing">
+                  <Button variant="ai" leftIcon={<Sparkles className="h-4 w-4" />}>
+                    Upgrade plan
+                  </Button>
+                </Link>
+              }
+            />
+          ) : (
+            <EmptyState
+              icon={<Unplug className="h-5 w-5" />}
+              title="Could not load providers"
+              description="The API may be unreachable. Try refreshing the page."
+            />
+          )}
         </Card>
       ) : list.length === 0 ? (
         <Card>

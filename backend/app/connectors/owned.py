@@ -32,6 +32,7 @@ from datetime import datetime, timezone
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from ..core.database import SessionLocal
 from ..models.linked_account import LinkedAccount
 from ..models.user import User
 from ..services.oauth import get_provider
@@ -77,22 +78,42 @@ class OwnedContentConnector(BaseConnector):
             return []
         self._emitted = True
 
+        # Use a DEDICATED session for all LinkedAccount token-refresh + status writes.
+        # The owned connector runs LAST in the scan, sharing the pipeline's session
+        # would mean our commits flush the in-progress (uncommitted) scan mentions —
+        # breaking scan atomicity on failure. An isolated session keeps our writes
+        # (token refresh, last_synced_at, expiry) independent of the scan transaction.
+        own_db = SessionLocal()
         mentions: list[RawMention] = []
-        for linked in self._accounts:
-            try:
-                mentions.extend(self._fetch_account(linked, limit=limit))
-            except Exception:
-                # Defensive: a misbehaving provider must never break the scan.
-                logger.warning(
-                    "owned fetch failed for provider=%s linked=%s user=%s",
-                    linked.provider, linked.id, self._user.id,
-                )
+        try:
+            accounts = list(
+                own_db.scalars(
+                    select(LinkedAccount).where(
+                        LinkedAccount.user_id == self._user.id,
+                        LinkedAccount.status == "connected",
+                    )
+                ).all()
+            )
+            for linked in accounts:
+                try:
+                    mentions.extend(self._fetch_account(own_db, linked, limit=limit))
+                except Exception:
+                    # Defensive: a misbehaving provider must never break the scan.
+                    logger.warning(
+                        "owned fetch failed for provider=%s linked=%s user=%s",
+                        linked.provider, linked.id, self._user.id,
+                    )
+        finally:
+            own_db.close()
         return mentions
 
-    def _fetch_account(self, linked: LinkedAccount, *, limit: int) -> list[RawMention]:
+    def _fetch_account(
+        self, db: Session, linked: LinkedAccount, *, limit: int
+    ) -> list[RawMention]:
         """Fetch one connected account's own content, handling token refresh.
 
-        On ``TokenExpired`` the account is marked ``expired`` and skipped; on success
+        ``db`` is the connector's OWN isolated session (not the scan's). On
+        ``TokenExpired`` the account is marked ``expired`` and skipped; on success
         ``last_synced_at`` is stamped. Returns ``[]`` for any non-fatal problem.
         """
         adapter = get_provider(linked.provider)
@@ -102,9 +123,9 @@ class OwnedContentConnector(BaseConnector):
         # Centralized refresh: may mint a new access token and persist it, or raise
         # TokenExpired (no valid/refreshable token) which we treat as "skip + mark".
         try:
-            access_token = get_valid_token(self._db, linked)
+            access_token = get_valid_token(db, linked)
         except TokenExpired:
-            self._mark_expired(linked)
+            self._mark_expired(db, linked)
             return []
         except Exception:
             logger.warning(
@@ -114,7 +135,7 @@ class OwnedContentConnector(BaseConnector):
             return []
 
         if not access_token:
-            self._mark_expired(linked)
+            self._mark_expired(db, linked)
             return []
 
         try:
@@ -135,25 +156,25 @@ class OwnedContentConnector(BaseConnector):
             return []
 
         # Success — stamp the sync time and clear any prior error.
-        self._stamp_synced(linked)
+        self._stamp_synced(db, linked)
         return list(mentions or [])
 
-    def _mark_expired(self, linked: LinkedAccount) -> None:
+    def _mark_expired(self, db: Session, linked: LinkedAccount) -> None:
         """Mark an account expired so the UI can prompt a re-link; best-effort."""
         try:
             linked.status = "expired"
             linked.last_error = "token expired"
-            self._db.add(linked)
-            self._db.commit()
+            db.add(linked)
+            db.commit()
         except Exception:
-            self._db.rollback()
+            db.rollback()
 
-    def _stamp_synced(self, linked: LinkedAccount) -> None:
+    def _stamp_synced(self, db: Session, linked: LinkedAccount) -> None:
         """Record a successful sync time; best-effort, never fatal."""
         try:
             linked.last_synced_at = datetime.now(timezone.utc)
             linked.last_error = None
-            self._db.add(linked)
-            self._db.commit()
+            db.add(linked)
+            db.commit()
         except Exception:
-            self._db.rollback()
+            db.rollback()

@@ -1,38 +1,80 @@
-# Brings up the NoYou API + Postgres. The app also runs fine without this
-# (SQLite default), so compose is for a more production-like local stack.
+# ─────────────────────────────────────────────────────────────────────────────
+# NoYou — production-style stack: API (FastAPI/gunicorn) + dashboard (Next.js).
+#
+#   docker compose up --build
+#       → api on :8000, web on :3001, using the default SQLite database
+#         (persisted in the `apidata` volume — no external DB required).
+#
+#   docker compose --profile postgres up --build
+#       → also starts Postgres and points the API at it via DATABASE_URL.
+#
+# Configuration is read from a `.env` file in this directory (repo root). Copy
+# .env.example → .env and fill in real values. See DEPLOY.md for the full guide.
+# ─────────────────────────────────────────────────────────────────────────────
 services:
+  # Optional Postgres. Only started under the `postgres` profile, so the default
+  # `docker compose up` keeps working on SQLite with zero extra setup.
   db:
     image: postgres:16-alpine
+    profiles: ["postgres"]
     environment:
-      POSTGRES_USER: noyou
-      POSTGRES_PASSWORD: noyou
-      POSTGRES_DB: noyou
+      POSTGRES_USER: ${POSTGRES_USER:-noyou}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-noyou}
+      POSTGRES_DB: ${POSTGRES_DB:-noyou}
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U noyou"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-noyou}"]
       interval: 5s
       timeout: 3s
       retries: 10
 
   api:
     build: ./backend
+    restart: unless-stopped
+    # db only exists under the `postgres` profile; this dependency is a no-op
+    # (and ignored) when that profile is inactive, so SQLite runs stand alone.
     depends_on:
       db:
         condition: service_healthy
+        required: false
     environment:
-      DATABASE_URL: postgresql+psycopg2://noyou:noyou@db:5432/noyou
-      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      # Default to the in-container SQLite file (persisted on the apidata volume).
+      # Override DATABASE_URL in .env to use Postgres (compose passes it through
+      # when the `postgres` profile is active).
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////data/noyou.db}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY in .env — the API refuses to boot without a strong one in production}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3001}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3001}
+      OAUTH_CALLBACK_BASE_URL: ${OAUTH_CALLBACK_BASE_URL:-http://localhost:8000}
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-4}
       ANALYZER: ${ANALYZER:-rule_based}
       CONNECTORS: ${CONNECTORS:-demo}
       SCAN_INTERVAL_MINUTES: ${SCAN_INTERVAL_MINUTES:-360}
-      SEED_DEMO: "true"
+      SEED_DEMO: ${SEED_DEMO:-true}
     ports:
       - "8000:8000"
     volumes:
-      - ./frontend:/frontend:ro
+      # Persists the SQLite DB across container restarts (no-op for Postgres).
+      - apidata:/data
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        # Baked into the client bundle at build time. Point this at the PUBLIC
+        # URL of the API as reached from the user's browser (not the compose
+        # service name), e.g. https://api.example.com in a real deployment.
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "3001:3001"
 
 volumes:
   pgdata:
+  apidata:
