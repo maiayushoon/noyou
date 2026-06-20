@@ -105,6 +105,15 @@ class Settings(BaseSettings):
     # --- Background scanning ---
     scan_interval_minutes: int = 360
 
+    # --- Weekly digest email ---
+    # Master switch for the scheduled weekly reputation digest. When False the
+    # job is not registered and send_weekly_digests is a no-op.
+    digest_enabled: bool = True
+    # Day of week the digest runs, 0 = Monday .. 6 = Sunday (APScheduler cron).
+    weekly_digest_day: int = 0
+    # Hour of day (0-23, server local time) the digest runs.
+    weekly_digest_hour: int = 8
+
     # --- Demo seeding ---
     seed_demo: bool = True
     demo_email: str = "demo@noyou.app"

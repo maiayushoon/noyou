@@ -36,6 +36,7 @@ class YouTubeProvider(OAuthProvider):
     name = "youtube"
     label = "YouTube"
     scopes = "https://www.googleapis.com/auth/youtube.readonly openid"
+    uses_pkce = True
 
     def is_configured(self) -> bool:
         return bool(settings.google_oauth_client_id and settings.google_oauth_client_secret)
@@ -51,19 +52,26 @@ class YouTubeProvider(OAuthProvider):
             "prompt": "consent",
             "include_granted_scopes": "true",
         }
+        # PKCE (S256): bind this authorize request to the verifier in the signed state.
+        code_challenge = extra.get("code_challenge")
+        if code_challenge:
+            params["code_challenge"] = code_challenge
+            params["code_challenge_method"] = "S256"
         return f"{_AUTHORIZE_URL}?{urlencode(params)}"
 
     def exchange_code(self, *, code: str, redirect_uri: str, **extra) -> TokenBundle | None:
-        resp = safe_post(
-            _TOKEN_URL,
-            data={
-                "grant_type": "authorization_code",
-                "code": code,
-                "client_id": settings.google_oauth_client_id,
-                "client_secret": settings.google_oauth_client_secret,
-                "redirect_uri": redirect_uri,
-            },
-        )
+        data = {
+            "grant_type": "authorization_code",
+            "code": code,
+            "client_id": settings.google_oauth_client_id,
+            "client_secret": settings.google_oauth_client_secret,
+            "redirect_uri": redirect_uri,
+        }
+        # PKCE: prove possession of the verifier that produced the authorize challenge.
+        code_verifier = extra.get("code_verifier")
+        if code_verifier:
+            data["code_verifier"] = code_verifier
+        resp = safe_post(_TOKEN_URL, data=data)
         data = safe_json(resp)
         if not isinstance(data, dict) or not data.get("access_token"):
             return None

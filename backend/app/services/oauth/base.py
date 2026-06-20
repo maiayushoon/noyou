@@ -13,6 +13,9 @@ Authorization headers and never logged.
 """
 from __future__ import annotations
 
+import base64
+import hashlib
+import secrets
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
@@ -107,6 +110,31 @@ class OAuthProvider(ABC):
     label: str = "Base"
     #: space-delimited scopes requested at authorize time
     scopes: str = ""
+    #: whether this provider uses PKCE (S256). When True, the connect endpoint mints
+    #: a verifier/challenge pair via :meth:`create_pkce_pair`, carries the verifier in
+    #: the signed state, and the provider must honor ``code_challenge`` at authorize
+    #: time and ``code_verifier`` at token-exchange time.
+    uses_pkce: bool = False
+    #: whether this provider has NO separate refresh token and instead refreshes a
+    #: long-lived access token using that access token itself (Meta: Instagram,
+    #: Threads). The token helper consults this to refresh-in-place rather than
+    #: immediately expiring an account that has no stored refresh token.
+    refreshes_with_access_token: bool = False
+
+    # --- PKCE ------------------------------------------------------------------
+    @staticmethod
+    def create_pkce_pair() -> tuple[str, str]:
+        """Return a ``(code_verifier, code_challenge)`` pair for PKCE (S256).
+
+        The verifier is a high-entropy URL-safe random string; the challenge is the
+        base64url (no padding) of its SHA-256 digest. Per RFC 7636, the verifier is
+        sent at token exchange and the challenge at authorize time with
+        ``code_challenge_method=S256``.
+        """
+        code_verifier = secrets.token_urlsafe(64)
+        digest = hashlib.sha256(code_verifier.encode("ascii")).digest()
+        code_challenge = base64.urlsafe_b64encode(digest).rstrip(b"=").decode("ascii")
+        return code_verifier, code_challenge
 
     # --- configuration --------------------------------------------------------
     @abstractmethod

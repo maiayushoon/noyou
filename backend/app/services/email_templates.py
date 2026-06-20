@@ -35,6 +35,51 @@ def verification_email(name: str | None, verify_url: str) -> tuple[str, str]:
     return subject, body
 
 
+def _format_delta(delta: float) -> str:
+    """Human-readable signed score change, e.g. '+3.4', '-2.0', 'no change'."""
+    if delta > 0:
+        return f"up {delta:+.1f} points"
+    if delta < 0:
+        return f"down {delta:+.1f} points"
+    return "unchanged"
+
+
+def weekly_digest_email(name: str | None, digest: dict) -> tuple[str, str]:
+    """Weekly reputation summary email built from a ``build_user_digest`` dict.
+
+    The ``digest`` carries only aggregate, non-sensitive figures (score, deltas,
+    counts, one issue title) -- never tokens, links to private content, or secrets.
+    """
+    score = digest.get("current_score", 0.0)
+    band = (digest.get("band") or "").replace("_", " ").title()
+    delta = float(digest.get("score_delta", 0.0) or 0.0)
+    new_high_risk = int(digest.get("new_high_risk_mentions", 0) or 0)
+    top_issue = (digest.get("top_issue") or "").strip()
+    owned_activity = int(digest.get("connected_account_activity", 0) or 0)
+
+    subject = f"Your weekly {_BRAND} reputation digest"
+
+    band_part = f" ({band})" if band else ""
+    lines = [
+        _greeting(name),
+        "",
+        f"Here is your {_BRAND} reputation summary for the past week.",
+        "",
+        f"Reputation score: {score:.0f}/100{band_part} -- {_format_delta(delta)} since last week.",
+        f"New high-risk mentions (last 7 days): {new_high_risk}",
+        f"Activity on your connected accounts: {owned_activity}",
+    ]
+    if top_issue:
+        lines += ["", f"Most important issue to review: {top_issue}"]
+    lines += [
+        "",
+        "Open your dashboard to review the details and recommended actions.",
+        "",
+        _SIGNOFF,
+    ]
+    return subject, "\n".join(lines)
+
+
 def password_reset_email(name: str | None, reset_url: str) -> tuple[str, str]:
     """Email containing a one-time link to choose a new password."""
     subject = f"Reset your {_BRAND} password"

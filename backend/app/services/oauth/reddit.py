@@ -38,6 +38,7 @@ class RedditProvider(OAuthProvider):
     name = "reddit"
     label = "Reddit"
     scopes = "identity history read"
+    uses_pkce = True
 
     def is_configured(self) -> bool:
         return bool(settings.reddit_oauth_client_id and settings.reddit_oauth_client_secret)
@@ -60,16 +61,26 @@ class RedditProvider(OAuthProvider):
             "duration": "permanent",  # request a refresh token
             "scope": self.scopes,
         }
+        # PKCE (S256): bind this authorize request to the verifier in the signed state.
+        code_challenge = extra.get("code_challenge")
+        if code_challenge:
+            params["code_challenge"] = code_challenge
+            params["code_challenge_method"] = "S256"
         return f"{_AUTHORIZE_URL}?{urlencode(params)}"
 
     def exchange_code(self, *, code: str, redirect_uri: str, **extra) -> TokenBundle | None:
+        data = {
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": redirect_uri,
+        }
+        # PKCE: prove possession of the verifier that produced the authorize challenge.
+        code_verifier = extra.get("code_verifier")
+        if code_verifier:
+            data["code_verifier"] = code_verifier
         resp = safe_post(
             _TOKEN_URL,
-            data={
-                "grant_type": "authorization_code",
-                "code": code,
-                "redirect_uri": redirect_uri,
-            },
+            data=data,
             auth=self._auth(),
             headers={"User-Agent": self._user_agent()},
         )

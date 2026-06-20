@@ -131,6 +131,12 @@ export interface SentimentCounts {
   negative: number;
 }
 
+/** A single point in the hero score sparkline (oldest -> newest). */
+export interface ScoreTrendPoint {
+  date: string;
+  score: number;
+}
+
 export interface DashboardSummary {
   reputation_score: number;
   band: DashboardBand;
@@ -142,6 +148,12 @@ export interface DashboardSummary {
   last_scan_at: string | null;
   top_alerts: Alert[];
   recent_high_risk: Mention[];
+  /** Most recent completed scan's score_after minus score_before; 0.0 when no prior scan. */
+  score_delta: number;
+  /** The score_before of that most recent scan; null if none. */
+  previous_score: number | null;
+  /** Up to the last 8 completed-scan scores, oldest -> newest. Empty if none. */
+  score_trend: ScoreTrendPoint[];
 }
 
 export type PublishRecommendation =

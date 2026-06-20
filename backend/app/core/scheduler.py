@@ -36,26 +36,71 @@ def _scan_all_users() -> None:
         db.close()
 
 
+def _send_weekly_digests() -> None:
+    """Scheduled job: email each active user their weekly reputation digest.
+
+    Self-contained and defensive — opens its own session and never propagates an
+    exception into the scheduler thread. send_weekly_digests itself isolates each
+    user and respects settings.digest_enabled.
+    """
+    # Imported here to avoid a circular import at module load.
+    from ..services.digest import send_weekly_digests
+
+    db = SessionLocal()
+    try:
+        send_weekly_digests(db)
+    except Exception:
+        logger.exception("weekly digest job failed")
+    finally:
+        db.close()
+
+
 def start_scheduler() -> BackgroundScheduler | None:
     global _scheduler
-    if settings.scan_interval_minutes <= 0:
-        logger.info("Scheduler disabled (SCAN_INTERVAL_MINUTES=0)")
+    scan_enabled = settings.scan_interval_minutes > 0
+    digest_enabled = settings.digest_enabled
+
+    # Nothing to run — don't spin up a scheduler thread at all.
+    if not scan_enabled and not digest_enabled:
+        logger.info("Scheduler disabled (no periodic scan and no weekly digest)")
         return None
     if _scheduler and _scheduler.running:
         return _scheduler
 
     _scheduler = BackgroundScheduler(daemon=True)
-    _scheduler.add_job(
-        _scan_all_users,
-        "interval",
-        minutes=settings.scan_interval_minutes,
-        id="periodic_scan",
-        replace_existing=True,
-        coalesce=True,
-        max_instances=1,
-    )
+
+    if scan_enabled:
+        _scheduler.add_job(
+            _scan_all_users,
+            "interval",
+            minutes=settings.scan_interval_minutes,
+            id="periodic_scan",
+            replace_existing=True,
+            coalesce=True,
+            max_instances=1,
+        )
+
+    if digest_enabled:
+        # Weekly cron job. coalesce + max_instances=1 + replace_existing keep it
+        # idempotent across restarts (no pile-up, no duplicate registration).
+        _scheduler.add_job(
+            _send_weekly_digests,
+            "cron",
+            day_of_week=settings.weekly_digest_day,
+            hour=settings.weekly_digest_hour,
+            minute=0,
+            id="weekly_digest",
+            replace_existing=True,
+            coalesce=True,
+            max_instances=1,
+        )
+
     _scheduler.start()
-    logger.info("Scheduler started: scanning every %s min", settings.scan_interval_minutes)
+    logger.info(
+        "Scheduler started (scan=%s, weekly_digest=%s)",
+        f"every {settings.scan_interval_minutes} min" if scan_enabled else "off",
+        "on" if digest_enabled else "off",
+    )
     return _scheduler
 
 

@@ -34,6 +34,8 @@ class InstagramProvider(OAuthProvider):
     name = "instagram"
     label = "Instagram"
     scopes = "instagram_business_basic"
+    # No separate refresh token: long-lived tokens are refreshed using the token itself.
+    refreshes_with_access_token = True
 
     def is_configured(self) -> bool:
         return bool(settings.instagram_app_id and settings.instagram_app_secret)

@@ -5,8 +5,12 @@ through :func:`get_valid_token`, so refresh logic lives in exactly one place.
 
 Flow:
   1. Decrypt the stored access token.
-  2. If it expires within a small skew AND a refresh token exists, call the
+  2. If it expires within a small skew AND a refresh credential exists, call the
      provider's ``refresh`` and persist the re-encrypted new access/refresh/expiry.
+     A "refresh credential" is normally a stored refresh token (Reddit/Google), but
+     self-refresh providers (Instagram/Threads, ``refreshes_with_access_token``) have
+     none and instead refresh the long-lived access token using that token itself —
+     so a still-decryptable access token is enough to attempt a refresh.
   3. If the token is expired with no usable refresh (or refresh fails), mark the
      row ``status="expired"`` and raise :class:`TokenExpired` so callers no-op.
 
@@ -58,10 +62,23 @@ def get_valid_token(db: Session, linked: LinkedAccount) -> str:
 
     # Token is at/near expiry — try to refresh.
     provider = get_provider(linked.provider)
-    refresh_plain = decrypt_token(linked.refresh_token_enc) if linked.refresh_token_enc else ""
-    if provider is None or not refresh_plain:
+    if provider is None:
         _mark_expired(db, linked, "token expired; no refresh available")
-        raise TokenExpired(f"linked_account {linked.id}: expired, no refresh")
+        raise TokenExpired(f"linked_account {linked.id}: expired, no provider")
+
+    refresh_plain = decrypt_token(linked.refresh_token_enc) if linked.refresh_token_enc else ""
+
+    # Self-refresh providers (Instagram, Threads) store NO refresh token: they refresh
+    # the long-lived access token using that access token itself. As long as the access
+    # token is still decryptable, attempt that rather than immediately expiring.
+    self_refresh = getattr(provider, "refreshes_with_access_token", False)
+    if not refresh_plain:
+        if not (self_refresh and access):
+            _mark_expired(db, linked, "token expired; no refresh available")
+            raise TokenExpired(f"linked_account {linked.id}: expired, no refresh")
+        # The provider's refresh signature treats the access token as the refresh
+        # credential; pass it as both so either name resolves to the right value.
+        refresh_plain = access
 
     bundle = provider.refresh(
         refresh_token=refresh_plain,

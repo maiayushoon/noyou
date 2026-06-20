@@ -33,6 +33,8 @@ class ThreadsProvider(OAuthProvider):
     name = "threads"
     label = "Threads"
     scopes = "threads_basic"
+    # No separate refresh token: long-lived tokens are refreshed using the token itself.
+    refreshes_with_access_token = True
 
     def is_configured(self) -> bool:
         return bool(settings.threads_app_id and settings.threads_app_secret)

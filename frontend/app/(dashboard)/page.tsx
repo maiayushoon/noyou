@@ -2,17 +2,21 @@
 
 import Link from "next/link";
 import useSWR from "swr";
+import { Area, AreaChart, ResponsiveContainer } from "recharts";
 import {
   AlertTriangle,
+  ArrowDown,
   ArrowRight,
+  ArrowUp,
   Bell,
   Brush,
   ExternalLink,
   MessageSquareText,
+  Minus,
   ShieldAlert,
   Sparkles,
 } from "lucide-react";
-import { api, type DashboardSummary } from "@/lib/api";
+import { api, type DashboardSummary, type ScoreTrendPoint } from "@/lib/api";
 import {
   bandColor,
   cn,
@@ -33,6 +37,7 @@ import {
   Stat,
 } from "@/components/ui";
 import { FadeIn, FadeInItem, StaggerList } from "@/components/motion/fade-in";
+import { AuditChecklist } from "@/components/dashboard/audit-checklist";
 
 export default function OverviewPage() {
   const { data, error, isLoading } = useSWR<DashboardSummary>(
@@ -63,13 +68,24 @@ export default function OverviewPage() {
                   Reputation score
                 </span>
               </div>
-              <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
-                {isLoading || !data ? (
-                  <Skeleton className="h-8 w-64" />
-                ) : (
-                  <>Your reputation is {bandColor(data.band).label.toLowerCase()}.</>
+              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
+                <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+                  {isLoading || !data ? (
+                    <Skeleton className="h-8 w-64" />
+                  ) : (
+                    <>Your reputation is {bandColor(data.band).label.toLowerCase()}.</>
+                  )}
+                </h2>
+                {isLoading || !data ? null : (
+                  <ScoreDeltaPill
+                    delta={data.score_delta}
+                    previousScore={data.previous_score}
+                  />
                 )}
-              </h2>
+                {!isLoading && data ? (
+                  <ScoreSparkline trend={data.score_trend} />
+                ) : null}
+              </div>
               <p className="mt-1.5 max-w-lg text-sm text-slate-500">
                 A <strong className="font-semibold text-slate-600">0–100</strong>{" "}
                 measure of how the web and AI engines portray you —{" "}
@@ -134,6 +150,11 @@ export default function OverviewPage() {
           accentClassName="bg-violet-50 text-ai-violet"
         />
       </div>
+
+      {/* Gamified profile-audit checklist */}
+      <FadeIn delay={0.05}>
+        <AuditChecklist dashboard={data} dashboardLoading={isLoading} />
+      </FadeIn>
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Sentiment mix */}
@@ -340,6 +361,90 @@ function ScaleDot({ className, label }: { className: string; label: string }) {
       <span className={cn("h-2 w-2 rounded-full", className)} aria-hidden />
       {label}
     </span>
+  );
+}
+
+/**
+ * Change in reputation score since the previous scan. Emerald for a rise,
+ * red for a drop, slate for no change. Rounds to one decimal and shows a sign.
+ */
+function ScoreDeltaPill({
+  delta,
+  previousScore,
+}: {
+  delta: number;
+  previousScore: number | null;
+}) {
+  const rounded = Math.round(delta * 10) / 10;
+  const isUp = rounded > 0;
+  const isDown = rounded < 0;
+
+  const tone = isUp
+    ? "bg-emerald-50 text-emerald-700 ring-emerald-200"
+    : isDown
+      ? "bg-red-50 text-red-700 ring-red-200"
+      : "bg-slate-100 text-slate-500 ring-slate-200";
+
+  const Icon = isUp ? ArrowUp : isDown ? ArrowDown : Minus;
+  // Avoid "-0"; build an explicit sign + absolute magnitude.
+  const sign = isUp ? "+" : isDown ? "-" : "";
+  const magnitude = Math.abs(rounded);
+
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset",
+        tone
+      )}
+      title={
+        previousScore !== null
+          ? `Previous scan: ${Math.round(previousScore)}`
+          : "No previous scan to compare"
+      }
+    >
+      <Icon className="h-3.5 w-3.5" aria-hidden />
+      <span className="tabular-nums">
+        {rounded === 0 ? "No change" : `${sign}${magnitude}`}
+      </span>
+      <span className="font-normal opacity-70">since last scan</span>
+    </span>
+  );
+}
+
+/**
+ * Compact, axis-less area sparkline of recent scan scores. Hidden gracefully
+ * when there are fewer than 2 points to plot.
+ */
+function ScoreSparkline({ trend }: { trend: ScoreTrendPoint[] }) {
+  if (!trend || trend.length < 2) return null;
+
+  const first = trend[0];
+  const last = trend[trend.length - 1];
+  if (!first || !last) return null;
+  const stroke = last.score >= first.score ? "#10b981" : "#ef4444";
+
+  return (
+    <div className="h-9 w-[120px]" aria-hidden>
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart data={trend} margin={{ top: 4, right: 2, bottom: 2, left: 2 }}>
+          <defs>
+            <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor={stroke} stopOpacity={0.28} />
+              <stop offset="100%" stopColor={stroke} stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <Area
+            type="monotone"
+            dataKey="score"
+            stroke={stroke}
+            strokeWidth={2}
+            fill="url(#sparkFill)"
+            isAnimationActive={false}
+            dot={false}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 
