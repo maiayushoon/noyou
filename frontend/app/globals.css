@@ -6,12 +6,12 @@
   :root {
     --font-inter: "Inter", system-ui, sans-serif;
 
-    /* Design tokens */
-    --canvas: 248 250 252; /* #f8fafc */
-    --card: 255 255 255;
-    --ink: 15 23 42; /* slate-900 */
-    --muted: 100 116 139; /* slate-500 */
-    --hairline: 15 23 42;
+    /* Design tokens — dark theme */
+    --canvas: 7 7 11; /* #07070b near-black */
+    --card: 12 12 18;
+    --ink: 231 233 239; /* #e7e9ef */
+    --muted: 148 163 184; /* slate-400 */
+    --hairline: 255 255 255;
 
     /* AI gradient stops */
     --ai-indigo: 99 102 241;
@@ -20,7 +20,7 @@
   }
 
   * {
-    border-color: rgba(15, 23, 42, 0.07);
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   html {
@@ -30,9 +30,26 @@
 
   body {
     background-color: rgb(var(--canvas));
+    /* Subtle radial AI glow for depth on the near-black canvas */
+    background-image: radial-gradient(
+        1200px 600px at 50% -10%,
+        rgba(99, 102, 241, 0.08),
+        transparent 60%
+      ),
+      radial-gradient(
+        900px 500px at 100% 0%,
+        rgba(139, 92, 246, 0.06),
+        transparent 55%
+      );
+    background-attachment: fixed;
     color: rgb(var(--ink));
     font-feature-settings: "cv11", "ss01";
     font-variation-settings: "opsz" 32;
+  }
+
+  ::selection {
+    background-color: rgba(139, 92, 246, 0.35);
+    color: #ffffff;
   }
 
   :focus-visible {
@@ -52,36 +69,52 @@
   }
 
   .border-hairline {
-    border-color: rgba(15, 23, 42, 0.07);
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   .glass {
-    background-color: rgba(255, 255, 255, 0.72);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
   }
 }
 
-/* Refined scrollbar */
+/* Refined scrollbar — dark */
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: rgba(15, 23, 42, 0.18) transparent;
+    scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
   }
   .scrollbar-thin::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: rgba(15, 23, 42, 0.16);
+    background-color: rgba(255, 255, 255, 0.14);
     border-radius: 9999px;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(15, 23, 42, 0.26);
+    background-color: rgba(255, 255, 255, 0.24);
   }
   .scrollbar-thin::-webkit-scrollbar-track {
     background: transparent;
   }
+}
+
+/* Global page scrollbar — dark */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Dark sidebar scrollbar */

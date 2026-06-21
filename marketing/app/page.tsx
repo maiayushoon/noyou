@@ -40,10 +40,10 @@ export default function HomePage() {
       <Hero />
 
       {/* Social proof / who it's for */}
-      <section className="border-y border-slate-100 bg-slate-50/60 py-10">
+      <section className="border-y border-white/[0.06] bg-white/[0.02] py-10">
         <div className="container-page">
           <Reveal>
-            <p className="text-center text-sm font-medium uppercase tracking-wider text-slate-500">
+            <p className="text-center text-sm font-medium uppercase tracking-wider text-slate-400">
               Trusted by founders, executives, professionals, and brands
             </p>
           </Reveal>
@@ -55,7 +55,7 @@ export default function HomePage() {
               (audience) => (
                 <RevealItem
                   key={audience}
-                  className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-brand-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-card"
+                  className="rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-center text-sm font-semibold text-slate-200 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-white/[0.12] hover:shadow-ai-glow"
                 >
                   {audience}
                 </RevealItem>
@@ -82,14 +82,19 @@ export default function HomePage() {
       </section>
 
       {/* How it works */}
-      <section className="bg-brand-900 py-20 text-white">
-        <div className="container-page">
+      <section className="relative overflow-hidden border-y border-white/[0.06] bg-white/[0.02] py-20 text-white">
+        {/* Soft ai-gradient orb for depth. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-ai-violet/10 blur-3xl"
+        />
+        <div className="container-page relative">
           <Reveal>
             <SectionHeading
               eyebrow="How it works"
               title={<span className="text-white">From mention to action in four steps</span>}
               description={
-                <span className="text-brand-100">
+                <span className="text-slate-400">
                   Set it up in minutes. NoYou does the watching, the scoring, and
                   the recommending.
                 </span>
@@ -105,15 +110,15 @@ export default function HomePage() {
               <RevealItem
                 key={step.number}
                 as="li"
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:border-white/25 hover:bg-white/10"
+                className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-white/[0.12] hover:shadow-ai-glow"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-cyan-400 text-base font-bold text-brand-950 shadow-ai">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ai-gradient text-base font-bold text-white shadow-ai">
                   {step.number}
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-white">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-brand-100">
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
                   {step.description}
                 </p>
               </RevealItem>
@@ -125,15 +130,15 @@ export default function HomePage() {
       {/* AI Visibility highlight */}
       <section className="py-20">
         <div className="container-page">
-          <div className="grid items-center gap-10 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-brand-50 p-8 shadow-card lg:grid-cols-2 lg:p-12">
+          <div className="grid items-center gap-10 rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 shadow-ai backdrop-blur-sm lg:grid-cols-2 lg:p-12">
             <Reveal from="right">
-              <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-accent-600">
+              <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-cyan-300">
                 New · AI Visibility
               </p>
-              <h2 className="text-balance text-3xl font-bold tracking-tight text-brand-900 sm:text-4xl">
+              <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 Find out how AI engines describe you
               </h2>
-              <p className="mt-4 text-lg leading-relaxed text-slate-600">
+              <p className="mt-4 text-lg leading-relaxed text-slate-300">
                 People now meet your brand inside an AI answer before they ever
                 visit your site. The AI Visibility Check asks ChatGPT, Perplexity,
                 Gemini, and Google AI Overviews how they describe you, surfaces
@@ -146,10 +151,10 @@ export default function HomePage() {
                   "Spot outdated or false claims before customers do",
                   "Get a content plan to shape future AI answers (GEO/AEO)",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-slate-700">
+                  <li key={item} className="flex items-start gap-3 text-slate-300">
                     <span
                       aria-hidden="true"
-                      className="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-100 text-accent-700"
+                      className="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30"
                     >
                       ✓
                     </span>
@@ -160,7 +165,7 @@ export default function HomePage() {
               <div className="mt-8">
                 <Link
                   href="/features#ai-visibility"
-                  className="inline-flex items-center gap-1 rounded-lg bg-brand-600 px-5 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-brand-700"
+                  className="inline-flex items-center gap-1 rounded-lg bg-ai-gradient px-5 py-3 text-base font-semibold text-white shadow-ai transition-transform hover:-translate-y-0.5"
                 >
                   Explore AI Visibility
                   <span aria-hidden="true">→</span>
@@ -169,37 +174,37 @@ export default function HomePage() {
             </Reveal>
 
             {/* Illustrative mock answer card */}
-            <Reveal from="left" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lift transition-shadow hover:shadow-ai">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
-                <span className="h-2.5 w-2.5 rounded-full bg-accent-500" />
-                <span className="text-sm font-semibold text-brand-900">
+            <Reveal from="left" className="rounded-xl border border-white/[0.06] bg-white/[0.05] p-6 shadow-ai backdrop-blur-sm transition-all hover:border-white/[0.12]">
+              <div className="flex items-center gap-2 border-b border-white/[0.08] pb-4">
+                <span className="h-2.5 w-2.5 rounded-full bg-cyan-400" />
+                <span className="text-sm font-semibold text-white">
                   AI Visibility report
                 </span>
-                <span className="ml-auto rounded-full bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-700">
+                <span className="ml-auto rounded-full bg-white/[0.06] px-2 py-0.5 text-xs font-medium text-slate-300">
                   4 engines
                 </span>
               </div>
               <dl className="mt-4 space-y-4 text-sm">
                 <div>
-                  <dt className="font-semibold text-slate-800">ChatGPT</dt>
-                  <dd className="text-slate-600">
+                  <dt className="font-semibold text-slate-100">ChatGPT</dt>
+                  <dd className="text-slate-400">
                     Describes you accurately. Cites your homepage and About page.
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-slate-800">Perplexity</dt>
-                  <dd className="text-slate-600">
+                  <dt className="font-semibold text-slate-100">Perplexity</dt>
+                  <dd className="text-slate-400">
                     Uses a two-year-old funding figure.{" "}
-                    <span className="font-medium text-amber-600">
+                    <span className="font-medium text-amber-300">
                       Recommend: publish an updated facts page.
                     </span>
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-slate-800">Gemini</dt>
-                  <dd className="text-slate-600">
+                  <dt className="font-semibold text-slate-100">Gemini</dt>
+                  <dd className="text-slate-400">
                     Confuses you with a similarly named company.{" "}
-                    <span className="font-medium text-red-600">
+                    <span className="font-medium text-red-300">
                       Action: add clear entity markup.
                     </span>
                   </dd>
@@ -211,7 +216,7 @@ export default function HomePage() {
       </section>
 
       {/* Pricing teaser */}
-      <section className="bg-slate-50 py-20">
+      <section className="border-y border-white/[0.06] bg-white/[0.02] py-20">
         <div className="container-page">
           <Reveal>
             <SectionHeading
@@ -225,7 +230,7 @@ export default function HomePage() {
           </div>
           <p className="mt-8 text-center text-sm text-slate-500">
             All prices in USD.{" "}
-            <Link href="/pricing" className="font-semibold text-brand-700 hover:text-brand-800">
+            <Link href="/pricing" className="font-semibold text-indigo-300 hover:text-indigo-200">
               Compare plans in detail →
             </Link>
           </p>
@@ -246,7 +251,7 @@ export default function HomePage() {
             <FaqAccordion faqs={homeFaqs} />
           </Reveal>
           <p className="mt-8 text-center text-sm text-slate-500">
-            <Link href="/faq" className="font-semibold text-brand-700 hover:text-brand-800">
+            <Link href="/faq" className="font-semibold text-indigo-300 hover:text-indigo-200">
               Read all FAQs →
             </Link>
           </p>

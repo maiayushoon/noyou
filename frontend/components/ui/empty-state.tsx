@@ -23,14 +23,14 @@ export function EmptyState({
       )}
     >
       <span
-        className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-400"
+        className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/[0.06] text-slate-400"
         aria-hidden
       >
         {icon}
       </span>
-      <p className="text-sm font-semibold text-slate-900">{title}</p>
+      <p className="text-sm font-semibold text-slate-100">{title}</p>
       {description ? (
-        <p className="mt-1 max-w-sm text-sm text-slate-500">{description}</p>
+        <p className="mt-1 max-w-sm text-sm text-slate-400">{description}</p>
       ) : null}
       {action ? <div className="mt-5">{action}</div> : null}
     </div>

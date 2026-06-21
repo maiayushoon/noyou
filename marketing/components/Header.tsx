@@ -8,11 +8,11 @@ import { NAV_LINKS, SITE } from "@/lib/content";
  */
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+    <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-[#07070b]/80 backdrop-blur supports-[backdrop-filter]:bg-[#07070b]/60">
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-md font-bold text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+          className="flex items-center gap-2 rounded-md font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ai-indigo"
           aria-label={`${SITE.name} home`}
         >
           <span
@@ -33,7 +33,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-slate-700 transition-colors hover:text-brand-700"
+              className="text-sm font-medium text-slate-300 transition-colors hover:text-white"
             >
               {link.label}
             </Link>
@@ -43,7 +43,7 @@ export default function Header() {
         <div className="hidden items-center gap-3 md:flex">
           <a
             href={SITE.appUrl}
-            className="text-sm font-medium text-slate-700 transition-colors hover:text-brand-700"
+            className="text-sm font-medium text-slate-300 transition-colors hover:text-white"
           >
             Sign in
           </a>
@@ -58,7 +58,7 @@ export default function Header() {
         {/* Mobile menu (no-JS friendly) */}
         <details className="relative md:hidden">
           <summary
-            className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-slate-200 text-slate-700 [&::-webkit-details-marker]:hidden"
+            className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-white/[0.08] text-slate-300 [&::-webkit-details-marker]:hidden"
             aria-label="Toggle menu"
           >
             <svg
@@ -75,27 +75,27 @@ export default function Header() {
               <line x1="3" y1="18" x2="21" y2="18" />
             </svg>
           </summary>
-          <div className="absolute right-0 mt-2 w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-lift">
+          <div className="absolute right-0 mt-2 w-56 rounded-xl border border-white/[0.08] bg-[#0c0c12]/95 p-2 shadow-lift backdrop-blur-md">
             <nav aria-label="Mobile" className="flex flex-col">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-700"
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-white/[0.06] hover:text-white"
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="my-2 h-px bg-slate-100" />
+              <div className="my-2 h-px bg-white/[0.08]" />
               <a
                 href={SITE.appUrl}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-white/[0.06] hover:text-white"
               >
                 Sign in
               </a>
               <a
                 href={`${SITE.appUrl}/signup`}
-                className="mt-1 rounded-lg bg-brand-600 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-brand-700"
+                className="mt-1 rounded-lg bg-ai-gradient px-3 py-2 text-center text-sm font-semibold text-white shadow-ai hover:-translate-y-0.5 transition-transform"
               >
                 Get started
               </a>

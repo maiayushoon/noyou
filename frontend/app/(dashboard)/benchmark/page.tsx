@@ -32,6 +32,16 @@ import { PageHeader } from "@/components/layout/page-header";
 import { FadeIn, FadeInItem, StaggerList } from "@/components/motion/fade-in";
 import { useToast } from "@/lib/toast";
 
+// Brightened band label colors for readable contrast on the dark surface
+// (mirrors bandColor() in lib/utils, which targets light backgrounds).
+const BAND_TEXT_DARK: Record<string, string> = {
+  excellent: "text-emerald-300",
+  high: "text-emerald-300",
+  medium: "text-amber-300",
+  low: "text-orange-300",
+  critical: "text-red-300",
+};
+
 export default function BenchmarkPage() {
   const toast = useToast();
   const { mutate } = useSWRConfig();
@@ -121,7 +131,7 @@ export default function BenchmarkPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Brand or person to track"
-                    className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+                    className="min-w-0 flex-1 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
                   />
                   <Button
                     type="submit"
@@ -149,11 +159,11 @@ export default function BenchmarkPage() {
                     <StaggerList className="space-y-2">
                       {competitors.data!.map((c) => (
                         <FadeInItem key={String(c.id)}>
-                          <div className="flex items-center gap-3 rounded-lg border border-hairline p-3">
-                            <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
+                          <div className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.03] p-3 transition-colors hover:border-white/[0.12]">
+                            <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] text-slate-400">
                               <TrendingUp className="h-4 w-4" aria-hidden />
                             </span>
-                            <p className="min-w-0 flex-1 truncate text-sm font-medium text-slate-900">
+                            <p className="min-w-0 flex-1 truncate text-sm font-medium text-slate-100">
                               {c.name}
                             </p>
                             <Button
@@ -236,24 +246,26 @@ function LeaderRow({ entry, rank }: { entry: BenchmarkEntry; rank: number }) {
   return (
     <div
       className={cn(
-        "rounded-xl border p-4",
+        "rounded-xl border p-4 transition-colors",
         entry.is_you
-          ? "border-ai-indigo/30 bg-ai-gradient-soft"
-          : "border-hairline bg-white"
+          ? "border-ai-indigo/40 bg-ai-gradient-soft shadow-[0_0_40px_-12px_rgba(139,92,246,0.45)]"
+          : "border-white/[0.08] bg-white/[0.03] hover:border-white/[0.12]"
       )}
     >
       <div className="flex items-center gap-3">
         <span
           className={cn(
             "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold",
-            rank === 1 ? "bg-amber-100 text-amber-700" : "bg-slate-100 text-slate-500"
+            rank === 1
+              ? "bg-amber-500/15 text-amber-300"
+              : "bg-white/[0.06] text-slate-400"
           )}
         >
           {rank}
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <p className="truncate text-sm font-semibold text-slate-900">{entry.name}</p>
+            <p className="truncate text-sm font-semibold text-slate-100">{entry.name}</p>
             {entry.is_you ? (
               <Badge variant="ai" className="gap-1">
                 <Crown className="h-3 w-3" aria-hidden /> You
@@ -263,13 +275,15 @@ function LeaderRow({ entry, rank }: { entry: BenchmarkEntry; rank: number }) {
           <p className="text-xs text-slate-400">{entry.total_mentions} mentions tracked</p>
         </div>
         <div className="shrink-0 text-right">
-          <p className="text-xl font-semibold tabular-nums text-slate-900">
+          <p className="text-xl font-semibold tabular-nums text-slate-100">
             {Math.round(entry.reputation_score)}
           </p>
-          <span className={cn("text-xs font-medium", band.text)}>{band.label}</span>
+          <span className={cn("text-xs font-medium", BAND_TEXT_DARK[entry.band] ?? "text-slate-300")}>
+            {band.label}
+          </span>
         </div>
       </div>
-      <div className="mt-3 flex h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+      <div className="mt-3 flex h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
         {segments.map((s, i) =>
           s.v > 0 ? (
             <div

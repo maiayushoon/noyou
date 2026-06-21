@@ -123,12 +123,12 @@ export default function CleanupPage() {
               </span>
               <div>
                 <div className="flex items-center gap-2">
-                  <p className="text-sm font-semibold text-slate-900">Automated cleanup</p>
+                  <p className="text-sm font-semibold text-slate-100">Automated cleanup</p>
                   <Badge variant="ai" dot dotClassName="bg-white">
                     Pro
                   </Badge>
                 </div>
-                <p className="mt-0.5 max-w-md text-sm text-slate-600">
+                <p className="mt-0.5 max-w-md text-sm text-slate-300">
                   NoYou applies safe actions (archive, monitor) automatically and
                   drafts the riskier ones for your review.
                 </p>
@@ -157,7 +157,7 @@ export default function CleanupPage() {
           </div>
 
           {preview ? (
-            <div className="border-t border-hairline px-5 py-4">
+            <div className="border-t border-white/[0.08] px-5 py-4">
               <p className="mb-2 text-xs font-medium uppercase tracking-wide text-slate-400">
                 Dry-run preview — nothing was changed
               </p>
@@ -168,20 +168,20 @@ export default function CleanupPage() {
               </div>
               <ul className="space-y-1.5">
                 {preview.details.slice(0, 6).map((d, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-slate-600">
+                  <li key={i} className="flex items-center gap-2 text-sm text-slate-300">
                     <span
                       className={cn(
                         "h-1.5 w-1.5 rounded-full",
                         d.outcome === "executed"
-                          ? "bg-emerald-500"
+                          ? "bg-emerald-400"
                           : d.outcome === "drafted"
-                          ? "bg-amber-500"
-                          : "bg-slate-300"
+                          ? "bg-amber-400"
+                          : "bg-slate-500"
                       )}
                       aria-hidden
                     />
-                    <span className="font-medium text-slate-700">{humanize(d.action_type)}</span>
-                    <span className="text-slate-400">·</span>
+                    <span className="font-medium text-slate-100">{humanize(d.action_type)}</span>
+                    <span className="text-slate-500">·</span>
                     <span className="truncate">{d.note}</span>
                   </li>
                 ))}
@@ -203,7 +203,7 @@ export default function CleanupPage() {
                 "rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
                 status === t.key
                   ? "bg-ai-gradient text-white shadow-ai"
-                  : "bg-white text-slate-600 ring-1 ring-inset ring-hairline hover:bg-slate-50"
+                  : "bg-white/[0.03] text-slate-300 ring-1 ring-inset ring-white/[0.10] hover:bg-white/[0.06] hover:text-slate-100"
               )}
             >
               {t.label}
@@ -262,7 +262,7 @@ function ActionRow({
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <CardTitle>{a.title}</CardTitle>
-            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-500">
+            <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-xs font-medium text-slate-400">
               {humanize(a.action_type)}
             </span>
             {a.automated ? (
@@ -275,8 +275,8 @@ function ActionRow({
         <span className="shrink-0 text-xs text-slate-400">{timeAgo(a.created_at)}</span>
       </CardHeader>
       <CardContent className="p-0">
-        <p className="text-sm text-slate-600">{a.instructions}</p>
-        <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-hairline pt-3">
+        <p className="text-sm text-slate-300">{a.instructions}</p>
+        <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-white/[0.08] pt-3">
           <StatusTag status={a.status} />
           <div className="ml-auto flex items-center gap-2">
             {a.status === "suggested" ? (
@@ -321,10 +321,10 @@ function ActionRow({
 
 function StatusTag({ status }: { status: CleanupStatus }) {
   const map: Record<CleanupStatus, string> = {
-    suggested: "bg-indigo-50 text-ai-indigo",
-    in_progress: "bg-amber-50 text-amber-700",
-    completed: "bg-emerald-50 text-emerald-700",
-    dismissed: "bg-slate-100 text-slate-500",
+    suggested: "bg-ai-indigo/15 text-indigo-300",
+    in_progress: "bg-amber-500/15 text-amber-300",
+    completed: "bg-emerald-500/15 text-emerald-300",
+    dismissed: "bg-white/[0.06] text-slate-400",
   };
   return (
     <span
@@ -348,9 +348,9 @@ function PreviewStat({
   tone: "emerald" | "amber" | "slate";
 }) {
   const tones = {
-    emerald: "bg-emerald-50 text-emerald-700",
-    amber: "bg-amber-50 text-amber-700",
-    slate: "bg-slate-100 text-slate-600",
+    emerald: "bg-emerald-500/15 text-emerald-300",
+    amber: "bg-amber-500/15 text-amber-300",
+    slate: "bg-white/[0.06] text-slate-300",
   };
   return (
     <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-medium", tones[tone])}>

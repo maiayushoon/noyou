@@ -27,7 +27,7 @@ function Avatar({ spec, index }: { spec: AvatarSpec; index: number }) {
 
   return (
     <span
-      className="relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full ring-2 ring-white shadow-card"
+      className="relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full ring-2 ring-white/15 shadow-card"
       style={{ zIndex: AVATARS.length - index }}
     >
       {failed ? (
@@ -93,7 +93,7 @@ export default function AvatarCluster({ caption, className = "" }: AvatarCluster
           </motion.div>
         ))}
       </div>
-      <p className="text-left text-sm font-medium leading-snug text-slate-600">
+      <p className="text-left text-sm font-medium leading-snug text-slate-400">
         {caption}
       </p>
     </div>

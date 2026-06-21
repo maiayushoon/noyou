@@ -100,7 +100,7 @@ export default function TeamsPage() {
                     value={orgName}
                     onChange={(e) => setOrgName(e.target.value)}
                     placeholder="New organization name"
-                    className="min-w-0 flex-1 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+                    className="min-w-0 flex-1 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
                   />
                   <Button
                     type="submit"
@@ -134,21 +134,21 @@ export default function TeamsPage() {
                             className={cn(
                               "flex w-full items-center gap-3 rounded-lg border p-3 text-left transition-colors",
                               String(o.id) === activeOrg
-                                ? "border-ai-indigo/30 bg-ai-gradient-soft"
-                                : "border-hairline bg-white hover:bg-slate-50"
+                                ? "border-ai-indigo/40 bg-ai-gradient-soft shadow-[0_0_40px_-12px_rgba(139,92,246,0.45)]"
+                                : "border-white/[0.08] bg-white/[0.03] hover:border-white/[0.12] hover:bg-white/[0.06]"
                             )}
                           >
-                            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-ai-violet ring-1 ring-inset ring-hairline">
+                            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] text-indigo-300 ring-1 ring-inset ring-white/[0.10]">
                               <Building2 className="h-4 w-4" aria-hidden />
                             </span>
                             <div className="min-w-0 flex-1">
-                              <p className="truncate text-sm font-medium text-slate-900">
+                              <p className="truncate text-sm font-medium text-slate-100">
                                 {o.name}
                               </p>
                               <p className="text-xs capitalize text-slate-400">{o.role}</p>
                             </div>
                             {o.role === "owner" ? (
-                              <Crown className="h-3.5 w-3.5 text-amber-500" aria-hidden />
+                              <Crown className="h-3.5 w-3.5 text-amber-400" aria-hidden />
                             ) : null}
                           </button>
                         </FadeInItem>
@@ -166,11 +166,11 @@ export default function TeamsPage() {
               <MembersCard org={selected} />
             ) : (
               <Card className="flex h-full flex-col items-center justify-center px-6 py-16 text-center">
-                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ai-gradient-soft text-ai-violet">
+                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
                   <Users className="h-6 w-6" aria-hidden />
                 </span>
-                <p className="text-sm font-semibold text-slate-900">Select an organization</p>
-                <p className="mt-1 max-w-xs text-sm text-slate-500">
+                <p className="text-sm font-semibold text-slate-100">Select an organization</p>
+                <p className="mt-1 max-w-xs text-sm text-slate-400">
                   Create or choose an organization to manage its members.
                 </p>
               </Card>
@@ -246,7 +246,7 @@ function MembersCard({ org }: { org: Organization }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="teammate@company.com"
-                className="w-full rounded-lg border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+                className="w-full rounded-lg border border-white/10 bg-white/[0.04] py-2.5 pl-9 pr-3 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
               />
             </div>
             <Button
@@ -260,7 +260,7 @@ function MembersCard({ org }: { org: Organization }) {
             </Button>
           </form>
         ) : (
-          <p className="rounded-lg bg-slate-50 px-3 py-2.5 text-xs text-slate-500">
+          <p className="rounded-lg bg-white/[0.04] px-3 py-2.5 text-xs text-slate-400">
             Only the organization owner can invite or remove members.
           </p>
         )}
@@ -288,20 +288,20 @@ function MembersCard({ org }: { org: Organization }) {
             <StaggerList className="space-y-2">
               {members.map((m) => (
                 <FadeInItem key={String(m.id)}>
-                  <div className="flex items-center gap-3 rounded-lg border border-hairline p-3">
-                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ai-gradient-soft text-sm font-semibold text-ai-violet">
+                  <div className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.03] p-3 transition-colors hover:border-white/[0.12]">
+                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ai-gradient-soft text-sm font-semibold text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
                       {m.email.charAt(0).toUpperCase()}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-slate-900">{m.email}</p>
+                      <p className="truncate text-sm font-medium text-slate-100">{m.email}</p>
                       <p className="text-xs capitalize text-slate-400">{humanize(m.role)}</p>
                     </div>
                     <span
                       className={cn(
                         "shrink-0 rounded-full px-2 py-0.5 text-xs font-medium",
                         m.status === "active"
-                          ? "bg-emerald-50 text-emerald-700"
-                          : "bg-amber-50 text-amber-700"
+                          ? "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"
+                          : "bg-amber-500/15 text-amber-300 border border-amber-500/30"
                       )}
                     >
                       {humanize(m.status)}

@@ -63,7 +63,7 @@ export default function AiVisibilityPage() {
                         AI visibility · {data.brand}
                       </span>
                     </div>
-                    <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900">
+                    <h2 className="mt-2 text-2xl font-semibold tracking-tight text-white">
                       {data.summary}
                     </h2>
                     <p className="mt-2 text-xs text-slate-400">
@@ -84,14 +84,14 @@ export default function AiVisibilityPage() {
                     {data.signals.map((s) => (
                       <div
                         key={s.name}
-                        className="flex items-start gap-3 rounded-lg border border-hairline p-3"
+                        className="flex items-start gap-3 rounded-lg border border-white/[0.08] bg-white/[0.02] p-3"
                       >
                         <span
                           className={cn(
                             "mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full",
                             s.present
-                              ? "bg-emerald-50 text-emerald-600"
-                              : "bg-slate-100 text-slate-400"
+                              ? "bg-emerald-500/15 text-emerald-300 ring-1 ring-inset ring-emerald-500/30"
+                              : "bg-white/[0.06] text-slate-400"
                           )}
                           aria-hidden
                         >
@@ -103,14 +103,14 @@ export default function AiVisibilityPage() {
                         </span>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-2">
-                            <p className="text-sm font-medium text-slate-900">
+                            <p className="text-sm font-medium text-slate-100">
                               {s.name}
                             </p>
                             <span className="shrink-0 text-xs text-slate-400">
                               weight {s.weight}
                             </span>
                           </div>
-                          <p className="mt-0.5 text-sm text-slate-500">{s.detail}</p>
+                          <p className="mt-0.5 text-sm text-slate-400">{s.detail}</p>
                         </div>
                       </div>
                     ))}
@@ -125,7 +125,7 @@ export default function AiVisibilityPage() {
                   </CardHeader>
                   <CardContent>
                     {data.recommendations.length === 0 ? (
-                      <p className="text-sm text-slate-500">
+                      <p className="text-sm text-slate-400">
                         You&apos;re covering the fundamentals. Keep publishing
                         authoritative, consistent content.
                       </p>
@@ -133,15 +133,15 @@ export default function AiVisibilityPage() {
                       <ol className="space-y-3">
                         {data.recommendations.map((r, i) => (
                           <li key={i} className="flex items-start gap-3">
-                            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ai-gradient-soft text-ai-violet">
+                            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
                               <Lightbulb className="h-3.5 w-3.5" aria-hidden />
                             </span>
-                            <p className="text-sm text-slate-700">{r}</p>
+                            <p className="text-sm text-slate-300">{r}</p>
                           </li>
                         ))}
                       </ol>
                     )}
-                    <div className="mt-5 flex items-center gap-1.5 rounded-lg bg-slate-50 px-3 py-2.5 text-xs text-slate-500">
+                    <div className="mt-5 flex items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.04] px-3 py-2.5 text-xs text-slate-400">
                       <ArrowRight className="h-3.5 w-3.5 text-ai-violet" aria-hidden />
                       Improving these signals raises how favorably AI engines
                       summarize you.

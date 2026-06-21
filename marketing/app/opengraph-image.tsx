@@ -22,7 +22,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "linear-gradient(135deg, #163653 0%, #1f4e79 60%, #2f6aa8 100%)",
+          background: "linear-gradient(135deg, #0b0b14 0%, #07070b 55%, #0d0b18 100%)",
           color: "white",
           fontFamily: "sans-serif",
         }}
@@ -36,8 +36,8 @@ export default function OpengraphImage() {
               width: "72px",
               height: "72px",
               borderRadius: "18px",
-              background: "white",
-              color: "#1f4e79",
+              background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #22d3ee 100%)",
+              color: "white",
               fontSize: "44px",
               fontWeight: 800,
             }}
@@ -61,7 +61,7 @@ export default function OpengraphImage() {
           <div
             style={{
               fontSize: "30px",
-              color: "#aec9e7",
+              color: "#94a3b8",
               maxWidth: "880px",
               lineHeight: 1.3,
             }}
@@ -77,7 +77,7 @@ export default function OpengraphImage() {
             alignItems: "center",
             gap: "16px",
             fontSize: "26px",
-            color: "#d6e4f3",
+            color: "#cbd5e1",
           }}
         >
           <div
@@ -85,7 +85,7 @@ export default function OpengraphImage() {
               width: "14px",
               height: "14px",
               borderRadius: "9999px",
-              background: "#16b8a6",
+              background: "#22d3ee",
             }}
           />
           noyou.app

@@ -42,10 +42,10 @@ export function PlanUpsell({
         <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-ai-gradient text-white shadow-ai">
           <Sparkles className="h-5 w-5" aria-hidden />
         </span>
-        <h3 className="mt-4 text-lg font-semibold text-slate-900">
+        <h3 className="mt-4 text-lg font-semibold text-white">
           {feature ? `${humanize(feature)} is a Pro feature` : "Upgrade to unlock"}
         </h3>
-        <p className="mt-1.5 max-w-md text-sm text-slate-600">
+        <p className="mt-1.5 max-w-md text-sm text-slate-300">
           {message ||
             "This capability is available on the Pro plan. Upgrade to access AI-powered insights and advanced protection."}
         </p>
@@ -55,13 +55,13 @@ export function PlanUpsell({
               Upgrade plan
             </Button>
           </Link>
-          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400">
             <Lock className="h-3.5 w-3.5" aria-hidden />
             Included in Pro and Business
           </span>
         </div>
       </div>
-      <ul className="divide-y divide-[rgba(15,23,42,0.06)] px-6 py-1 text-sm text-slate-600">
+      <ul className="divide-y divide-white/[0.06] px-6 py-1 text-sm text-slate-300">
         {[
           "AI sentiment & risk analysis on every mention",
           "Pre-Post Check before you publish",

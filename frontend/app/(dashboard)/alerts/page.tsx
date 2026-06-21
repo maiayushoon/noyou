@@ -114,20 +114,20 @@ export default function AlertsPage() {
         <StaggerList className="space-y-2.5">
           {alerts.map((a) => {
             const c = severityColor(a.severity);
+            const tone = darkSeverityTone(a.severity);
             return (
               <FadeInItem key={String(a.id)}>
                 <Card
                   interactive
                   className={cn(
                     "flex items-start gap-3.5 p-4 sm:p-5",
-                    !a.is_read && "ring-1 ring-inset ring-ai-indigo/15"
+                    !a.is_read && "ring-1 ring-inset ring-ai-indigo/25"
                   )}
                 >
                   <span
                     className={cn(
                       "mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
-                      c.bg,
-                      c.text
+                      tone
                     )}
                     aria-hidden
                   >
@@ -135,14 +135,13 @@ export default function AlertsPage() {
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="truncate text-sm font-semibold text-slate-900">
+                      <p className="truncate text-sm font-semibold text-slate-100">
                         {a.title}
                       </p>
                       <span
                         className={cn(
                           "shrink-0 rounded-full px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide",
-                          c.bg,
-                          c.text
+                          tone
                         )}
                       >
                         {c.label}
@@ -151,8 +150,8 @@ export default function AlertsPage() {
                         <span className="h-2 w-2 shrink-0 rounded-full bg-ai-indigo" aria-label="Unread" />
                       ) : null}
                     </div>
-                    <p className="mt-0.5 text-sm text-slate-500">{a.message}</p>
-                    <p className="mt-1.5 text-xs text-slate-400">{timeAgo(a.created_at)}</p>
+                    <p className="mt-0.5 text-sm text-slate-400">{a.message}</p>
+                    <p className="mt-1.5 text-xs text-slate-500">{timeAgo(a.created_at)}</p>
                   </div>
                   {!a.is_read ? (
                     <Button
@@ -173,6 +172,25 @@ export default function AlertsPage() {
       )}
     </div>
   );
+}
+
+/**
+ * Dark-theme severity tone (bg + text) for the alert icon tile and pill.
+ * Mirrors severityColor() labels but uses brightened on-dark semantic colors
+ * per the dark design spec instead of the light xx-50/xx-700 pastels.
+ */
+function darkSeverityTone(severity: string): string {
+  switch (severity) {
+    case "critical":
+      return "bg-red-500/15 text-red-300";
+    case "high":
+      return "bg-orange-500/15 text-orange-300";
+    case "medium":
+      return "bg-amber-500/15 text-amber-300";
+    case "low":
+    default:
+      return "bg-white/[0.06] text-slate-400";
+  }
 }
 
 function ListSkeleton() {

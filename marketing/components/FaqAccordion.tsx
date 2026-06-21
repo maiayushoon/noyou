@@ -12,13 +12,13 @@ type FaqAccordionProps = {
  */
 export default function FaqAccordion({ faqs }: FaqAccordionProps) {
   return (
-    <div className="mx-auto max-w-3xl divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white shadow-card">
+    <div className="mx-auto max-w-3xl divide-y divide-white/[0.06] rounded-xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm">
       {faqs.map((faq) => (
         <details key={faq.id} id={faq.id} className="group px-6">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-base font-semibold text-brand-900 [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left text-base font-semibold text-slate-100 transition-colors hover:text-white [&::-webkit-details-marker]:hidden">
             <span>{faq.question}</span>
             <svg
-              className="h-5 w-5 flex-none text-slate-400 transition-transform group-open:rotate-180"
+              className="h-5 w-5 flex-none text-slate-500 transition-transform group-open:rotate-180"
               viewBox="0 0 20 20"
               fill="currentColor"
               aria-hidden="true"
@@ -30,7 +30,7 @@ export default function FaqAccordion({ faqs }: FaqAccordionProps) {
               />
             </svg>
           </summary>
-          <div className="pb-5 text-sm leading-relaxed text-slate-600">
+          <div className="pb-5 text-sm leading-relaxed text-slate-400">
             {faq.answer}
           </div>
         </details>

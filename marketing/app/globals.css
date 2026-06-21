@@ -12,10 +12,43 @@
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    /* Deep near-black so the address bar / overscroll matches the dark theme. */
+    background-color: #07070b;
+    color-scheme: dark;
   }
 
   body {
-    @apply bg-white font-sans text-slate-700 antialiased;
+    @apply bg-ai-radial font-sans text-slate-200 antialiased;
+    /* Deep near-black base with a very subtle ai-gradient glow on top. */
+    background-color: #07070b;
+  }
+
+  /* Dark, sleek scrollbar to match the premium theme. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.14);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.24);
+  }
+
+  /* Tinted selection that reads against the dark surfaces. */
+  ::selection {
+    background-color: rgba(139, 92, 246, 0.35);
+    color: #f8fafc;
   }
 
   /* Respect users who prefer reduced motion. */
@@ -64,6 +97,6 @@
     @apply sr-only;
   }
   .skip-link:focus {
-    @apply not-sr-only fixed left-4 top-4 z-[100] rounded-lg bg-brand-700 px-4 py-2 text-sm font-semibold text-white shadow-lift;
+    @apply not-sr-only fixed left-4 top-4 z-[100] rounded-lg bg-ai-gradient px-4 py-2 text-sm font-semibold text-white shadow-ai;
   }
 }

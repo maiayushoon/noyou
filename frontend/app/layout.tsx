@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f172a",
+  themeColor: "#07070b",
   width: "device-width",
   initialScale: 1,
 };
@@ -33,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="min-h-screen bg-canvas font-sans text-slate-900 antialiased">
+      <body className="min-h-screen bg-canvas font-sans text-slate-100 antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>

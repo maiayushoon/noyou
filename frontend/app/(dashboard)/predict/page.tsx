@@ -43,20 +43,20 @@ const VERDICT: Record<
   safe_to_post: {
     label: "Safe to post",
     icon: CheckCircle2,
-    tone: "text-emerald-700",
-    ring: "bg-emerald-50 ring-emerald-200",
+    tone: "text-emerald-300",
+    ring: "bg-emerald-500/10 ring-emerald-500/30",
   },
   review_suggested: {
     label: "Review suggested",
     icon: AlertTriangle,
-    tone: "text-amber-700",
-    ring: "bg-amber-50 ring-amber-200",
+    tone: "text-amber-300",
+    ring: "bg-amber-500/10 ring-amber-500/30",
   },
   do_not_post: {
     label: "Do not post",
     icon: XCircle,
-    tone: "text-red-700",
-    ring: "bg-red-50 ring-red-200",
+    tone: "text-red-300",
+    ring: "bg-red-500/10 ring-red-500/30",
   },
 };
 
@@ -107,13 +107,13 @@ export default function PredictPage() {
                   onChange={(e) => setText(e.target.value)}
                   rows={7}
                   placeholder="Paste the post, reply, or message you're about to publish…"
-                  className="w-full resize-y rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+                  className="w-full resize-y rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
                 />
                 <input
                   value={context}
                   onChange={(e) => setContext(e.target.value)}
                   placeholder="Optional: where will this be posted? (e.g. LinkedIn, a reply to a critic)"
-                  className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+                  className="w-full rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
                 />
                 <div className="flex flex-wrap items-center gap-2">
                   <Button
@@ -129,7 +129,7 @@ export default function PredictPage() {
                     {text.length} characters
                   </span>
                 </div>
-                <div className="border-t border-hairline pt-3">
+                <div className="border-t border-white/[0.08] pt-3">
                   <p className="mb-2 text-xs font-medium text-slate-400">
                     Try an example
                   </p>
@@ -139,7 +139,7 @@ export default function PredictPage() {
                         key={i}
                         type="button"
                         onClick={() => setText(s)}
-                        className="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-600 ring-1 ring-inset ring-hairline transition-colors hover:bg-slate-50"
+                        className="rounded-full bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-slate-300 ring-1 ring-inset ring-white/[0.10] transition-colors hover:bg-white/[0.06]"
                       >
                         Example {i + 1}
                       </button>
@@ -155,13 +155,13 @@ export default function PredictPage() {
               <ResultCard result={result} />
             ) : (
               <Card className="flex h-full flex-col items-center justify-center px-6 py-16 text-center">
-                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ai-gradient-soft text-ai-violet">
+                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
                   <Sparkles className="h-6 w-6" aria-hidden />
                 </span>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-slate-100">
                   Your reputation forecast appears here
                 </p>
-                <p className="mt-1 max-w-xs text-sm text-slate-500">
+                <p className="mt-1 max-w-xs text-sm text-slate-400">
                   We score sentiment, risk, and whether a draft is safe to post —
                   before anyone else sees it.
                 </p>
@@ -185,7 +185,7 @@ function ResultCard({ result }: { result: AnalyzeResult }) {
         <VIcon className={cn("h-6 w-6 shrink-0", v.tone)} aria-hidden />
         <div>
           <p className={cn("text-sm font-semibold", v.tone)}>{v.label}</p>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-400">
             Confidence {Math.round(result.confidence * 100)}% · via {result.analyzer}
           </p>
         </div>
@@ -210,19 +210,19 @@ function ResultCard({ result }: { result: AnalyzeResult }) {
           <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
             Summary
           </p>
-          <p className="mt-1 text-sm text-slate-700">{result.summary}</p>
+          <p className="mt-1 text-sm text-slate-300">{result.summary}</p>
         </div>
 
-        <div className="rounded-lg bg-slate-50 px-3 py-2.5">
-          <p className="flex items-center gap-1.5 text-xs font-medium text-slate-700">
+        <div className="rounded-lg border border-white/[0.06] bg-white/[0.04] px-3 py-2.5">
+          <p className="flex items-center gap-1.5 text-xs font-medium text-slate-200">
             {result.risk_level >= 3 ? (
-              <ShieldAlert className="h-3.5 w-3.5 text-amber-600" aria-hidden />
+              <ShieldAlert className="h-3.5 w-3.5 text-amber-300" aria-hidden />
             ) : (
-              <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" aria-hidden />
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
             )}
             Recommendation
           </p>
-          <p className="mt-1 text-sm text-slate-600">{result.recommendation}</p>
+          <p className="mt-1 text-sm text-slate-300">{result.recommendation}</p>
         </div>
 
         {result.flagged_terms.length > 0 ? (
@@ -234,7 +234,7 @@ function ResultCard({ result }: { result: AnalyzeResult }) {
               {result.flagged_terms.map((t) => (
                 <span
                   key={t}
-                  className="rounded-md bg-red-50 px-2 py-0.5 text-xs font-medium text-red-600"
+                  className="rounded-md bg-red-500/15 px-2 py-0.5 text-xs font-medium text-red-300 ring-1 ring-inset ring-red-500/30"
                 >
                   {t}
                 </span>

@@ -36,13 +36,13 @@ export default function ForgotPasswordPage() {
     return (
       <FadeIn>
         <div className="flex flex-col items-center text-center">
-          <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+          <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300 ring-1 ring-inset ring-emerald-500/30">
             <MailCheck className="h-6 w-6" aria-hidden />
           </span>
-          <h2 className="text-xl font-semibold tracking-tight text-slate-900">
+          <h2 className="text-xl font-semibold tracking-tight text-white">
             Check your inbox
           </h2>
-          <p className="mt-1.5 max-w-xs text-sm text-slate-500">
+          <p className="mt-1.5 max-w-xs text-sm text-slate-400">
             If an account exists for {email || "that address"}, we sent a link to
             reset your password.
           </p>
@@ -59,17 +59,17 @@ export default function ForgotPasswordPage() {
   return (
     <FadeIn>
       <div className="mb-7">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-semibold tracking-tight text-white">
           Reset your password
         </h2>
-        <p className="mt-1.5 text-sm text-slate-500">
+        <p className="mt-1.5 text-sm text-slate-400">
           Enter your email and we&apos;ll send a reset link.
         </p>
       </div>
 
       <form onSubmit={onSubmit} className="space-y-4">
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-300">
             Email
           </label>
           <div className="relative">
@@ -84,7 +84,7 @@ export default function ForgotPasswordPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="h-11 w-full rounded-lg border border-hairline bg-white pl-10 pr-3 text-sm text-slate-900 shadow-sm outline-none transition-colors placeholder:text-slate-400 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+              className="h-11 w-full rounded-lg border border-white/10 bg-white/[0.04] pl-10 pr-3 text-sm text-slate-100 outline-none transition-colors placeholder:text-slate-500 hover:border-white/20 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
             />
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function ForgotPasswordPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-slate-500">
+      <p className="mt-6 text-center text-sm text-slate-400">
         <Link href="/login" className="font-medium text-ai-indigo hover:underline">
           Back to sign in
         </Link>

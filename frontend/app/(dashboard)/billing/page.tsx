@@ -156,13 +156,13 @@ export default function BillingPage() {
               <CreditCard className="h-5 w-5" aria-hidden />
             </span>
             <div className="min-w-0 flex-1">
-              <h1 className="text-lg font-semibold tracking-tight text-slate-900">
+              <h1 className="text-lg font-semibold tracking-tight text-white">
                 Billing &amp; plan
               </h1>
               {isLoading || !data ? (
                 <Skeleton className="mt-1.5 h-4 w-56" />
               ) : (
-                <p className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-slate-500">
+                <p className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-slate-400">
                   <span>You are on the</span>
                   <Badge variant={currentPlan === "free" ? "neutral" : "ai"}>
                     {humanize(currentPlan ?? "free")}
@@ -194,7 +194,7 @@ export default function BillingPage() {
         <FadeIn delay={0.04}>
           <Card>
             <CardContent className="py-4">
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-slate-400">
                 We couldn&apos;t load your billing details right now. The plans
                 below are still available for reference.
               </p>
@@ -205,7 +205,7 @@ export default function BillingPage() {
 
       {!isLoading && data && !stripeConfigured ? (
         <FadeIn delay={0.04}>
-          <div className="flex items-start gap-2.5 rounded-xl border border-hairline bg-slate-50 px-4 py-3 text-sm text-slate-500">
+          <div className="flex items-start gap-2.5 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-slate-400">
             <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" aria-hidden />
             <p>
               Online payments aren&apos;t set up on this workspace yet. Plan
@@ -272,7 +272,7 @@ function PlanCard({
     >
       <CardContent className="flex h-full flex-col gap-4 pt-5">
         <div className="flex items-center justify-between gap-2">
-          <h2 className="inline-flex items-center gap-1.5 text-base font-semibold text-slate-900">
+          <h2 className="inline-flex items-center gap-1.5 text-base font-semibold text-white">
             {plan.highlight ? (
               <Sparkles className="h-4 w-4 text-ai-violet" aria-hidden />
             ) : null}
@@ -288,7 +288,7 @@ function PlanCard({
         </div>
 
         <div className="flex items-baseline gap-1">
-          <span className="text-2xl font-semibold tracking-tight text-slate-900">
+          <span className="text-2xl font-semibold tracking-tight text-white">
             {plan.price}
           </span>
           {plan.cadence ? (
@@ -296,11 +296,11 @@ function PlanCard({
           ) : null}
         </div>
 
-        <p className="text-sm text-slate-500">{plan.tagline}</p>
+        <p className="text-sm text-slate-400">{plan.tagline}</p>
 
         <ul className="space-y-2">
           {plan.features.map((f) => (
-            <li key={f} className="flex items-start gap-2 text-sm text-slate-700">
+            <li key={f} className="flex items-start gap-2 text-sm text-slate-300">
               <Check
                 className={cn(
                   "mt-0.5 h-4 w-4 shrink-0",

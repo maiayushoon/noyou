@@ -60,30 +60,30 @@ const STATUS_STYLE: Record<
 > = {
   connected: {
     label: "Connected",
-    pill: "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200",
-    dot: "bg-emerald-500",
+    pill: "bg-emerald-500/15 text-emerald-300 ring-1 ring-inset ring-emerald-500/30",
+    dot: "bg-emerald-400",
   },
   expired: {
     label: "Expired",
-    pill: "bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200",
-    dot: "bg-amber-500",
+    pill: "bg-amber-500/15 text-amber-300 ring-1 ring-inset ring-amber-500/30",
+    dot: "bg-amber-400",
   },
   revoked: {
     label: "Revoked",
-    pill: "bg-slate-100 text-slate-500",
-    dot: "bg-slate-400",
+    pill: "bg-white/[0.06] text-slate-400 ring-1 ring-inset ring-white/[0.10]",
+    dot: "bg-slate-500",
   },
   error: {
     label: "Needs attention",
-    pill: "bg-red-50 text-red-700 ring-1 ring-inset ring-red-200",
-    dot: "bg-red-500",
+    pill: "bg-red-500/15 text-red-300 ring-1 ring-inset ring-red-500/30",
+    dot: "bg-red-400",
   },
 };
 
 const NOT_CONNECTED = {
   label: "Not connected",
-  pill: "bg-slate-100 text-slate-500",
-  dot: "bg-slate-400",
+  pill: "bg-white/[0.06] text-slate-400 ring-1 ring-inset ring-white/[0.10]",
+  dot: "bg-slate-500",
 };
 
 /* --------------------------------- Page ---------------------------------- */
@@ -163,7 +163,7 @@ export default function ConnectionsPage() {
               <Link2 className="h-5 w-5" aria-hidden />
             </span>
             <div>
-              <p className="text-sm font-semibold text-slate-900">
+              <p className="text-sm font-semibold text-slate-100">
                 Account linking
                 <Badge
                   variant={user?.plan === "free" ? "neutral" : "ai"}
@@ -172,7 +172,7 @@ export default function ConnectionsPage() {
                   {humanize(user?.plan ?? "free")}
                 </Badge>
               </p>
-              <p className="mt-0.5 text-sm text-slate-500">
+              <p className="mt-0.5 text-sm text-slate-400">
                 {user?.plan === "free"
                   ? "Connecting your own accounts is a Pro feature."
                   : "Securely connect platforms via OAuth. You can disconnect anytime."}
@@ -186,7 +186,7 @@ export default function ConnectionsPage() {
               </Button>
             </Link>
           ) : (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400">
               <Lock className="h-3.5 w-3.5" aria-hidden />
               OAuth secured
             </span>
@@ -340,14 +340,14 @@ function ProviderCard({
               className={cn(
                 "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
                 isConnected
-                  ? "bg-ai-gradient-soft text-ai-violet"
-                  : "bg-slate-100 text-slate-500"
+                  ? "bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]"
+                  : "bg-white/[0.06] text-slate-400"
               )}
             >
               <Icon className="h-5 w-5" aria-hidden />
             </span>
             <div className="min-w-0">
-              <p className="truncate text-sm font-semibold text-slate-900">
+              <p className="truncate text-sm font-semibold text-slate-100">
                 {provider.label || humanize(provider.provider)}
               </p>
               {connection?.external_handle || connection?.display_name ? (
@@ -379,7 +379,7 @@ function ProviderCard({
         {isConnected && connection ? (
           <div className="mt-4 space-y-3">
             {connection.external_handle ? (
-              <p className="flex items-center gap-1.5 text-sm text-slate-600">
+              <p className="flex items-center gap-1.5 text-sm text-slate-300">
                 <AtSign className="h-3.5 w-3.5 text-slate-400" aria-hidden />
                 <span className="truncate">{connection.external_handle}</span>
               </p>
@@ -389,7 +389,7 @@ function ProviderCard({
                 {scopes.map((scope) => (
                   <span
                     key={scope}
-                    className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[0.7rem] font-medium text-slate-500"
+                    className="rounded-md bg-white/[0.06] px-1.5 py-0.5 text-[0.7rem] font-medium text-slate-400"
                   >
                     {scope}
                   </span>
@@ -408,7 +408,7 @@ function ProviderCard({
                 {scopes.map((scope) => (
                   <span
                     key={scope}
-                    className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[0.7rem] font-medium text-slate-400"
+                    className="rounded-md bg-white/[0.06] px-1.5 py-0.5 text-[0.7rem] font-medium text-slate-500"
                   >
                     {scope}
                   </span>
@@ -425,7 +425,7 @@ function ProviderCard({
         {/* Mastodon instance input, revealed before connecting */}
         {!isConnected && isMastodon && showInstance ? (
           <div className="mt-3">
-            <label className="mb-1.5 block text-xs font-medium text-slate-700">
+            <label className="mb-1.5 block text-xs font-medium text-slate-300">
               Mastodon instance
             </label>
             <input
@@ -434,7 +434,7 @@ function ProviderCard({
               value={instanceUrl}
               onChange={(e) => setInstanceUrl(e.target.value)}
               placeholder="https://mastodon.social"
-              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+              className="w-full rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
             />
           </div>
         ) : null}
@@ -470,7 +470,7 @@ function ProviderCard({
               <Button variant="outline" className="w-full" disabled>
                 Connect
               </Button>
-              <span className="inline-flex items-center gap-1.5 text-[0.7rem] font-medium text-slate-400">
+              <span className="inline-flex items-center gap-1.5 text-[0.7rem] font-medium text-slate-500">
                 <Lock className="h-3 w-3" aria-hidden />
                 Needs setup
               </span>

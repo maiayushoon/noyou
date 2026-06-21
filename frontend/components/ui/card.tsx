@@ -8,9 +8,9 @@ export const Card = forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border border-hairline bg-white shadow-card",
+      "rounded-xl border border-white/[0.06] bg-white/[0.03] shadow-card backdrop-blur-sm",
       interactive &&
-        "transition-shadow duration-200 hover:shadow-card-hover",
+        "transition-all duration-200 hover:border-white/[0.12] hover:shadow-card-hover",
       className
     )}
     {...props}
@@ -39,7 +39,7 @@ export const CardTitle = forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("text-sm font-semibold text-slate-900", className)}
+    className={cn("text-sm font-semibold text-white", className)}
     {...props}
   />
 ));
@@ -49,7 +49,7 @@ export const CardDescription = forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-sm text-slate-500", className)} {...props} />
+  <p ref={ref} className={cn("text-sm text-slate-400", className)} {...props} />
 ));
 CardDescription.displayName = "CardDescription";
 
@@ -68,7 +68,7 @@ export const CardFooter = forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex items-center gap-2 border-t border-hairline px-5 py-3.5",
+      "flex items-center gap-2 border-t border-white/[0.06] px-5 py-3.5",
       className
     )}
     {...props}

@@ -9,10 +9,10 @@ export default function PricingTable() {
       {PLANS.map((plan) => (
         <RevealItem key={plan.id} as="div" className="h-full">
           <div
-            className={`relative flex h-full flex-col rounded-2xl border bg-white p-6 transition-all duration-300 hover:-translate-y-1 ${
+            className={`relative flex h-full flex-col rounded-xl border bg-white/[0.03] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 ${
               plan.featured
-                ? "border-indigo-200 shadow-ai ring-1 ring-indigo-200"
-                : "border-slate-200 shadow-card hover:border-indigo-200 hover:shadow-ai"
+                ? "border-ai-violet/40 shadow-ai ring-1 ring-ai-violet/30"
+                : "border-white/[0.06] hover:border-white/[0.12] hover:shadow-ai-glow"
             }`}
           >
             {plan.featured ? (
@@ -21,25 +21,25 @@ export default function PricingTable() {
               </span>
             ) : null}
 
-            <h3 className="text-lg font-semibold text-brand-900">{plan.name}</h3>
+            <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
 
             <div className="mt-3 flex items-baseline gap-1">
-              <span className="text-4xl font-bold tracking-tight text-brand-900">
+              <span className="text-4xl font-bold tracking-tight text-white">
                 {plan.priceLabel}
               </span>
               <span className="text-sm text-slate-500">/{plan.period}</span>
             </div>
 
-            <p className="mt-3 min-h-[3rem] text-sm leading-relaxed text-slate-600">
+            <p className="mt-3 min-h-[3rem] text-sm leading-relaxed text-slate-400">
               {plan.blurb}
             </p>
 
             <a
               href={plan.cta.href}
-              className={`mt-5 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+              className={`mt-5 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07070b] ${
                 plan.featured
-                  ? "bg-ai-gradient text-white shadow-ai hover:-translate-y-0.5 focus-visible:ring-indigo-500"
-                  : "border border-slate-300 text-brand-700 hover:border-indigo-300 hover:bg-indigo-50 focus-visible:ring-brand-500"
+                  ? "bg-ai-gradient text-white shadow-ai hover:-translate-y-0.5 focus-visible:ring-ai-indigo"
+                  : "border border-white/10 text-slate-100 hover:border-white/20 hover:bg-white/[0.06] focus-visible:ring-ai-indigo"
               }`}
             >
               {plan.cta.label}
@@ -47,9 +47,9 @@ export default function PricingTable() {
 
             <ul className="mt-6 space-y-3 text-sm">
               {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2 text-slate-700">
+                <li key={feature} className="flex items-start gap-2 text-slate-300">
                   <svg
-                    className="mt-0.5 h-4 w-4 flex-none text-accent-600"
+                    className="mt-0.5 h-4 w-4 flex-none text-emerald-400"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                     aria-hidden="true"

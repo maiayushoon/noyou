@@ -41,8 +41,12 @@ export default function PricingPage() {
         id="ld-pricing-breadcrumb"
       />
 
-      <section className="bg-gradient-to-b from-brand-50 to-white py-16 sm:py-20">
-        <div className="container-page">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#0b0b14] to-[#07070b] py-16 sm:py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-ai-indigo/10 blur-3xl"
+        />
+        <div className="container-page relative">
           <Reveal>
             <SectionHeading
               as="h1"
@@ -61,7 +65,7 @@ export default function PricingPage() {
       </section>
 
       {/* Comparison highlights */}
-      <section className="bg-slate-50 py-16">
+      <section className="border-y border-white/[0.06] bg-white/[0.02] py-16">
         <div className="container-page">
           <Reveal>
             <SectionHeading
@@ -95,23 +99,23 @@ export default function PricingPage() {
             ].map((row) => (
               <RevealItem
                 key={row.title}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-ai"
+                className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-white/[0.12] hover:shadow-ai-glow"
               >
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-indigo-300">
                   {row.title}
                 </h3>
                 <dl className="mt-4 space-y-3 text-sm">
                   <div className="flex justify-between gap-3">
                     <dt className="text-slate-500">Free</dt>
-                    <dd className="text-right font-medium text-slate-800">{row.free}</dd>
+                    <dd className="text-right font-medium text-slate-200">{row.free}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="text-slate-500">Pro</dt>
-                    <dd className="text-right font-medium text-slate-800">{row.pro}</dd>
+                    <dd className="text-right font-medium text-slate-200">{row.pro}</dd>
                   </div>
                   <div className="flex justify-between gap-3">
                     <dt className="text-slate-500">Premium</dt>
-                    <dd className="text-right font-medium text-slate-800">{row.premium}</dd>
+                    <dd className="text-right font-medium text-slate-200">{row.premium}</dd>
                   </div>
                 </dl>
               </RevealItem>

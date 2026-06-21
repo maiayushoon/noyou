@@ -74,15 +74,15 @@ export default function ReputationOrb() {
       {/* Glowing blurred gradient orbs behind the centerpiece. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-6 top-6 h-56 w-56 rounded-full bg-indigo-400/30 blur-3xl"
+        className="pointer-events-none absolute -left-6 top-6 h-56 w-56 rounded-full bg-indigo-500/40 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-4 bottom-2 h-52 w-52 rounded-full bg-cyan-300/30 blur-3xl"
+        className="pointer-events-none absolute -right-4 bottom-2 h-52 w-52 rounded-full bg-cyan-400/35 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-400/25 blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/35 blur-3xl"
       />
 
       <motion.div
@@ -106,7 +106,7 @@ export default function ReputationOrb() {
         {/* Back glass panel for depth. */}
         <div
           aria-hidden="true"
-          className="absolute inset-6 rounded-[2rem] border border-white/40 bg-white/30 backdrop-blur-md"
+          className="absolute inset-6 rounded-[2rem] border border-white/10 bg-white/[0.04] backdrop-blur-md"
           style={{ transform: "translateZ(-40px)" }}
         />
 
@@ -127,9 +127,9 @@ export default function ReputationOrb() {
                 <stop offset="100%" stopColor="#22d3ee" />
               </linearGradient>
               <radialGradient id="orb-core" cx="50%" cy="42%" r="65%">
-                <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="70%" stopColor="#f5f3ff" />
-                <stop offset="100%" stopColor="#eef2ff" />
+                <stop offset="0%" stopColor="#1a1a2e" />
+                <stop offset="70%" stopColor="#101019" />
+                <stop offset="100%" stopColor="#0b0b14" />
               </radialGradient>
             </defs>
 
@@ -140,7 +140,7 @@ export default function ReputationOrb() {
               cy="120"
               r="80"
               fill="none"
-              stroke="rgba(99,102,241,0.12)"
+              stroke="rgba(255,255,255,0.08)"
               strokeWidth="1"
             />
 
@@ -150,7 +150,7 @@ export default function ReputationOrb() {
               cy="120"
               r={radius}
               fill="none"
-              stroke="rgba(99,102,241,0.12)"
+              stroke="rgba(255,255,255,0.08)"
               strokeWidth="14"
             />
 
@@ -189,13 +189,13 @@ export default function ReputationOrb() {
             x: reduceMotion ? 0 : shiftMid,
           }}
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-500">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-300">
             Reputation
           </span>
-          <span className="bg-gradient-to-br from-indigo-600 via-violet-600 to-cyan-500 bg-clip-text text-6xl font-black leading-none text-transparent sm:text-7xl">
+          <span className="bg-gradient-to-br from-indigo-400 via-violet-400 to-cyan-300 bg-clip-text text-6xl font-black leading-none text-transparent sm:text-7xl">
             {SCORE}
           </span>
-          <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-200">
+          <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-bold text-emerald-300 ring-1 ring-emerald-500/30">
             <TrendingUp className="h-3.5 w-3.5" aria-hidden="true" />
             {BAND}
           </span>
@@ -203,7 +203,7 @@ export default function ReputationOrb() {
 
         {/* Floating glass chip: shield (top-left). */}
         <motion.div
-          className="absolute left-0 top-8 flex items-center gap-2 rounded-2xl border border-white/60 bg-white/80 px-3 py-2 shadow-ai backdrop-blur-md"
+          className="absolute left-0 top-8 flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-3 py-2 shadow-ai backdrop-blur-md"
           style={{
             transform: "translateZ(80px)",
             x: reduceMotion ? 0 : shiftFront,
@@ -214,10 +214,10 @@ export default function ReputationOrb() {
             <ShieldCheck className="h-4 w-4" aria-hidden="true" />
           </span>
           <span className="text-left">
-            <span className="block text-[11px] font-semibold leading-tight text-slate-900">
+            <span className="block text-[11px] font-semibold leading-tight text-slate-100">
               0 high-risk
             </span>
-            <span className="block text-[10px] leading-tight text-slate-500">
+            <span className="block text-[10px] leading-tight text-slate-400">
               mentions today
             </span>
           </span>
@@ -225,7 +225,7 @@ export default function ReputationOrb() {
 
         {/* Floating glass chip: AI visibility (bottom-right). */}
         <motion.div
-          className="absolute bottom-10 right-0 flex items-center gap-2 rounded-2xl border border-white/60 bg-white/80 px-3 py-2 shadow-ai backdrop-blur-md"
+          className="absolute bottom-10 right-0 flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-3 py-2 shadow-ai backdrop-blur-md"
           style={{
             transform: "translateZ(72px)",
             x: reduceMotion ? 0 : shiftFront,
@@ -236,10 +236,10 @@ export default function ReputationOrb() {
             <Eye className="h-4 w-4" aria-hidden="true" />
           </span>
           <span className="text-left">
-            <span className="block text-[11px] font-semibold leading-tight text-slate-900">
+            <span className="block text-[11px] font-semibold leading-tight text-slate-100">
               4 AI engines
             </span>
-            <span className="block text-[10px] leading-tight text-slate-500">
+            <span className="block text-[10px] leading-tight text-slate-400">
               describe you well
             </span>
           </span>

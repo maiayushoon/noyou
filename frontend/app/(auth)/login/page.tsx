@@ -38,10 +38,10 @@ export default function LoginPage() {
   return (
     <FadeIn>
       <div className="mb-7">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-semibold tracking-tight text-white">
           Sign in
         </h2>
-        <p className="mt-1.5 text-sm text-slate-500">
+        <p className="mt-1.5 text-sm text-slate-400">
           Welcome back. Enter your details to continue.
         </p>
       </div>
@@ -60,7 +60,7 @@ export default function LoginPage() {
         />
         <div>
           <div className="mb-1.5 flex items-center justify-between">
-            <label htmlFor="password" className="text-sm font-medium text-slate-700">
+            <label htmlFor="password" className="text-sm font-medium text-slate-300">
               Password
             </label>
             <Link
@@ -79,7 +79,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="h-11 w-full rounded-lg border border-hairline bg-white pl-10 pr-3 text-sm text-slate-900 shadow-sm outline-none transition-all duration-150 placeholder:text-slate-400 hover:border-slate-300 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+              className="h-11 w-full rounded-lg border border-white/10 bg-white/[0.04] pl-10 pr-3 text-sm text-slate-100 outline-none transition-all duration-150 placeholder:text-slate-500 hover:border-white/20 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
             />
           </InputShell>
         </div>
@@ -95,24 +95,24 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      <div className="mt-5 rounded-lg border border-hairline bg-white p-3 text-xs text-slate-500">
-        <span className="inline-flex items-center gap-1.5 font-medium text-slate-600">
+      <div className="mt-5 rounded-lg border border-white/[0.08] bg-white/[0.03] p-3 text-xs text-slate-400">
+        <span className="inline-flex items-center gap-1.5 font-medium text-slate-300">
           <Sparkles className="h-3.5 w-3.5 text-ai-violet" aria-hidden />
           Demo access
         </span>
         <p className="mt-1">
           Use{" "}
-          <code className="rounded bg-slate-100 px-1 py-0.5 text-slate-700">
+          <code className="rounded bg-white/[0.08] px-1 py-0.5 text-slate-200">
             demo@noyou.app
           </code>{" "}
           /{" "}
-          <code className="rounded bg-slate-100 px-1 py-0.5 text-slate-700">
+          <code className="rounded bg-white/[0.08] px-1 py-0.5 text-slate-200">
             demo12345
           </code>
         </p>
       </div>
 
-      <p className="mt-6 text-center text-sm text-slate-500">
+      <p className="mt-6 text-center text-sm text-slate-400">
         No account?{" "}
         <Link
           href="/register"
@@ -148,7 +148,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-slate-700">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-slate-300">
         {label}
       </label>
       <InputShell icon={icon}>
@@ -160,7 +160,7 @@ function Field({
           onChange={(e) => onChange(e.target.value)}
           autoComplete={autoComplete}
           required={required}
-          className="h-11 w-full rounded-lg border border-hairline bg-white pl-10 pr-3 text-sm text-slate-900 shadow-sm outline-none transition-colors placeholder:text-slate-400 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+          className="h-11 w-full rounded-lg border border-white/10 bg-white/[0.04] pl-10 pr-3 text-sm text-slate-100 outline-none transition-colors placeholder:text-slate-500 hover:border-white/20 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
         />
       </InputShell>
     </div>

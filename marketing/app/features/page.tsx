@@ -28,8 +28,12 @@ export default function FeaturesPage() {
         id="ld-features-breadcrumb"
       />
 
-      <section className="bg-gradient-to-b from-brand-50 to-white py-16 sm:py-20">
-        <div className="container-page">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#0b0b14] to-[#07070b] py-16 sm:py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-ai-indigo/10 blur-3xl"
+        />
+        <div className="container-page relative">
           <Reveal>
             <SectionHeading
               as="h1"
@@ -48,16 +52,16 @@ export default function FeaturesPage() {
       </section>
 
       {/* Pre-Post Check deep dive */}
-      <section id="pre-post-check" className="bg-slate-50 py-20">
+      <section id="pre-post-check" className="border-y border-white/[0.06] bg-white/[0.02] py-20">
         <div className="container-page grid items-center gap-10 lg:grid-cols-2">
           <Reveal from="right">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-accent-600">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-cyan-300">
               Predictive
             </p>
-            <h2 className="text-balance text-3xl font-bold tracking-tight text-brand-900 sm:text-4xl">
+            <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Pre-Post Check: will this post hurt me?
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 text-lg leading-relaxed text-slate-300">
               Reputation damage is far cheaper to prevent than to repair. Paste a
               draft tweet, comment, or announcement into Pre-Post Check and NoYou
               estimates its reputational risk, highlights wording that could be
@@ -71,10 +75,10 @@ export default function FeaturesPage() {
                 "Suggests safer alternative phrasing",
                 "Learns the tone that fits your brand",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-slate-700">
+                <li key={item} className="flex items-start gap-3 text-slate-300">
                   <span
                     aria-hidden="true"
-                    className="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-100 text-accent-700"
+                    className="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30"
                   >
                     ✓
                   </span>
@@ -85,20 +89,20 @@ export default function FeaturesPage() {
           </Reveal>
           <Reveal
             from="left"
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lift transition-shadow hover:shadow-ai"
+            className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-6 shadow-ai backdrop-blur-sm transition-all hover:border-white/[0.12]"
           >
-            <div className="rounded-xl bg-slate-50 p-4 text-sm text-slate-700">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.04] p-4 text-sm text-slate-300">
               “Honestly our competitor’s product is a joke and anyone who buys it
               is wasting their money.”
             </div>
-            <div className="mt-4 flex items-center justify-between rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
-              <span className="text-sm font-semibold text-amber-800">
+            <div className="mt-4 flex items-center justify-between rounded-xl border border-amber-500/30 bg-amber-500/15 px-4 py-3">
+              <span className="text-sm font-semibold text-amber-300">
                 Risk: High
               </span>
-              <span className="text-xs text-amber-700">Insulting customers</span>
+              <span className="text-xs text-amber-200/80">Insulting customers</span>
             </div>
-            <p className="mt-4 text-sm text-slate-600">
-              <span className="font-semibold text-brand-900">Suggested rewrite:</span>{" "}
+            <p className="mt-4 text-sm text-slate-400">
+              <span className="font-semibold text-slate-100">Suggested rewrite:</span>{" "}
               “We think we offer a better value — here’s an honest comparison so
               you can decide for yourself.”
             </p>
@@ -111,40 +115,40 @@ export default function FeaturesPage() {
         <div className="container-page grid items-center gap-10 lg:grid-cols-2">
           <Reveal
             from="right"
-            className="order-2 lg:order-1 rounded-2xl border border-slate-200 bg-white p-6 shadow-lift transition-shadow hover:shadow-ai"
+            className="order-2 lg:order-1 rounded-xl border border-white/[0.06] bg-white/[0.03] p-6 shadow-ai backdrop-blur-sm transition-all hover:border-white/[0.12]"
           >
-            <h3 className="text-sm font-semibold text-brand-900">
+            <h3 className="text-sm font-semibold text-white">
               How AI engines describe “{SITE.name}”
             </h3>
             <dl className="mt-4 space-y-4 text-sm">
-              <div className="rounded-xl bg-slate-50 p-4">
-                <dt className="font-semibold text-slate-800">ChatGPT & Perplexity</dt>
-                <dd className="mt-1 text-slate-600">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.04] p-4">
+                <dt className="font-semibold text-slate-100">ChatGPT & Perplexity</dt>
+                <dd className="mt-1 text-slate-400">
                   Accurate summary, correct pricing, cites your homepage.
                 </dd>
               </div>
-              <div className="rounded-xl bg-amber-50 p-4">
-                <dt className="font-semibold text-amber-800">Gemini</dt>
-                <dd className="mt-1 text-amber-700">
+              <div className="rounded-xl border border-amber-500/30 bg-amber-500/15 p-4">
+                <dt className="font-semibold text-amber-300">Gemini</dt>
+                <dd className="mt-1 text-amber-200/80">
                   Missing your newest feature — publish a feature page to fix.
                 </dd>
               </div>
-              <div className="rounded-xl bg-slate-50 p-4">
-                <dt className="font-semibold text-slate-800">Google AI Overviews</dt>
-                <dd className="mt-1 text-slate-600">
+              <div className="rounded-xl border border-white/[0.06] bg-white/[0.04] p-4">
+                <dt className="font-semibold text-slate-100">Google AI Overviews</dt>
+                <dd className="mt-1 text-slate-400">
                   Surfaces your FAQ. Add structured data to strengthen citations.
                 </dd>
               </div>
             </dl>
           </Reveal>
           <Reveal from="left" className="order-1 lg:order-2">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-accent-600">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-cyan-300">
               AEO / GEO
             </p>
-            <h2 className="text-balance text-3xl font-bold tracking-tight text-brand-900 sm:text-4xl">
+            <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
               AI Visibility Check
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 text-lg leading-relaxed text-slate-300">
               Answer Engine Optimization (AEO) and Generative Engine Optimization
               (GEO) — AI SEO — are about making sure AI answer engines surface and
               cite accurate information about you. NoYou queries the major engines,
@@ -158,10 +162,10 @@ export default function FeaturesPage() {
                 "Recommends pages and structured data to publish",
                 "Tracks how AI answers change over time",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-slate-700">
+                <li key={item} className="flex items-start gap-3 text-slate-300">
                   <span
                     aria-hidden="true"
-                    className="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-accent-100 text-accent-700"
+                    className="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30"
                   >
                     ✓
                   </span>
@@ -174,14 +178,18 @@ export default function FeaturesPage() {
       </section>
 
       {/* Data sources */}
-      <section className="bg-brand-900 py-20 text-white">
-        <div className="container-page">
+      <section className="relative overflow-hidden border-y border-white/[0.06] bg-white/[0.02] py-20 text-white">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-0 h-72 w-[36rem] rounded-full bg-ai-cyan/8 blur-3xl"
+        />
+        <div className="container-page relative">
           <Reveal>
             <SectionHeading
               eyebrow="Data sources"
               title={<span className="text-white">Real sources, no keys required to start</span>}
               description={
-                <span className="text-brand-100">
+                <span className="text-slate-400">
                   NoYou works with public, keyless sources out of the box. Add Google
                   CSE and LLM providers when you want deeper coverage.
                 </span>
@@ -190,30 +198,30 @@ export default function FeaturesPage() {
           </Reveal>
           <Reveal
             delay={0.1}
-            className="mx-auto mt-12 max-w-3xl overflow-hidden rounded-2xl border border-white/10"
+            className="mx-auto mt-12 max-w-3xl overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm"
           >
             <table className="w-full text-left text-sm">
-              <thead className="bg-white/5 text-brand-100">
+              <thead className="bg-white/[0.04] text-slate-400">
                 <tr>
                   <th scope="col" className="px-5 py-3 font-semibold">Source</th>
                   <th scope="col" className="px-5 py-3 font-semibold">Type</th>
                   <th scope="col" className="px-5 py-3 font-semibold">Setup</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/10">
+              <tbody className="divide-y divide-white/[0.06]">
                 {DATA_SOURCES.map((source) => (
                   <tr key={source.name}>
                     <th scope="row" className="px-5 py-3 font-medium text-white">
                       {source.name}
                     </th>
-                    <td className="px-5 py-3 text-brand-100">{source.type}</td>
+                    <td className="px-5 py-3 text-slate-400">{source.type}</td>
                     <td className="px-5 py-3">
                       {source.keyless ? (
-                        <span className="rounded-full bg-accent-500/20 px-2.5 py-0.5 text-xs font-semibold text-accent-200">
+                        <span className="rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-xs font-semibold text-emerald-300 ring-1 ring-emerald-500/30">
                           No API key
                         </span>
                       ) : (
-                        <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-semibold text-brand-100">
+                        <span className="rounded-full bg-white/[0.06] px-2.5 py-0.5 text-xs font-semibold text-slate-300">
                           Optional key
                         </span>
                       )}
@@ -244,15 +252,15 @@ export default function FeaturesPage() {
               <RevealItem
                 key={step.number}
                 as="li"
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card transition-all hover:-translate-y-1 hover:border-indigo-200 hover:shadow-ai"
+                className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-white/[0.12] hover:shadow-ai-glow"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ai-gradient text-base font-bold text-white shadow-ai">
                   {step.number}
                 </span>
-                <h3 className="mt-4 text-lg font-semibold text-brand-900">
+                <h3 className="mt-4 text-lg font-semibold text-white">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
                   {step.description}
                 </p>
               </RevealItem>
@@ -261,7 +269,7 @@ export default function FeaturesPage() {
           <Reveal>
             <p className="mt-10 text-center text-sm text-slate-500">
               Ready to see your score?{" "}
-              <Link href="/pricing" className="font-semibold text-brand-700 hover:text-brand-800">
+              <Link href="/pricing" className="font-semibold text-indigo-300 hover:text-indigo-200">
                 View pricing →
               </Link>
             </p>

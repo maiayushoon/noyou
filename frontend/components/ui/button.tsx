@@ -24,14 +24,14 @@ export interface ButtonProps
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:
-    "bg-slate-900 text-white shadow-sm hover:bg-slate-800 active:bg-slate-900",
-  ai: "bg-ai-gradient text-white shadow-ai hover:brightness-[1.06] active:brightness-100",
+    "bg-white text-slate-900 shadow-sm hover:bg-slate-200 active:bg-white",
+  ai: "bg-ai-gradient text-white shadow-ai hover:brightness-[1.08] active:brightness-100",
   secondary:
-    "bg-slate-100 text-slate-900 hover:bg-slate-200 active:bg-slate-100",
+    "bg-white/[0.06] text-slate-100 hover:bg-white/[0.10] active:bg-white/[0.06]",
   outline:
-    "border border-hairline bg-white text-slate-700 shadow-sm hover:bg-slate-50 hover:text-slate-900",
-  ghost: "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
-  danger: "bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-600",
+    "border border-white/[0.12] bg-white/[0.03] text-slate-200 hover:bg-white/[0.06] hover:text-white",
+  ghost: "text-slate-300 hover:bg-white/[0.06] hover:text-white",
+  danger: "bg-red-600 text-white shadow-sm hover:bg-red-500 active:bg-red-600",
 };
 
 const SIZES: Record<ButtonSize, string> = {

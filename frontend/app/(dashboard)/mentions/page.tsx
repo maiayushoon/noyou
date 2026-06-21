@@ -105,11 +105,11 @@ export default function MentionsPage() {
         title="Mentions"
         description="Everything the web and AI engines say about you, analyzed and triaged."
         actions={
-          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400">
             <Filter className="h-3.5 w-3.5" aria-hidden />
             {isLoading ? "…" : `${mentions.length} shown`}
             {negativeCount > 0 ? (
-              <span className="ml-1 inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-0.5 text-red-600">
+              <span className="ml-1 inline-flex items-center gap-1 rounded-full bg-red-500/15 px-2 py-0.5 text-red-300">
                 <ShieldAlert className="h-3 w-3" aria-hidden />
                 {negativeCount} negative
               </span>
@@ -142,7 +142,7 @@ export default function MentionsPage() {
                 {c.label}
               </FilterPill>
             ))}
-            <span className="mx-1 h-4 w-px bg-hairline" aria-hidden />
+            <span className="mx-1 h-4 w-px bg-white/[0.08]" aria-hidden />
             {RISK_CHIPS.map((c) => (
               <FilterPill
                 key={c.key}
@@ -253,15 +253,15 @@ function MentionRow({
               {timeAgo(m.published_at || m.discovered_at)}
             </span>
           </div>
-          <p className="mt-1.5 text-sm font-medium text-slate-900">
+          <p className="mt-1.5 text-sm font-medium text-slate-100">
             {m.title || m.content.slice(0, 120)}
           </p>
-          <p className="mt-1 line-clamp-2 text-sm text-slate-500">
+          <p className="mt-1 line-clamp-2 text-sm text-slate-400">
             {m.analysis?.summary || m.content}
           </p>
           {m.analysis?.recommendation ? (
-            <p className="mt-2 rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-600">
-              <span className="font-medium text-slate-700">Suggested: </span>
+            <p className="mt-2 rounded-lg bg-white/[0.04] px-3 py-2 text-xs text-slate-300">
+              <span className="font-medium text-slate-200">Suggested: </span>
               {m.analysis.recommendation}
             </p>
           ) : null}
@@ -279,7 +279,7 @@ function MentionRow({
         </div>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-hairline pt-3">
+      <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-white/[0.08] pt-3">
         <StatusTag status={m.status} />
         <div className="ml-auto flex items-center gap-2">
           <Button
@@ -335,7 +335,7 @@ function MentionRow({
 function SuggestionPanel({ fix }: { fix: FixSuggestion }) {
   const isRewrite = fix.kind === "rewrite";
   return (
-    <div className="mt-3 rounded-xl border border-ai-indigo/20 bg-ai-indigo/5 p-3.5">
+    <div className="mt-3 rounded-xl border border-ai-indigo/25 bg-ai-indigo/10 p-3.5">
       <div className="flex items-center gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-ai-gradient px-2.5 py-0.5 text-xs font-semibold text-white shadow-ai">
           {isRewrite ? (
@@ -346,10 +346,10 @@ function SuggestionPanel({ fix }: { fix: FixSuggestion }) {
           {isRewrite ? "Suggested rewrite" : "Suggested response"}
         </span>
       </div>
-      <p className="mt-2.5 whitespace-pre-wrap text-sm leading-relaxed text-slate-700">
+      <p className="mt-2.5 whitespace-pre-wrap text-sm leading-relaxed text-slate-200">
         {fix.suggestion}
       </p>
-      <p className="mt-2.5 border-t border-ai-indigo/15 pt-2.5 text-xs text-slate-500">
+      <p className="mt-2.5 border-t border-ai-indigo/20 pt-2.5 text-xs text-slate-400">
         {fix.rationale}
       </p>
     </div>
@@ -358,10 +358,10 @@ function SuggestionPanel({ fix }: { fix: FixSuggestion }) {
 
 function StatusTag({ status }: { status: MentionStatus }) {
   const map: Record<MentionStatus, string> = {
-    active: "bg-slate-100 text-slate-600",
-    archived: "bg-slate-100 text-slate-500",
-    removal_requested: "bg-amber-50 text-amber-700",
-    removed: "bg-emerald-50 text-emerald-700",
+    active: "bg-white/[0.06] text-slate-300",
+    archived: "bg-white/[0.06] text-slate-400",
+    removal_requested: "bg-amber-500/15 text-amber-300",
+    removed: "bg-emerald-500/15 text-emerald-300",
   };
   return (
     <span
@@ -394,9 +394,9 @@ function FilterPill({
         "rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
         active
           ? subtle
-            ? "bg-slate-900 text-white"
+            ? "bg-white/[0.10] text-white ring-1 ring-inset ring-white/[0.12]"
             : "bg-ai-gradient text-white shadow-ai"
-          : "bg-white text-slate-600 ring-1 ring-inset ring-hairline hover:bg-slate-50"
+          : "bg-white/[0.03] text-slate-300 ring-1 ring-inset ring-white/[0.10] hover:bg-white/[0.06] hover:text-slate-100"
       )}
     >
       {children}

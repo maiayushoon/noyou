@@ -58,49 +58,49 @@ export function bandColor(band: ScoreBand | string): {
   switch (band) {
     case "excellent":
       return {
-        text: "text-emerald-700",
-        bg: "bg-emerald-50",
-        ring: "ring-emerald-200",
-        dot: "bg-emerald-500",
+        text: "text-emerald-300",
+        bg: "bg-emerald-500/15",
+        ring: "ring-emerald-500/30",
+        dot: "bg-emerald-400",
         label: "Excellent",
       };
     case "high":
       return {
-        text: "text-emerald-700",
-        bg: "bg-emerald-50",
-        ring: "ring-emerald-200",
-        dot: "bg-emerald-500",
+        text: "text-emerald-300",
+        bg: "bg-emerald-500/15",
+        ring: "ring-emerald-500/30",
+        dot: "bg-emerald-400",
         label: "Strong",
       };
     case "medium":
       return {
-        text: "text-amber-700",
-        bg: "bg-amber-50",
-        ring: "ring-amber-200",
-        dot: "bg-amber-500",
+        text: "text-amber-300",
+        bg: "bg-amber-500/15",
+        ring: "ring-amber-500/30",
+        dot: "bg-amber-400",
         label: "Fair",
       };
     case "low":
       return {
-        text: "text-orange-700",
-        bg: "bg-orange-50",
-        ring: "ring-orange-200",
-        dot: "bg-orange-500",
+        text: "text-orange-300",
+        bg: "bg-orange-500/15",
+        ring: "ring-orange-500/30",
+        dot: "bg-orange-400",
         label: "At risk",
       };
     case "critical":
       return {
-        text: "text-red-700",
-        bg: "bg-red-50",
-        ring: "ring-red-200",
-        dot: "bg-red-500",
+        text: "text-red-300",
+        bg: "bg-red-500/15",
+        ring: "ring-red-500/30",
+        dot: "bg-red-400",
         label: "Critical",
       };
     default:
       return {
-        text: "text-slate-700",
-        bg: "bg-slate-50",
-        ring: "ring-slate-200",
+        text: "text-slate-300",
+        bg: "bg-white/[0.06]",
+        ring: "ring-white/[0.10]",
         dot: "bg-slate-400",
         label: "Unknown",
       };
@@ -118,28 +118,28 @@ export function sentimentColor(sentiment: Sentiment | string): {
   switch (sentiment) {
     case "positive":
       return {
-        text: "text-emerald-700",
-        bg: "bg-emerald-50",
-        border: "border-emerald-200",
-        dot: "bg-emerald-500",
+        text: "text-emerald-300",
+        bg: "bg-emerald-500/15",
+        border: "border-emerald-500/30",
+        dot: "bg-emerald-400",
         hex: "#10b981",
         label: "Positive",
       };
     case "negative":
       return {
-        text: "text-red-700",
-        bg: "bg-red-50",
-        border: "border-red-200",
-        dot: "bg-red-500",
+        text: "text-red-300",
+        bg: "bg-red-500/15",
+        border: "border-red-500/30",
+        dot: "bg-red-400",
         hex: "#ef4444",
         label: "Negative",
       };
     case "neutral":
     default:
       return {
-        text: "text-slate-600",
-        bg: "bg-slate-50",
-        border: "border-slate-200",
+        text: "text-slate-300",
+        bg: "bg-white/[0.06]",
+        border: "border-white/[0.10]",
         dot: "bg-slate-400",
         hex: "#64748b",
         label: "Neutral",
@@ -158,48 +158,48 @@ export function riskColor(level: number): {
 } {
   if (level >= 4) {
     return {
-      text: "text-red-700",
-      bg: "bg-red-50",
-      border: "border-red-200",
-      dot: "bg-red-500",
+      text: "text-red-300",
+      bg: "bg-red-500/15",
+      border: "border-red-500/30",
+      dot: "bg-red-400",
       hex: "#ef4444",
       label: "Critical",
     };
   }
   if (level >= 3) {
     return {
-      text: "text-orange-700",
-      bg: "bg-orange-50",
-      border: "border-orange-200",
-      dot: "bg-orange-500",
+      text: "text-orange-300",
+      bg: "bg-orange-500/15",
+      border: "border-orange-500/30",
+      dot: "bg-orange-400",
       hex: "#f97316",
       label: "High",
     };
   }
   if (level >= 2) {
     return {
-      text: "text-amber-700",
-      bg: "bg-amber-50",
-      border: "border-amber-200",
-      dot: "bg-amber-500",
+      text: "text-amber-300",
+      bg: "bg-amber-500/15",
+      border: "border-amber-500/30",
+      dot: "bg-amber-400",
       hex: "#f59e0b",
       label: "Medium",
     };
   }
   if (level >= 1) {
     return {
-      text: "text-yellow-700",
-      bg: "bg-yellow-50",
-      border: "border-yellow-200",
+      text: "text-yellow-300",
+      bg: "bg-yellow-500/15",
+      border: "border-yellow-500/30",
       dot: "bg-yellow-400",
       hex: "#eab308",
       label: "Low",
     };
   }
   return {
-    text: "text-slate-600",
-    bg: "bg-slate-50",
-    border: "border-slate-200",
+    text: "text-slate-300",
+    bg: "bg-white/[0.06]",
+    border: "border-white/[0.10]",
     dot: "bg-slate-400",
     hex: "#64748b",
     label: "Minimal",
@@ -216,14 +216,14 @@ export function severityColor(severity: string): {
 } {
   switch (severity) {
     case "critical":
-      return { text: "text-red-700", bg: "bg-red-50", border: "border-red-200", dot: "bg-red-500", label: "Critical" };
+      return { text: "text-red-300", bg: "bg-red-500/15", border: "border-red-500/30", dot: "bg-red-400", label: "Critical" };
     case "high":
-      return { text: "text-orange-700", bg: "bg-orange-50", border: "border-orange-200", dot: "bg-orange-500", label: "High" };
+      return { text: "text-orange-300", bg: "bg-orange-500/15", border: "border-orange-500/30", dot: "bg-orange-400", label: "High" };
     case "medium":
-      return { text: "text-amber-700", bg: "bg-amber-50", border: "border-amber-200", dot: "bg-amber-500", label: "Medium" };
+      return { text: "text-amber-300", bg: "bg-amber-500/15", border: "border-amber-500/30", dot: "bg-amber-400", label: "Medium" };
     case "low":
     default:
-      return { text: "text-slate-600", bg: "bg-slate-50", border: "border-slate-200", dot: "bg-slate-400", label: "Low" };
+      return { text: "text-slate-300", bg: "bg-white/[0.06]", border: "border-white/[0.10]", dot: "bg-slate-400", label: "Low" };
   }
 }
 

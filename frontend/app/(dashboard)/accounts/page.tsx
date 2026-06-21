@@ -112,17 +112,17 @@ export default function AccountsPage() {
       <FadeIn>
         <Card className="mb-6 flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ai-gradient-soft text-ai-violet">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
               <CreditCard className="h-5 w-5" aria-hidden />
             </span>
             <div>
-              <p className="text-sm font-semibold text-slate-900">
+              <p className="text-sm font-semibold text-slate-100">
                 Current plan
                 <Badge variant={user?.plan === "free" ? "neutral" : "ai"} className="ml-2">
                   {humanize(user?.plan ?? "free")}
                 </Badge>
               </p>
-              <p className="mt-0.5 text-sm text-slate-500">
+              <p className="mt-0.5 text-sm text-slate-400">
                 Manage your subscription, invoices, and payment method.
               </p>
             </div>
@@ -145,13 +145,13 @@ export default function AccountsPage() {
             <CardContent>
               <form onSubmit={add} className="space-y-3.5">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-300">
                     Platform
                   </label>
                   <select
                     value={platform}
                     onChange={(e) => setPlatform(e.target.value)}
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+                    className="w-full rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-slate-100 outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30 [&>option]:bg-[#0b0b12] [&>option]:text-slate-100"
                   >
                     {PLATFORMS.map((p) => (
                       <option key={p} value={p}>
@@ -228,18 +228,18 @@ export default function AccountsPage() {
                 <StaggerList className="space-y-2.5">
                   {accounts.map((a) => (
                     <FadeInItem key={String(a.id)}>
-                      <div className="flex items-center gap-3 rounded-lg border border-hairline p-3.5">
-                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
+                      <div className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.03] p-3.5 transition-colors hover:border-white/[0.12]">
+                        <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] text-slate-400">
                           <AtSign className="h-4 w-4" aria-hidden />
                         </span>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
-                            <p className="truncate text-sm font-medium text-slate-900">
+                            <p className="truncate text-sm font-medium text-slate-100">
                               {a.display_name || a.handle}
                             </p>
                             <span
                               className={cn(
-                                "shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-500",
+                                "shrink-0 rounded-full bg-white/[0.06] px-2 py-0.5 text-xs font-medium text-slate-400",
                                 !a.is_active && "opacity-60"
                               )}
                             >
@@ -300,7 +300,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="mb-1.5 block text-sm font-medium text-slate-700">{label}</label>
+      <label className="mb-1.5 block text-sm font-medium text-slate-300">{label}</label>
       <div className="relative">
         {icon ? (
           <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
@@ -314,7 +314,7 @@ function Field({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           className={cn(
-            "w-full rounded-lg border border-slate-200 bg-white py-2.5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20",
+            "w-full rounded-lg border border-white/10 bg-white/[0.04] py-2.5 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30",
             icon ? "pl-9 pr-3" : "px-3"
           )}
         />

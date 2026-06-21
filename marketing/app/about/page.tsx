@@ -28,8 +28,12 @@ export default function AboutPage() {
         id="ld-about-breadcrumb"
       />
 
-      <section className="bg-gradient-to-b from-brand-50 to-white py-16 sm:py-20">
-        <div className="container-page">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#0b0b14] to-[#07070b] py-16 sm:py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-ai-indigo/10 blur-3xl"
+        />
+        <div className="container-page relative">
           <Reveal>
             <SectionHeading
               as="h1"
@@ -45,10 +49,10 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="container-page">
           <Reveal className="mx-auto max-w-3xl">
-            <h2 className="text-2xl font-bold tracking-tight text-brand-900 sm:text-3xl">
+            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
               Our story
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 text-lg leading-relaxed text-slate-300">
               {ABOUT.story}
             </p>
           </Reveal>
@@ -56,7 +60,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-slate-50 py-16">
+      <section className="border-y border-white/[0.06] bg-white/[0.02] py-16">
         <div className="container-page">
           <Reveal>
             <SectionHeading eyebrow="What we believe" title="Our values" />
@@ -68,12 +72,12 @@ export default function AboutPage() {
             {ABOUT.values.map((value) => (
               <RevealItem
                 key={value.title}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-ai"
+                className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-white/[0.12] hover:shadow-ai-glow"
               >
-                <h3 className="text-lg font-semibold text-brand-900">
+                <h3 className="text-lg font-semibold text-white">
                   {value.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
                   {value.description}
                 </p>
               </RevealItem>
@@ -86,10 +90,10 @@ export default function AboutPage() {
       <section id="privacy" className="py-16">
         <div className="container-page">
           <Reveal className="mx-auto max-w-3xl">
-            <h2 className="text-2xl font-bold tracking-tight text-brand-900 sm:text-3xl">
+            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
               Privacy & compliance
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 text-lg leading-relaxed text-slate-300">
               {SITE.name} analyzes publicly available mentions — not private
               accounts or messages. We support GDPR and CCPA data-subject requests,
               including access and erasure, and you can export or delete your data
@@ -102,13 +106,13 @@ export default function AboutPage() {
       </section>
 
       {/* Terms */}
-      <section id="terms" className="border-t border-slate-100 py-16">
+      <section id="terms" className="border-t border-white/[0.06] py-16">
         <div className="container-page">
           <Reveal className="mx-auto max-w-3xl">
-            <h2 className="text-2xl font-bold tracking-tight text-brand-900 sm:text-3xl">
+            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
               Terms & responsible use
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 text-lg leading-relaxed text-slate-300">
               {SITE.name} is a tool for monitoring and improving your own
               reputation, or that of a brand you are authorized to represent. It is
               not for surveilling or harassing others. By using {SITE.name} you
@@ -120,7 +124,7 @@ export default function AboutPage() {
               Questions about privacy, terms, or data requests? Email{" "}
               <a
                 href={`mailto:${SITE.email}`}
-                className="font-semibold text-brand-700 hover:text-brand-800"
+                className="font-semibold text-indigo-300 hover:text-indigo-200"
               >
                 {SITE.email}
               </a>

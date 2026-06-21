@@ -9,12 +9,13 @@ export type BadgeVariant =
   | "outline";
 
 const VARIANTS: Record<BadgeVariant, string> = {
-  neutral: "bg-slate-100 text-slate-600",
+  neutral: "bg-white/[0.06] text-slate-300",
   ai: "bg-ai-gradient text-white shadow-sm",
-  success: "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200",
-  warning: "bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200",
-  danger: "bg-red-50 text-red-700 ring-1 ring-inset ring-red-200",
-  outline: "border border-hairline text-slate-600",
+  success:
+    "bg-emerald-500/15 text-emerald-300 ring-1 ring-inset ring-emerald-500/30",
+  warning: "bg-amber-500/15 text-amber-300 ring-1 ring-inset ring-amber-500/30",
+  danger: "bg-red-500/15 text-red-300 ring-1 ring-inset ring-red-500/30",
+  outline: "border border-white/[0.12] text-slate-300",
 };
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {

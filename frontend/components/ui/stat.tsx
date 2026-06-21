@@ -22,7 +22,7 @@ export function Stat({
   value,
   icon,
   hint,
-  accentClassName = "bg-slate-100 text-slate-600",
+  accentClassName = "bg-white/[0.06] text-slate-400",
   loading = false,
   className,
   index = 0,
@@ -50,7 +50,7 @@ export function Stat({
     >
       <Card interactive className={cn("p-5", className)}>
         <div className="flex items-center justify-between">
-          <p className="text-sm font-medium text-slate-500">{label}</p>
+          <p className="text-sm font-medium text-slate-400">{label}</p>
           {icon ? (
             <span
               className={cn(
@@ -63,7 +63,7 @@ export function Stat({
             </span>
           ) : null}
         </div>
-        <p className="mt-3 text-3xl font-semibold tracking-tight text-slate-900">
+        <p className="mt-3 text-3xl font-semibold tracking-tight text-white">
           {value}
         </p>
         {hint ? <p className="mt-1 text-sm text-slate-500">{hint}</p> : null}

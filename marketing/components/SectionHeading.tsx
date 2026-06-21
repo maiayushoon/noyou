@@ -25,12 +25,12 @@ export default function SectionHeading({
   return (
     <div className={`max-w-2xl ${alignment} ${className}`}>
       {eyebrow ? (
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-accent-600">
+        <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-indigo-300">
           {eyebrow}
         </p>
       ) : null}
       <Tag
-        className={`text-balance font-bold tracking-tight text-brand-900 ${
+        className={`text-balance font-bold tracking-tight text-white ${
           Tag === "h1"
             ? "text-4xl sm:text-5xl"
             : Tag === "h2"
@@ -41,7 +41,7 @@ export default function SectionHeading({
         {title}
       </Tag>
       {description ? (
-        <p className="mt-4 text-lg leading-relaxed text-slate-600">{description}</p>
+        <p className="mt-4 text-lg leading-relaxed text-slate-400">{description}</p>
       ) : null}
     </div>
   );

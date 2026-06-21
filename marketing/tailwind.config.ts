@@ -9,6 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Direct, single-token references to the brand gradient stops so dark
+        // surfaces can lean on the ai-* accent palette (focus rings, glows).
+        ai: {
+          indigo: "#6366f1",
+          violet: "#8b5cf6",
+          cyan: "#22d3ee",
+        },
         brand: {
           DEFAULT: "#1f4e79",
           50: "#eef4fb",
@@ -62,14 +69,19 @@ const config: Config = {
         "ai-gradient":
           "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #22d3ee 100%)",
         "ai-gradient-soft":
-          "linear-gradient(135deg, rgba(99,102,241,0.14) 0%, rgba(139,92,246,0.12) 50%, rgba(34,211,238,0.14) 100%)",
+          "linear-gradient(135deg, rgba(99,102,241,0.22) 0%, rgba(139,92,246,0.18) 50%, rgba(34,211,238,0.22) 100%)",
+        // Very subtle radial glow washes for deep, near-black page depth.
+        "ai-radial":
+          "radial-gradient(60rem 40rem at 50% -10%, rgba(99,102,241,0.10), transparent 60%), radial-gradient(50rem 36rem at 100% 0%, rgba(34,211,238,0.06), transparent 55%)",
       },
       boxShadow: {
-        card: "0 1px 2px rgba(15, 27, 43, 0.04), 0 8px 24px rgba(15, 27, 43, 0.06)",
-        lift: "0 12px 40px rgba(31, 78, 121, 0.14)",
+        card: "0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35)",
+        lift: "0 12px 40px rgba(0, 0, 0, 0.45)",
         // Glowing halo for the 3D centerpiece and gradient buttons.
-        ai: "0 18px 60px -12px rgba(99, 102, 241, 0.45), 0 8px 24px -8px rgba(34, 211, 238, 0.35)",
-        hairline: "0 0 0 1px rgba(15, 27, 43, 0.06)",
+        ai: "0 18px 60px -12px rgba(99, 102, 241, 0.55), 0 8px 24px -8px rgba(34, 211, 238, 0.4)",
+        // Soft accent glow used on hover for sleek glass surfaces.
+        "ai-glow": "0 0 40px -8px rgba(139, 92, 246, 0.45)",
+        hairline: "0 0 0 1px rgba(255, 255, 255, 0.08)",
       },
       keyframes: {
         "fade-up": {

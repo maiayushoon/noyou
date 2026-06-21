@@ -45,10 +45,10 @@ export default function RegisterPage() {
   return (
     <FadeIn>
       <div className="mb-7">
-        <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-semibold tracking-tight text-white">
           Create your account
         </h2>
-        <p className="mt-1.5 text-sm text-slate-500">
+        <p className="mt-1.5 text-sm text-slate-400">
           Start monitoring your reputation in minutes.
         </p>
       </div>
@@ -98,7 +98,7 @@ export default function RegisterPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-slate-500">
+      <p className="mt-6 text-center text-sm text-slate-400">
         Already have an account?{" "}
         <Link href="/login" className="font-medium text-ai-indigo hover:underline">
           Sign in
@@ -131,7 +131,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-slate-700">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-slate-300">
         {label}
       </label>
       <div className="relative">
@@ -146,7 +146,7 @@ function Field({
           onChange={(e) => onChange(e.target.value)}
           autoComplete={autoComplete}
           required={required}
-          className="h-11 w-full rounded-lg border border-hairline bg-white pl-10 pr-3 text-sm text-slate-900 shadow-sm outline-none transition-all duration-150 placeholder:text-slate-400 hover:border-slate-300 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+          className="h-11 w-full rounded-lg border border-white/10 bg-white/[0.04] pl-10 pr-3 text-sm text-slate-100 outline-none transition-all duration-150 placeholder:text-slate-500 hover:border-white/20 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/30"
         />
       </div>
     </div>

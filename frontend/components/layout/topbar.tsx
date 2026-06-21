@@ -77,17 +77,17 @@ export function Topbar({ onOpenMenu }: { onOpenMenu: () => void }) {
   const band = user ? bandColor(scoreBand(user.reputation_score)) : null;
 
   return (
-    <header className="glass sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-hairline px-4 sm:px-6">
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-white/[0.08] bg-[#07070b]/80 px-4 backdrop-blur sm:px-6">
       <button
         type="button"
         onClick={onOpenMenu}
         aria-label="Open navigation"
-        className="-ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 lg:hidden"
+        className="-ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/[0.06] hover:text-white lg:hidden"
       >
         <Menu className="h-5 w-5" aria-hidden />
       </button>
 
-      <h1 className="truncate text-base font-semibold tracking-tight text-slate-900">
+      <h1 className="truncate text-base font-semibold tracking-tight text-white">
         {pageTitle(pathname)}
       </h1>
 

@@ -34,12 +34,12 @@ export default function VerifyEmailPage() {
     <FadeIn>
       <div className="flex flex-col items-center text-center">
         <span
-          className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${
+          className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ring-1 ring-inset ${
             state === "ok"
-              ? "bg-emerald-50 text-emerald-600"
+              ? "bg-emerald-500/15 text-emerald-300 ring-emerald-500/30"
               : state === "error"
-              ? "bg-red-50 text-red-600"
-              : "bg-indigo-50 text-ai-indigo"
+              ? "bg-red-500/15 text-red-300 ring-red-500/30"
+              : "bg-ai-indigo/15 text-indigo-300 ring-white/[0.08]"
           }`}
         >
           {state === "loading" ? (
@@ -50,10 +50,10 @@ export default function VerifyEmailPage() {
             <AlertTriangle className="h-6 w-6" aria-hidden />
           )}
         </span>
-        <h2 className="text-xl font-semibold tracking-tight text-slate-900">
+        <h2 className="text-xl font-semibold tracking-tight text-white">
           {state === "ok" ? "Email verified" : state === "error" ? "Verification failed" : "Verifying…"}
         </h2>
-        <p className="mt-1.5 max-w-xs text-sm text-slate-500">{message}</p>
+        <p className="mt-1.5 max-w-xs text-sm text-slate-400">{message}</p>
         {state !== "loading" ? (
           <Link href="/login" className="mt-6">
             <Button variant="ai" rightIcon={<ArrowRight className="h-4 w-4" />}>

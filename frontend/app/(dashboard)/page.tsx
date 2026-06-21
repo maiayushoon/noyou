@@ -79,7 +79,7 @@ export default function OverviewPage() {
                 </span>
               </div>
               <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2">
-                <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+                <h2 className="text-2xl font-semibold tracking-tight text-white">
                   {isLoading || !data ? (
                     <Skeleton className="h-8 w-64" />
                   ) : (
@@ -96,10 +96,10 @@ export default function OverviewPage() {
                   <ScoreSparkline trend={data.score_trend} />
                 ) : null}
               </div>
-              <p className="mt-1.5 max-w-lg text-sm text-slate-500">
-                A <strong className="font-semibold text-slate-600">0–100</strong>{" "}
+              <p className="mt-1.5 max-w-lg text-sm text-slate-400">
+                A <strong className="font-semibold text-slate-300">0–100</strong>{" "}
                 measure of how the web and AI engines portray you —{" "}
-                <span className="font-medium text-slate-600">higher is safer</span>.
+                <span className="font-medium text-slate-300">higher is safer</span>.
                 It blends the sentiment, risk, and recency of every mention we find,
                 and updates with each scan.
               </p>
@@ -107,7 +107,7 @@ export default function OverviewPage() {
                 <span>
                   Last scan {isLoading || !data ? "…" : timeAgo(data.last_scan_at)}
                 </span>
-                <span className="hidden h-3 w-px bg-hairline sm:inline-block" aria-hidden />
+                <span className="hidden h-3 w-px bg-white/[0.08] sm:inline-block" aria-hidden />
                 <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <ScaleDot className="bg-emerald-500" label="85–100 Excellent" />
                   <ScaleDot className="bg-emerald-400" label="70–84 Strong" />
@@ -117,7 +117,7 @@ export default function OverviewPage() {
                 </span>
               </div>
               {/* Connected accounts: real people protect their reputation with NoYou */}
-              <div className="mt-5 border-t border-hairline pt-4">
+              <div className="mt-5 border-t border-white/[0.08] pt-4">
                 <ConnectedAccounts />
               </div>
             </div>
@@ -134,7 +134,7 @@ export default function OverviewPage() {
           value={data?.total_mentions ?? 0}
           hint="Across all sources"
           icon={<MessageSquareText className="h-4.5 w-4.5" />}
-          accentClassName="bg-indigo-50 text-ai-indigo"
+          accentClassName="bg-ai-indigo/15 text-indigo-300"
         />
         <Stat
           index={1}
@@ -143,7 +143,7 @@ export default function OverviewPage() {
           value={data?.high_risk_count ?? 0}
           hint="Need attention"
           icon={<ShieldAlert className="h-4.5 w-4.5" />}
-          accentClassName="bg-red-50 text-red-600"
+          accentClassName="bg-red-500/15 text-red-300"
         />
         <Stat
           index={2}
@@ -152,7 +152,7 @@ export default function OverviewPage() {
           value={data?.unread_alerts ?? 0}
           hint="New since last visit"
           icon={<Bell className="h-4.5 w-4.5" />}
-          accentClassName="bg-amber-50 text-amber-600"
+          accentClassName="bg-amber-500/15 text-amber-300"
         />
         <Stat
           index={3}
@@ -161,7 +161,7 @@ export default function OverviewPage() {
           value={data?.active_cleanup_actions ?? 0}
           hint="Suggested actions"
           icon={<Brush className="h-4.5 w-4.5" />}
-          accentClassName="bg-violet-50 text-ai-violet"
+          accentClassName="bg-ai-violet/15 text-violet-300"
         />
       </div>
 
@@ -210,7 +210,7 @@ export default function OverviewPage() {
                   description="You're all caught up. New issues will appear here."
                 />
               ) : (
-                <StaggerList className="divide-y divide-[rgba(15,23,42,0.06)]">
+                <StaggerList className="divide-y divide-white/[0.06]">
                   {data.top_alerts.slice(0, 5).map((alert) => {
                     const c = severityColor(alert.severity);
                     return (
@@ -221,10 +221,10 @@ export default function OverviewPage() {
                             aria-hidden
                           />
                           <div className="min-w-0 flex-1">
-                            <p className="truncate text-sm font-medium text-slate-900">
+                            <p className="truncate text-sm font-medium text-slate-100">
                               {alert.title}
                             </p>
-                            <p className="line-clamp-2 text-sm text-slate-500">
+                            <p className="line-clamp-2 text-sm text-slate-400">
                               {alert.message}
                             </p>
                           </div>
@@ -265,7 +265,7 @@ export default function OverviewPage() {
                 description="Nothing risky surfaced in the latest scan."
               />
             ) : (
-              <StaggerList className="divide-y divide-[rgba(15,23,42,0.06)]">
+              <StaggerList className="divide-y divide-white/[0.06]">
                 {data.recent_high_risk.slice(0, 5).map((m) => (
                   <FadeInItem key={String(m.id)}>
                     <div className="flex items-start gap-3 py-3.5">
@@ -286,10 +286,10 @@ export default function OverviewPage() {
                             </a>
                           ) : null}
                         </div>
-                        <p className="mt-0.5 truncate text-sm font-medium text-slate-900">
+                        <p className="mt-0.5 truncate text-sm font-medium text-slate-100">
                           {m.title || m.content.slice(0, 90)}
                         </p>
-                        <p className="mt-0.5 line-clamp-1 text-sm text-slate-500">
+                        <p className="mt-0.5 line-clamp-1 text-sm text-slate-400">
                           {m.analysis?.summary || m.content}
                         </p>
                       </div>
@@ -334,7 +334,7 @@ function SentimentMix({
   ];
   return (
     <div>
-      <div className="flex h-3 w-full overflow-hidden rounded-full bg-slate-100">
+      <div className="flex h-3 w-full overflow-hidden rounded-full bg-white/[0.06]">
         {segments.map((s) =>
           s.value > 0 ? (
             <div
@@ -348,7 +348,7 @@ function SentimentMix({
       <ul className="mt-4 space-y-2.5">
         {segments.map((s) => (
           <li key={s.key} className="flex items-center justify-between text-sm">
-            <span className="inline-flex items-center gap-2 text-slate-600">
+            <span className="inline-flex items-center gap-2 text-slate-300">
               <span
                 className="h-2.5 w-2.5 rounded-full"
                 style={{ backgroundColor: s.color }}
@@ -356,7 +356,7 @@ function SentimentMix({
               />
               {s.label}
             </span>
-            <span className="font-medium tabular-nums text-slate-900">
+            <span className="font-medium tabular-nums text-slate-100">
               {s.value}
               <span className="ml-1.5 text-xs text-slate-400">
                 {Math.round((s.value / total) * 100)}%
@@ -394,10 +394,10 @@ function ScoreDeltaPill({
   const isDown = rounded < 0;
 
   const tone = isUp
-    ? "bg-emerald-50 text-emerald-700 ring-emerald-200"
+    ? "bg-emerald-500/15 text-emerald-300 ring-emerald-500/30"
     : isDown
-      ? "bg-red-50 text-red-700 ring-red-200"
-      : "bg-slate-100 text-slate-500 ring-slate-200";
+      ? "bg-red-500/15 text-red-300 ring-red-500/30"
+      : "bg-white/[0.06] text-slate-400 ring-white/[0.10]";
 
   const Icon = isUp ? ArrowUp : isDown ? ArrowDown : Minus;
   // Avoid "-0"; build an explicit sign + absolute magnitude.

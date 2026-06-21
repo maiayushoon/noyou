@@ -9,13 +9,13 @@ import {
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-slate-200 bg-slate-50">
+    <footer className="border-t border-white/[0.08] bg-white/[0.02]">
       <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
           <div className="col-span-2">
             <Link
               href="/"
-              className="flex items-center gap-2 font-bold text-brand-700"
+              className="flex items-center gap-2 font-bold text-white"
             >
               <span
                 aria-hidden="true"
@@ -25,12 +25,12 @@ export default function Footer() {
               </span>
               <span className="text-lg tracking-tight">{SITE.name}</span>
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-600">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
               {SITE.shortDescription}
             </p>
             <a
               href={`mailto:${SITE.email}`}
-              className="mt-4 inline-block text-sm font-medium text-brand-700 hover:text-brand-800"
+              className="mt-4 inline-block text-sm font-medium text-indigo-300 hover:text-indigo-200"
             >
               {SITE.email}
             </a>
@@ -38,7 +38,7 @@ export default function Footer() {
 
           {FOOTER_LINKS.map((group) => (
             <div key={group.heading}>
-              <h2 className="text-sm font-semibold text-brand-900">
+              <h2 className="text-sm font-semibold text-white">
                 {group.heading}
               </h2>
               <ul className="mt-3 space-y-2">
@@ -47,14 +47,14 @@ export default function Footer() {
                     {link.href.startsWith("/") ? (
                       <Link
                         href={link.href}
-                        className="text-sm text-slate-600 hover:text-brand-700"
+                        className="text-sm text-slate-400 hover:text-white"
                       >
                         {link.label}
                       </Link>
                     ) : (
                       <a
                         href={link.href}
-                        className="text-sm text-slate-600 hover:text-brand-700"
+                        className="text-sm text-slate-400 hover:text-white"
                       >
                         {link.label}
                       </a>
@@ -66,7 +66,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center">
+        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/[0.08] pt-6 sm:flex-row sm:items-center">
           <p className="text-sm text-slate-500">
             © {year} {SITE.legalName}. All rights reserved.
           </p>
@@ -75,7 +75,7 @@ export default function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-slate-500 hover:text-brand-700"
+                  className="text-sm text-slate-500 hover:text-white"
                 >
                   {link.label}
                 </Link>

@@ -18,9 +18,9 @@ const config: Config = {
           deep: "#0b1220",
           hover: "#1e293b",
         },
-        canvas: "#f8fafc",
+        canvas: "#07070b",
         // Hairline (also available as a borderColor) — usable as bg-hairline too.
-        hairline: "rgba(15,23,42,.07)",
+        hairline: "rgba(255,255,255,.08)",
         // AI gradient stops
         ai: {
           indigo: "#6366f1",
@@ -40,12 +40,13 @@ const config: Config = {
           "linear-gradient(135deg, rgba(99,102,241,.12) 0%, rgba(139,92,246,.12) 50%, rgba(34,211,238,.12) 100%)",
       },
       borderColor: {
-        hairline: "rgba(15,23,42,.07)",
+        hairline: "rgba(255,255,255,.08)",
       },
       boxShadow: {
-        card: "0 1px 2px rgba(15,23,42,.04), 0 4px 16px rgba(15,23,42,.05)",
-        "card-hover": "0 2px 4px rgba(15,23,42,.06), 0 12px 28px rgba(15,23,42,.08)",
-        ai: "0 6px 24px rgba(99,102,241,.28)",
+        card: "0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3)",
+        "card-hover":
+          "0 0 0 1px rgba(255,255,255,.06), 0 0 40px -8px rgba(139,92,246,.45)",
+        ai: "0 6px 24px rgba(99,102,241,.35)",
       },
       borderRadius: {
         xl: "0.875rem",

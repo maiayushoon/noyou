@@ -80,7 +80,7 @@ export function ScoreRing({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="rgba(15,23,42,0.07)"
+          stroke="rgba(255,255,255,0.08)"
           strokeWidth={strokeWidth}
         />
         {/* Progress */}
@@ -104,7 +104,7 @@ export function ScoreRing({
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-4xl font-semibold tracking-tight tabular-nums text-slate-900">
+        <span className="text-4xl font-semibold tracking-tight tabular-nums text-white">
           {display}
         </span>
         {label ? (

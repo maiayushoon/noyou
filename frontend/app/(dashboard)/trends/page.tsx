@@ -96,7 +96,7 @@ export default function TrendsPage() {
         actions={
           <div className="flex flex-wrap items-center gap-2">
             <RangePills days={days} onChange={setDays} />
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-3 py-1 text-xs font-semibold text-slate-300">
               <TrendingUp className="h-3.5 w-3.5" aria-hidden />
               Score {data.reputation_score}
             </span>
@@ -265,7 +265,7 @@ function RangePills({
             "rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
             days === r.days
               ? "bg-ai-gradient text-white shadow-ai"
-              : "bg-white text-slate-600 ring-1 ring-inset ring-hairline hover:bg-slate-50"
+              : "bg-white/[0.04] text-slate-300 ring-1 ring-inset ring-white/[0.10] hover:bg-white/[0.06] hover:text-slate-100"
           )}
         >
           {r.label}
@@ -293,10 +293,10 @@ function DistributionList({
       {data.map((d) => (
         <li key={d.name}>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-slate-600">{d.name}</span>
-            <span className="font-medium tabular-nums text-slate-900">{d.value}</span>
+            <span className="text-slate-300">{d.name}</span>
+            <span className="font-medium tabular-nums text-slate-100">{d.value}</span>
           </div>
-          <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
+          <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-white/[0.06]">
             <div
               className="h-full rounded-full transition-all duration-500"
               style={{ width: `${(d.value / max) * 100}%`, backgroundColor: color }}
@@ -322,9 +322,9 @@ function ChartTooltip({
   const first = payload?.[0];
   if (!active || !first) return null;
   return (
-    <div className="rounded-lg border border-hairline bg-white px-3 py-2 shadow-card">
+    <div className="rounded-lg border border-white/10 bg-[#0b0b12]/95 px-3 py-2 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.6)] backdrop-blur-sm">
       <p className="text-xs font-medium text-slate-400">{label}</p>
-      <p className="text-sm font-semibold text-slate-900">
+      <p className="text-sm font-semibold text-slate-100">
         {first.value}
         {suffix}
       </p>
