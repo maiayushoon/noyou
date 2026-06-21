@@ -79,7 +79,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="h-11 w-full rounded-lg border border-hairline bg-white pl-10 pr-3 text-sm text-slate-900 shadow-sm outline-none transition-colors placeholder:text-slate-400 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
+              className="h-11 w-full rounded-lg border border-hairline bg-white pl-10 pr-3 text-sm text-slate-900 shadow-sm outline-none transition-all duration-150 placeholder:text-slate-400 hover:border-slate-300 focus:border-ai-indigo focus:ring-2 focus:ring-ai-indigo/20"
             />
           </InputShell>
         </div>

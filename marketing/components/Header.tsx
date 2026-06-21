@@ -17,7 +17,7 @@ export default function Header() {
         >
           <span
             aria-hidden="true"
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-sm font-black text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-ai-gradient text-sm font-black text-white shadow-ai"
           >
             N
           </span>
@@ -49,7 +49,7 @@ export default function Header() {
           </a>
           <a
             href={`${SITE.appUrl}/signup`}
-            className="inline-flex items-center justify-center rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+            className="inline-flex items-center justify-center rounded-lg bg-ai-gradient px-4 py-2 text-sm font-semibold text-white shadow-ai transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
           >
             Get started
           </a>

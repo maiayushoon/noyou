@@ -31,13 +31,14 @@ import {
   CardTitle,
   EmptyState,
   RiskBadge,
-  ScoreRing,
   SentimentBadge,
   Skeleton,
   Stat,
 } from "@/components/ui";
 import { FadeIn, FadeInItem, StaggerList } from "@/components/motion/fade-in";
 import { AuditChecklist } from "@/components/dashboard/audit-checklist";
+import { HeroOrb } from "@/components/dashboard/hero-orb";
+import { ConnectedAccounts } from "@/components/dashboard/connected-accounts";
 
 export default function OverviewPage() {
   const { data, error, isLoading } = useSWR<DashboardSummary>(
@@ -49,13 +50,22 @@ export default function OverviewPage() {
     <div className="space-y-6">
       {/* Hero: score ring + band + stat cards */}
       <FadeIn>
-        <Card className="overflow-hidden">
-          <div className="grid gap-6 p-6 md:grid-cols-[auto,1fr] md:items-center md:gap-10">
+        <Card className="relative overflow-hidden">
+          {/* Decorative ai-gradient orbs for depth (purely background) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-ai-gradient opacity-[0.07] blur-3xl"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-24 left-1/3 h-48 w-48 rounded-full bg-ai-cyan/10 blur-3xl"
+          />
+          <div className="relative grid gap-6 p-6 md:grid-cols-[auto,1fr] md:items-center md:gap-10">
             <div className="flex justify-center md:justify-start">
               {isLoading || !data ? (
                 <Skeleton className="h-[180px] w-[180px] rounded-full" />
               ) : (
-                <ScoreRing
+                <HeroOrb
                   score={data.reputation_score}
                   label={bandColor(data.band).label}
                 />
@@ -105,6 +115,10 @@ export default function OverviewPage() {
                   <ScaleDot className="bg-orange-500" label="30–49 At risk" />
                   <ScaleDot className="bg-red-500" label="0–29 Critical" />
                 </span>
+              </div>
+              {/* Connected accounts: real people protect their reputation with NoYou */}
+              <div className="mt-5 border-t border-hairline pt-4">
+                <ConnectedAccounts />
               </div>
             </div>
           </div>

@@ -57,18 +57,48 @@ const config: Config = {
         xl: "0.875rem",
         "2xl": "1.25rem",
       },
+      backgroundImage: {
+        // Signature AI brand gradient: indigo -> violet -> cyan.
+        "ai-gradient":
+          "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #22d3ee 100%)",
+        "ai-gradient-soft":
+          "linear-gradient(135deg, rgba(99,102,241,0.14) 0%, rgba(139,92,246,0.12) 50%, rgba(34,211,238,0.14) 100%)",
+      },
       boxShadow: {
         card: "0 1px 2px rgba(15, 27, 43, 0.04), 0 8px 24px rgba(15, 27, 43, 0.06)",
         lift: "0 12px 40px rgba(31, 78, 121, 0.14)",
+        // Glowing halo for the 3D centerpiece and gradient buttons.
+        ai: "0 18px 60px -12px rgba(99, 102, 241, 0.45), 0 8px 24px -8px rgba(34, 211, 238, 0.35)",
+        hairline: "0 0 0 1px rgba(15, 27, 43, 0.06)",
       },
       keyframes: {
         "fade-up": {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-16px)" },
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "pulse-soft": {
+          "0%, 100%": { opacity: "0.5" },
+          "50%": { opacity: "0.85" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease-out both",
+        float: "float 6s ease-in-out infinite",
+        "float-slow": "float-slow 9s ease-in-out infinite",
+        "spin-slow": "spin-slow 26s linear infinite",
+        "pulse-soft": "pulse-soft 5s ease-in-out infinite",
       },
     },
   },

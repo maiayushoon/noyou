@@ -19,6 +19,8 @@ const config: Config = {
           hover: "#1e293b",
         },
         canvas: "#f8fafc",
+        // Hairline (also available as a borderColor) — usable as bg-hairline too.
+        hairline: "rgba(15,23,42,.07)",
         // AI gradient stops
         ai: {
           indigo: "#6366f1",

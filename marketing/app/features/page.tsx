@@ -4,6 +4,9 @@ import SectionHeading from "@/components/SectionHeading";
 import FeatureGrid from "@/components/FeatureGrid";
 import Cta from "@/components/Cta";
 import JsonLd from "@/components/JsonLd";
+import Reveal from "@/components/motion/Reveal";
+import RevealGroup from "@/components/motion/RevealGroup";
+import RevealItem from "@/components/motion/RevealItem";
 import { FEATURES, HOW_IT_WORKS, DATA_SOURCES, SITE } from "@/lib/content";
 import { pageMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -27,12 +30,14 @@ export default function FeaturesPage() {
 
       <section className="bg-gradient-to-b from-brand-50 to-white py-16 sm:py-20">
         <div className="container-page">
-          <SectionHeading
-            as="h1"
-            eyebrow="Features"
-            title="Everything you need to manage your reputation"
-            description="NoYou combines real-time monitoring, AI analysis, and clear recommendations so you always know where you stand — and what to do next."
-          />
+          <Reveal>
+            <SectionHeading
+              as="h1"
+              eyebrow="Features"
+              title="Everything you need to manage your reputation"
+              description="NoYou combines real-time monitoring, AI analysis, and clear recommendations so you always know where you stand — and what to do next."
+            />
+          </Reveal>
         </div>
       </section>
 
@@ -45,7 +50,7 @@ export default function FeaturesPage() {
       {/* Pre-Post Check deep dive */}
       <section id="pre-post-check" className="bg-slate-50 py-20">
         <div className="container-page grid items-center gap-10 lg:grid-cols-2">
-          <div>
+          <Reveal from="right">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-accent-600">
               Predictive
             </p>
@@ -77,8 +82,11 @@ export default function FeaturesPage() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lift">
+          </Reveal>
+          <Reveal
+            from="left"
+            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lift transition-shadow hover:shadow-ai"
+          >
             <div className="rounded-xl bg-slate-50 p-4 text-sm text-slate-700">
               “Honestly our competitor’s product is a joke and anyone who buys it
               is wasting their money.”
@@ -94,14 +102,17 @@ export default function FeaturesPage() {
               “We think we offer a better value — here’s an honest comparison so
               you can decide for yourself.”
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* AI Visibility deep dive */}
       <section id="ai-visibility" className="py-20">
         <div className="container-page grid items-center gap-10 lg:grid-cols-2">
-          <div className="order-2 lg:order-1 rounded-2xl border border-slate-200 bg-white p-6 shadow-lift">
+          <Reveal
+            from="right"
+            className="order-2 lg:order-1 rounded-2xl border border-slate-200 bg-white p-6 shadow-lift transition-shadow hover:shadow-ai"
+          >
             <h3 className="text-sm font-semibold text-brand-900">
               How AI engines describe “{SITE.name}”
             </h3>
@@ -125,8 +136,8 @@ export default function FeaturesPage() {
                 </dd>
               </div>
             </dl>
-          </div>
-          <div className="order-1 lg:order-2">
+          </Reveal>
+          <Reveal from="left" className="order-1 lg:order-2">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-accent-600">
               AEO / GEO
             </p>
@@ -158,24 +169,29 @@ export default function FeaturesPage() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Data sources */}
       <section className="bg-brand-900 py-20 text-white">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Data sources"
-            title={<span className="text-white">Real sources, no keys required to start</span>}
-            description={
-              <span className="text-brand-100">
-                NoYou works with public, keyless sources out of the box. Add Google
-                CSE and LLM providers when you want deeper coverage.
-              </span>
-            }
-          />
-          <div className="mx-auto mt-12 max-w-3xl overflow-hidden rounded-2xl border border-white/10">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Data sources"
+              title={<span className="text-white">Real sources, no keys required to start</span>}
+              description={
+                <span className="text-brand-100">
+                  NoYou works with public, keyless sources out of the box. Add Google
+                  CSE and LLM providers when you want deeper coverage.
+                </span>
+              }
+            />
+          </Reveal>
+          <Reveal
+            delay={0.1}
+            className="mx-auto mt-12 max-w-3xl overflow-hidden rounded-2xl border border-white/10"
+          >
             <table className="w-full text-left text-sm">
               <thead className="bg-white/5 text-brand-100">
                 <tr>
@@ -206,24 +222,31 @@ export default function FeaturesPage() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* How it works recap */}
       <section className="py-20">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Workflow"
-            title="How NoYou works, end to end"
-          />
-          <ol className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Workflow"
+              title="How NoYou works, end to end"
+            />
+          </Reveal>
+          <RevealGroup
+            as="ol"
+            className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            stagger={0.1}
+          >
             {HOW_IT_WORKS.map((step) => (
-              <li
+              <RevealItem
                 key={step.number}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card"
+                as="li"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card transition-all hover:-translate-y-1 hover:border-indigo-200 hover:shadow-ai"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-base font-bold text-white">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ai-gradient text-base font-bold text-white shadow-ai">
                   {step.number}
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-brand-900">
@@ -232,15 +255,17 @@ export default function FeaturesPage() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   {step.description}
                 </p>
-              </li>
+              </RevealItem>
             ))}
-          </ol>
-          <p className="mt-10 text-center text-sm text-slate-500">
-            Ready to see your score?{" "}
-            <Link href="/pricing" className="font-semibold text-brand-700 hover:text-brand-800">
-              View pricing →
-            </Link>
-          </p>
+          </RevealGroup>
+          <Reveal>
+            <p className="mt-10 text-center text-sm text-slate-500">
+              Ready to see your score?{" "}
+              <Link href="/pricing" className="font-semibold text-brand-700 hover:text-brand-800">
+                View pricing →
+              </Link>
+            </p>
+          </Reveal>
         </div>
       </section>
 

@@ -7,6 +7,9 @@ import PricingTable from "@/components/PricingTable";
 import FaqAccordion from "@/components/FaqAccordion";
 import Cta from "@/components/Cta";
 import JsonLd from "@/components/JsonLd";
+import Reveal from "@/components/motion/Reveal";
+import RevealGroup from "@/components/motion/RevealGroup";
+import RevealItem from "@/components/motion/RevealItem";
 import {
   FEATURES,
   HOW_IT_WORKS,
@@ -39,32 +42,39 @@ export default function HomePage() {
       {/* Social proof / who it's for */}
       <section className="border-y border-slate-100 bg-slate-50/60 py-10">
         <div className="container-page">
-          <p className="text-center text-sm font-medium uppercase tracking-wider text-slate-500">
-            Trusted by founders, executives, professionals, and brands
-          </p>
-          <div className="mx-auto mt-6 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
+          <Reveal>
+            <p className="text-center text-sm font-medium uppercase tracking-wider text-slate-500">
+              Trusted by founders, executives, professionals, and brands
+            </p>
+          </Reveal>
+          <RevealGroup
+            className="mx-auto mt-6 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4"
+            stagger={0.08}
+          >
             {["Founders", "Executives", "Professionals", "Brands & Agencies"].map(
               (audience) => (
-                <div
+                <RevealItem
                   key={audience}
-                  className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-brand-800 shadow-sm"
+                  className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-brand-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-card"
                 >
                   {audience}
-                </div>
+                </RevealItem>
               ),
             )}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* Feature grid */}
       <section className="py-20">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Everything in one place"
-            title="One platform to watch, score, and protect your reputation"
-            description="NoYou turns scattered mentions into a clear picture — and tells you exactly what to do next."
-          />
+          <Reveal>
+            <SectionHeading
+              eyebrow="Everything in one place"
+              title="One platform to watch, score, and protect your reputation"
+              description="NoYou turns scattered mentions into a clear picture — and tells you exactly what to do next."
+            />
+          </Reveal>
           <div className="mt-12">
             <FeatureGrid features={FEATURES} />
           </div>
@@ -74,23 +84,30 @@ export default function HomePage() {
       {/* How it works */}
       <section className="bg-brand-900 py-20 text-white">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="How it works"
-            title={<span className="text-white">From mention to action in four steps</span>}
-            description={
-              <span className="text-brand-100">
-                Set it up in minutes. NoYou does the watching, the scoring, and
-                the recommending.
-              </span>
-            }
-          />
-          <ol className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Reveal>
+            <SectionHeading
+              eyebrow="How it works"
+              title={<span className="text-white">From mention to action in four steps</span>}
+              description={
+                <span className="text-brand-100">
+                  Set it up in minutes. NoYou does the watching, the scoring, and
+                  the recommending.
+                </span>
+              }
+            />
+          </Reveal>
+          <RevealGroup
+            as="ol"
+            className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            stagger={0.1}
+          >
             {HOW_IT_WORKS.map((step) => (
-              <li
+              <RevealItem
                 key={step.number}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6"
+                as="li"
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:border-white/25 hover:bg-white/10"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-500 text-base font-bold text-brand-950">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-cyan-400 text-base font-bold text-brand-950 shadow-ai">
                   {step.number}
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-white">
@@ -99,9 +116,9 @@ export default function HomePage() {
                 <p className="mt-2 text-sm leading-relaxed text-brand-100">
                   {step.description}
                 </p>
-              </li>
+              </RevealItem>
             ))}
-          </ol>
+          </RevealGroup>
         </div>
       </section>
 
@@ -109,7 +126,7 @@ export default function HomePage() {
       <section className="py-20">
         <div className="container-page">
           <div className="grid items-center gap-10 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-brand-50 p-8 shadow-card lg:grid-cols-2 lg:p-12">
-            <div>
+            <Reveal from="right">
               <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-accent-600">
                 New · AI Visibility
               </p>
@@ -149,10 +166,10 @@ export default function HomePage() {
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>
-            </div>
+            </Reveal>
 
             {/* Illustrative mock answer card */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lift">
+            <Reveal from="left" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lift transition-shadow hover:shadow-ai">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-4">
                 <span className="h-2.5 w-2.5 rounded-full bg-accent-500" />
                 <span className="text-sm font-semibold text-brand-900">
@@ -188,7 +205,7 @@ export default function HomePage() {
                   </dd>
                 </div>
               </dl>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -196,11 +213,13 @@ export default function HomePage() {
       {/* Pricing teaser */}
       <section className="bg-slate-50 py-20">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Pricing"
-            title="Plans for every stage"
-            description="Start free. Upgrade when you need deeper coverage, faster scans, and AI Visibility."
-          />
+          <Reveal>
+            <SectionHeading
+              eyebrow="Pricing"
+              title="Plans for every stage"
+              description="Start free. Upgrade when you need deeper coverage, faster scans, and AI Visibility."
+            />
+          </Reveal>
           <div className="mt-12">
             <PricingTable />
           </div>
@@ -216,14 +235,16 @@ export default function HomePage() {
       {/* FAQ teaser */}
       <section className="py-20">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Answers to common questions"
-            description="The essentials on what NoYou is, how it works, and how it protects your privacy."
-          />
-          <div className="mt-12">
+          <Reveal>
+            <SectionHeading
+              eyebrow="FAQ"
+              title="Answers to common questions"
+              description="The essentials on what NoYou is, how it works, and how it protects your privacy."
+            />
+          </Reveal>
+          <Reveal delay={0.1} className="mt-12">
             <FaqAccordion faqs={homeFaqs} />
-          </div>
+          </Reveal>
           <p className="mt-8 text-center text-sm text-slate-500">
             <Link href="/faq" className="font-semibold text-brand-700 hover:text-brand-800">
               Read all FAQs →

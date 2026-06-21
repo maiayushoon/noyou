@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import SectionHeading from "@/components/SectionHeading";
 import Cta from "@/components/Cta";
 import JsonLd from "@/components/JsonLd";
+import Reveal from "@/components/motion/Reveal";
+import RevealGroup from "@/components/motion/RevealGroup";
+import RevealItem from "@/components/motion/RevealItem";
 import { ABOUT, SITE } from "@/lib/content";
 import { pageMetadata, organizationJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -27,38 +30,45 @@ export default function AboutPage() {
 
       <section className="bg-gradient-to-b from-brand-50 to-white py-16 sm:py-20">
         <div className="container-page">
-          <SectionHeading
-            as="h1"
-            eyebrow="About"
-            title="We help you control your narrative"
-            description={ABOUT.mission}
-          />
+          <Reveal>
+            <SectionHeading
+              as="h1"
+              eyebrow="About"
+              title="We help you control your narrative"
+              description={ABOUT.mission}
+            />
+          </Reveal>
         </div>
       </section>
 
       {/* Story */}
       <section className="py-16">
         <div className="container-page">
-          <div className="mx-auto max-w-3xl">
+          <Reveal className="mx-auto max-w-3xl">
             <h2 className="text-2xl font-bold tracking-tight text-brand-900 sm:text-3xl">
               Our story
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-slate-600">
               {ABOUT.story}
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Values */}
       <section className="bg-slate-50 py-16">
         <div className="container-page">
-          <SectionHeading eyebrow="What we believe" title="Our values" />
-          <div className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
+          <Reveal>
+            <SectionHeading eyebrow="What we believe" title="Our values" />
+          </Reveal>
+          <RevealGroup
+            className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2"
+            stagger={0.08}
+          >
             {ABOUT.values.map((value) => (
-              <div
+              <RevealItem
                 key={value.title}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-ai"
               >
                 <h3 className="text-lg font-semibold text-brand-900">
                   {value.title}
@@ -66,16 +76,16 @@ export default function AboutPage() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   {value.description}
                 </p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* Privacy */}
       <section id="privacy" className="py-16">
         <div className="container-page">
-          <div className="mx-auto max-w-3xl">
+          <Reveal className="mx-auto max-w-3xl">
             <h2 className="text-2xl font-bold tracking-tight text-brand-900 sm:text-3xl">
               Privacy & compliance
             </h2>
@@ -87,14 +97,14 @@ export default function AboutPage() {
               fully offline using keyless sources, so no data leaves your
               environment. We never sell your data.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Terms */}
       <section id="terms" className="border-t border-slate-100 py-16">
         <div className="container-page">
-          <div className="mx-auto max-w-3xl">
+          <Reveal className="mx-auto max-w-3xl">
             <h2 className="text-2xl font-bold tracking-tight text-brand-900 sm:text-3xl">
               Terms & responsible use
             </h2>
@@ -116,7 +126,7 @@ export default function AboutPage() {
               </a>
               .
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 

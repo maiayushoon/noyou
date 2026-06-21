@@ -4,6 +4,9 @@ import PricingTable from "@/components/PricingTable";
 import FaqAccordion from "@/components/FaqAccordion";
 import Cta from "@/components/Cta";
 import JsonLd from "@/components/JsonLd";
+import Reveal from "@/components/motion/Reveal";
+import RevealGroup from "@/components/motion/RevealGroup";
+import RevealItem from "@/components/motion/RevealItem";
 import { FAQS } from "@/lib/content";
 import {
   pageMetadata,
@@ -40,12 +43,14 @@ export default function PricingPage() {
 
       <section className="bg-gradient-to-b from-brand-50 to-white py-16 sm:py-20">
         <div className="container-page">
-          <SectionHeading
-            as="h1"
-            eyebrow="Pricing"
-            title="Simple, transparent pricing"
-            description="Start free and upgrade when you need deeper coverage, faster scans, and AI Visibility. All prices in USD. No hidden fees."
-          />
+          <Reveal>
+            <SectionHeading
+              as="h1"
+              eyebrow="Pricing"
+              title="Simple, transparent pricing"
+              description="Start free and upgrade when you need deeper coverage, faster scans, and AI Visibility. All prices in USD. No hidden fees."
+            />
+          </Reveal>
         </div>
       </section>
 
@@ -58,11 +63,16 @@ export default function PricingPage() {
       {/* Comparison highlights */}
       <section className="bg-slate-50 py-16">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="What changes as you grow"
-            title="Pick the plan that matches your risk"
-          />
-          <div className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-3">
+          <Reveal>
+            <SectionHeading
+              eyebrow="What changes as you grow"
+              title="Pick the plan that matches your risk"
+            />
+          </Reveal>
+          <RevealGroup
+            className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-3"
+            stagger={0.08}
+          >
             {[
               {
                 title: "Coverage",
@@ -83,9 +93,9 @@ export default function PricingPage() {
                 premium: "Real-time alerts",
               },
             ].map((row) => (
-              <div
+              <RevealItem
                 key={row.title}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-ai"
               >
                 <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
                   {row.title}
@@ -104,22 +114,24 @@ export default function PricingPage() {
                     <dd className="text-right font-medium text-slate-800">{row.premium}</dd>
                   </div>
                 </dl>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* Pricing FAQ */}
       <section className="py-16">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="Pricing FAQ"
-            title="Questions about plans & billing"
-          />
-          <div className="mt-10">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Pricing FAQ"
+              title="Questions about plans & billing"
+            />
+          </Reveal>
+          <Reveal delay={0.1} className="mt-10">
             <FaqAccordion faqs={pricingFaqs} />
-          </div>
+          </Reveal>
         </div>
       </section>
 
