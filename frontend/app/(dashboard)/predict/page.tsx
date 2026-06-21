@@ -155,7 +155,7 @@ export default function PredictPage() {
               <ResultCard result={result} />
             ) : (
               <Card className="flex h-full flex-col items-center justify-center px-6 py-16 text-center">
-                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
+                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ai-gradient-soft text-amber-200 ring-1 ring-inset ring-white/[0.08]">
                   <Sparkles className="h-6 w-6" aria-hidden />
                 </span>
                 <p className="text-sm font-semibold text-slate-100">

@@ -18,14 +18,14 @@ const config: Config = {
           deep: "#0b1220",
           hover: "#1e293b",
         },
-        canvas: "#07070b",
+        canvas: "#12100D",
         // Hairline (also available as a borderColor) — usable as bg-hairline too.
-        hairline: "rgba(255,255,255,.08)",
+        hairline: "rgba(245,238,228,.09)",
         // AI gradient stops
         ai: {
-          indigo: "#6366f1",
-          violet: "#8b5cf6",
-          cyan: "#22d3ee",
+          indigo: "#C8A24C",
+          violet: "#E8D7A8",
+          cyan: "#F0E3BE",
         },
         // Band / status semantic colors
         positive: "#10b981",
@@ -35,21 +35,21 @@ const config: Config = {
       },
       backgroundImage: {
         "ai-gradient":
-          "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #22d3ee 100%)",
+          "linear-gradient(135deg, #F0DFB0 0%, #D9B86A 48%, #C8A24C 100%)",
         "ai-gradient-soft":
-          "linear-gradient(135deg, rgba(99,102,241,.12) 0%, rgba(139,92,246,.12) 50%, rgba(34,211,238,.12) 100%)",
+          "linear-gradient(135deg, rgba(240,223,176,.10) 0%, rgba(217,184,106,.10) 48%, rgba(200,162,76,.10) 100%)",
       },
       borderColor: {
-        hairline: "rgba(255,255,255,.08)",
+        hairline: "rgba(245,238,228,.09)",
       },
       boxShadow: {
         card: "0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3)",
         "card-hover":
-          "0 0 0 1px rgba(255,255,255,.06), 0 0 40px -8px rgba(139,92,246,.45)",
-        ai: "0 6px 24px rgba(99,102,241,.35)",
+          "0 0 0 1px rgba(245,238,228,.06), 0 0 44px -10px rgba(216,184,106,.40)",
+        ai: "0 6px 24px rgba(200,162,76,.30)",
       },
       borderRadius: {
-        xl: "0.875rem",
+        xl: "1rem",
       },
       keyframes: {
         shimmer: {

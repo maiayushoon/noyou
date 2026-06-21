@@ -27,7 +27,7 @@ export default function FaqPage() {
         id="ld-faq-breadcrumb"
       />
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0b0b14] to-[#07070b] py-16 sm:py-20">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#1A160F] to-[#12100D] py-16 sm:py-20">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-ai-indigo/10 blur-3xl"
@@ -56,14 +56,14 @@ export default function FaqPage() {
             delay={0.1}
             className="mx-auto mt-12 max-w-3xl rounded-xl border border-white/[0.06] bg-white/[0.03] p-6 backdrop-blur-sm"
           >
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-indigo-300">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-amber-200">
               Still have questions?
             </h2>
             <p className="mt-2 text-sm text-slate-400">
               Reach the team at{" "}
               <a
                 href="mailto:hello@noyou.app"
-                className="font-semibold text-indigo-300 hover:text-indigo-200"
+                className="font-semibold text-amber-200 hover:text-amber-100"
               >
                 hello@noyou.app
               </a>{" "}

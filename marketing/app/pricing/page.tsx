@@ -41,7 +41,7 @@ export default function PricingPage() {
         id="ld-pricing-breadcrumb"
       />
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0b0b14] to-[#07070b] py-16 sm:py-20">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#1A160F] to-[#12100D] py-16 sm:py-20">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-ai-indigo/10 blur-3xl"
@@ -101,7 +101,7 @@ export default function PricingPage() {
                 key={row.title}
                 className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-white/[0.12] hover:shadow-ai-glow"
               >
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-indigo-300">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-amber-200">
                   {row.title}
                 </h3>
                 <dl className="mt-4 space-y-3 text-sm">

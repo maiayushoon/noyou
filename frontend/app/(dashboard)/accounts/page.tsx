@@ -112,7 +112,7 @@ export default function AccountsPage() {
       <FadeIn>
         <Card className="mb-6 flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-ai-gradient-soft text-amber-200 ring-1 ring-inset ring-white/[0.08]">
               <CreditCard className="h-5 w-5" aria-hidden />
             </span>
             <div>

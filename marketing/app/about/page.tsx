@@ -28,7 +28,7 @@ export default function AboutPage() {
         id="ld-about-breadcrumb"
       />
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0b0b14] to-[#07070b] py-16 sm:py-20">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#1A160F] to-[#12100D] py-16 sm:py-20">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-ai-indigo/10 blur-3xl"
@@ -124,7 +124,7 @@ export default function AboutPage() {
               Questions about privacy, terms, or data requests? Email{" "}
               <a
                 href={`mailto:${SITE.email}`}
-                className="font-semibold text-indigo-300 hover:text-indigo-200"
+                className="font-semibold text-amber-200 hover:text-amber-100"
               >
                 {SITE.email}
               </a>

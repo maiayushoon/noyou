@@ -190,7 +190,7 @@ export function AuditChecklist({
                     variant="ghost"
                     size="sm"
                     rightIcon={<ArrowRight className="h-3.5 w-3.5" />}
-                    className="text-ai-indigo hover:bg-indigo-50"
+                    className="text-ai-indigo hover:bg-[#C8A24C]/10"
                   >
                     {step.cta}
                   </Button>

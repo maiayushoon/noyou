@@ -39,13 +39,13 @@ export default function Cta({
           <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href={primaryHref}
-              className="inline-flex w-full items-center justify-center rounded-lg bg-ai-gradient px-6 py-3 text-base font-semibold text-white shadow-ai transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ai-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-[#07070b] sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-lg bg-ai-gradient px-6 py-3 text-base font-semibold text-white shadow-ai transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ai-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-[#12100D] sm:w-auto"
             >
               {primaryLabel}
             </a>
             <a
               href={secondaryHref}
-              className="inline-flex w-full items-center justify-center rounded-lg border border-white/15 px-6 py-3 text-base font-semibold text-slate-100 transition-colors hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ai-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-[#07070b] sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-lg border border-white/15 px-6 py-3 text-base font-semibold text-slate-100 transition-colors hover:border-white/25 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ai-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-[#12100D] sm:w-auto"
             >
               {secondaryLabel}
             </a>

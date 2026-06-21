@@ -340,7 +340,7 @@ function ProviderCard({
               className={cn(
                 "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
                 isConnected
-                  ? "bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]"
+                  ? "bg-ai-gradient-soft text-amber-200 ring-1 ring-inset ring-white/[0.08]"
                   : "bg-white/[0.06] text-slate-400"
               )}
             >

@@ -291,9 +291,9 @@ function ReputationRing({ reduce }: { reduce: boolean }) {
       >
         <defs>
           <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6366f1" />
-            <stop offset="50%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#22d3ee" />
+            <stop offset="0%" stopColor="#C8A24C" />
+            <stop offset="50%" stopColor="#D9B86A" />
+            <stop offset="100%" stopColor="#F0E3BE" />
           </linearGradient>
           <filter id="ringGlow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="4" result="blur" />
@@ -357,7 +357,7 @@ function ReputationRing({ reduce }: { reduce: boolean }) {
         className="relative grid h-[150px] w-[150px] place-items-center rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm"
         style={{
           boxShadow:
-            "inset 0 1px 0 rgba(255,255,255,0.18), 0 20px 50px rgba(99,102,241,0.35)",
+            "inset 0 1px 0 rgba(255,255,255,0.18), 0 20px 50px rgba(200,162,76,0.35)",
         }}
       >
         <div className="flex flex-col items-center">
@@ -477,11 +477,11 @@ function Avatar({
   const [failed, setFailed] = useState(false);
   // Per-avatar gradient fallback hues for variety.
   const fallbackGradients = [
-    "from-indigo-400 to-violet-500",
-    "from-violet-400 to-fuchsia-500",
-    "from-cyan-400 to-sky-500",
-    "from-emerald-400 to-teal-500",
-    "from-rose-400 to-orange-400",
+    "from-[#C8A24C] to-[#E8D7A8]",
+    "from-[#E8D7A8] to-[#C8A24C]",
+    "from-[#F0E3BE] to-[#D9B86A]",
+    "from-[#A9853A] to-[#E8D7A8]",
+    "from-[#86692E] to-[#C8A24C]",
   ] as const;
   const grad = fallbackGradients[index % fallbackGradients.length]!;
 

@@ -4,29 +4,29 @@
 
 @layer base {
   :root {
-    --brand: #1f4e79;
-    --accent: #16b8a6;
+    --brand: #C8A24C;
+    --accent: #D9B86A;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
-    /* Deep near-black so the address bar / overscroll matches the dark theme. */
-    background-color: #07070b;
+    /* Warm charcoal so the address bar / overscroll matches the dark theme. */
+    background-color: #12100D;
     color-scheme: dark;
   }
 
   body {
     @apply bg-ai-radial font-sans text-slate-200 antialiased;
-    /* Deep near-black base with a very subtle ai-gradient glow on top. */
-    background-color: #07070b;
+    /* Warm charcoal base with a very subtle gold ai-gradient glow on top. */
+    background-color: #12100D;
   }
 
-  /* Dark, sleek scrollbar to match the premium theme. */
+  /* Warm dark, sleek scrollbar to match the premium theme. */
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+    scrollbar-color: rgba(245, 238, 228, 0.18) transparent;
   }
   *::-webkit-scrollbar {
     width: 10px;
@@ -36,18 +36,18 @@
     background: transparent;
   }
   *::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: rgba(245, 238, 228, 0.14);
     border-radius: 9999px;
     border: 2px solid transparent;
     background-clip: padding-box;
   }
   *::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.24);
+    background-color: rgba(245, 238, 228, 0.24);
   }
 
-  /* Tinted selection that reads against the dark surfaces. */
+  /* Tinted gold selection that reads against the dark surfaces. */
   ::selection {
-    background-color: rgba(139, 92, 246, 0.35);
+    background-color: rgba(200, 162, 76, 0.35);
     color: #f8fafc;
   }
 

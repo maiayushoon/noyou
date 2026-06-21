@@ -321,7 +321,7 @@ function ActionRow({
 
 function StatusTag({ status }: { status: CleanupStatus }) {
   const map: Record<CleanupStatus, string> = {
-    suggested: "bg-ai-indigo/15 text-indigo-300",
+    suggested: "bg-ai-indigo/15 text-amber-200",
     in_progress: "bg-amber-500/15 text-amber-300",
     completed: "bg-emerald-500/15 text-emerald-300",
     dismissed: "bg-white/[0.06] text-slate-400",

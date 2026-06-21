@@ -132,7 +132,7 @@ export default function HomePage() {
         <div className="container-page">
           <div className="grid items-center gap-10 rounded-2xl border border-white/[0.06] bg-white/[0.03] p-8 shadow-ai backdrop-blur-sm lg:grid-cols-2 lg:p-12">
             <Reveal from="right">
-              <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-cyan-300">
+              <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-amber-200">
                 New · AI Visibility
               </p>
               <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -176,7 +176,7 @@ export default function HomePage() {
             {/* Illustrative mock answer card */}
             <Reveal from="left" className="rounded-xl border border-white/[0.06] bg-white/[0.05] p-6 shadow-ai backdrop-blur-sm transition-all hover:border-white/[0.12]">
               <div className="flex items-center gap-2 border-b border-white/[0.08] pb-4">
-                <span className="h-2.5 w-2.5 rounded-full bg-cyan-400" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#E8D7A8]" />
                 <span className="text-sm font-semibold text-white">
                   AI Visibility report
                 </span>
@@ -230,7 +230,7 @@ export default function HomePage() {
           </div>
           <p className="mt-8 text-center text-sm text-slate-500">
             All prices in USD.{" "}
-            <Link href="/pricing" className="font-semibold text-indigo-300 hover:text-indigo-200">
+            <Link href="/pricing" className="font-semibold text-amber-200 hover:text-amber-100">
               Compare plans in detail →
             </Link>
           </p>
@@ -251,7 +251,7 @@ export default function HomePage() {
             <FaqAccordion faqs={homeFaqs} />
           </Reveal>
           <p className="mt-8 text-center text-sm text-slate-500">
-            <Link href="/faq" className="font-semibold text-indigo-300 hover:text-indigo-200">
+            <Link href="/faq" className="font-semibold text-amber-200 hover:text-amber-100">
               Read all FAQs →
             </Link>
           </p>

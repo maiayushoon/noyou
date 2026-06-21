@@ -69,9 +69,9 @@ export function ScoreRing({
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         <defs>
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6366f1" />
-            <stop offset="50%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#22d3ee" />
+            <stop offset="0%" stopColor="#C8A24C" />
+            <stop offset="50%" stopColor="#D9B86A" />
+            <stop offset="100%" stopColor="#F0E3BE" />
           </linearGradient>
         </defs>
         {/* Track */}

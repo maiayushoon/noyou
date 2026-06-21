@@ -134,11 +134,11 @@ export default function TeamsPage() {
                             className={cn(
                               "flex w-full items-center gap-3 rounded-lg border p-3 text-left transition-colors",
                               String(o.id) === activeOrg
-                                ? "border-ai-indigo/40 bg-ai-gradient-soft shadow-[0_0_40px_-12px_rgba(139,92,246,0.45)]"
+                                ? "border-ai-indigo/40 bg-ai-gradient-soft shadow-[0_0_40px_-12px_rgba(216,184,106,0.45)]"
                                 : "border-white/[0.08] bg-white/[0.03] hover:border-white/[0.12] hover:bg-white/[0.06]"
                             )}
                           >
-                            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] text-indigo-300 ring-1 ring-inset ring-white/[0.10]">
+                            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.06] text-amber-200 ring-1 ring-inset ring-white/[0.10]">
                               <Building2 className="h-4 w-4" aria-hidden />
                             </span>
                             <div className="min-w-0 flex-1">
@@ -166,7 +166,7 @@ export default function TeamsPage() {
               <MembersCard org={selected} />
             ) : (
               <Card className="flex h-full flex-col items-center justify-center px-6 py-16 text-center">
-                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
+                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-ai-gradient-soft text-amber-200 ring-1 ring-inset ring-white/[0.08]">
                   <Users className="h-6 w-6" aria-hidden />
                 </span>
                 <p className="text-sm font-semibold text-slate-100">Select an organization</p>
@@ -289,7 +289,7 @@ function MembersCard({ org }: { org: Organization }) {
               {members.map((m) => (
                 <FadeInItem key={String(m.id)}>
                   <div className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.03] p-3 transition-colors hover:border-white/[0.12]">
-                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ai-gradient-soft text-sm font-semibold text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
+                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ai-gradient-soft text-sm font-semibold text-amber-200 ring-1 ring-inset ring-white/[0.08]">
                       {m.email.charAt(0).toUpperCase()}
                     </span>
                     <div className="min-w-0 flex-1">

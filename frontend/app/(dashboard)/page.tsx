@@ -134,7 +134,7 @@ export default function OverviewPage() {
           value={data?.total_mentions ?? 0}
           hint="Across all sources"
           icon={<MessageSquareText className="h-4.5 w-4.5" />}
-          accentClassName="bg-ai-indigo/15 text-indigo-300"
+          accentClassName="bg-ai-indigo/15 text-amber-200"
         />
         <Stat
           index={1}
@@ -161,7 +161,7 @@ export default function OverviewPage() {
           value={data?.active_cleanup_actions ?? 0}
           hint="Suggested actions"
           icon={<Brush className="h-4.5 w-4.5" />}
-          accentClassName="bg-ai-violet/15 text-violet-300"
+          accentClassName="bg-ai-violet/15 text-amber-200"
         />
       </div>
 

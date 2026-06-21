@@ -30,7 +30,7 @@ export default function Footer() {
             </p>
             <a
               href={`mailto:${SITE.email}`}
-              className="mt-4 inline-block text-sm font-medium text-indigo-300 hover:text-indigo-200"
+              className="mt-4 inline-block text-sm font-medium text-amber-200 hover:text-amber-100"
             >
               {SITE.email}
             </a>

@@ -39,7 +39,7 @@ export default function VerifyEmailPage() {
               ? "bg-emerald-500/15 text-emerald-300 ring-emerald-500/30"
               : state === "error"
               ? "bg-red-500/15 text-red-300 ring-red-500/30"
-              : "bg-ai-indigo/15 text-indigo-300 ring-white/[0.08]"
+              : "bg-ai-indigo/15 text-amber-200 ring-white/[0.08]"
           }`}
         >
           {state === "loading" ? (

@@ -119,11 +119,11 @@ export function ConnectedAccounts() {
 /* --------------------------------- Avatar --------------------------------- */
 
 const FALLBACK_GRADIENTS = [
-  "from-indigo-500 to-violet-500",
-  "from-violet-500 to-cyan-500",
-  "from-cyan-500 to-indigo-500",
-  "from-fuchsia-500 to-indigo-500",
-  "from-sky-500 to-violet-500",
+  "from-[#C8A24C] to-[#E8D7A8]",
+  "from-[#E8D7A8] to-[#F0E3BE]",
+  "from-[#F0E3BE] to-[#C8A24C]",
+  "from-[#A9853A] to-[#C8A24C]",
+  "from-[#86692E] to-[#E8D7A8]",
 ];
 
 function Avatar({ connection, index }: { connection: Connection; index: number }) {

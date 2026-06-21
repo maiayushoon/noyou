@@ -28,7 +28,7 @@ export default function FeaturesPage() {
         id="ld-features-breadcrumb"
       />
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#0b0b14] to-[#07070b] py-16 sm:py-20">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#1A160F] to-[#12100D] py-16 sm:py-20">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-ai-indigo/10 blur-3xl"
@@ -55,7 +55,7 @@ export default function FeaturesPage() {
       <section id="pre-post-check" className="border-y border-white/[0.06] bg-white/[0.02] py-20">
         <div className="container-page grid items-center gap-10 lg:grid-cols-2">
           <Reveal from="right">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-cyan-300">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-amber-200">
               Predictive
             </p>
             <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -142,7 +142,7 @@ export default function FeaturesPage() {
             </dl>
           </Reveal>
           <Reveal from="left" className="order-1 lg:order-2">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-cyan-300">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-amber-200">
               AEO / GEO
             </p>
             <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -269,7 +269,7 @@ export default function FeaturesPage() {
           <Reveal>
             <p className="mt-10 text-center text-sm text-slate-500">
               Ready to see your score?{" "}
-              <Link href="/pricing" className="font-semibold text-indigo-300 hover:text-indigo-200">
+              <Link href="/pricing" className="font-semibold text-amber-200 hover:text-amber-100">
                 View pricing →
               </Link>
             </p>

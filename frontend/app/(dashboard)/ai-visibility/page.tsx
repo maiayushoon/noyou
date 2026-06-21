@@ -133,7 +133,7 @@ export default function AiVisibilityPage() {
                       <ol className="space-y-3">
                         {data.recommendations.map((r, i) => (
                           <li key={i} className="flex items-start gap-3">
-                            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ai-gradient-soft text-indigo-300 ring-1 ring-inset ring-white/[0.08]">
+                            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ai-gradient-soft text-amber-200 ring-1 ring-inset ring-white/[0.08]">
                               <Lightbulb className="h-3.5 w-3.5" aria-hidden />
                             </span>
                             <p className="text-sm text-slate-300">{r}</p>

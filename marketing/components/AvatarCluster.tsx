@@ -15,11 +15,11 @@ type AvatarSpec = {
 };
 
 const AVATARS: AvatarSpec[] = [
-  { img: 12, initials: "AR", gradient: "from-indigo-500 to-violet-500", label: "NoYou member" },
-  { img: 32, initials: "JL", gradient: "from-violet-500 to-fuchsia-500", label: "NoYou member" },
-  { img: 5, initials: "MP", gradient: "from-cyan-500 to-sky-500", label: "NoYou member" },
-  { img: 47, initials: "SK", gradient: "from-sky-500 to-indigo-500", label: "NoYou member" },
-  { img: 60, initials: "DT", gradient: "from-fuchsia-500 to-rose-500", label: "NoYou member" },
+  { img: 12, initials: "AR", gradient: "from-[#C8A24C] to-[#E8D7A8]", label: "NoYou member" },
+  { img: 32, initials: "JL", gradient: "from-[#E8D7A8] to-[#C8A24C]", label: "NoYou member" },
+  { img: 5, initials: "MP", gradient: "from-[#F0E3BE] to-[#D9B86A]", label: "NoYou member" },
+  { img: 47, initials: "SK", gradient: "from-[#A9853A] to-[#C8A24C]", label: "NoYou member" },
+  { img: 60, initials: "DT", gradient: "from-[#A9853A] to-[#E8D7A8]", label: "NoYou member" },
 ];
 
 function Avatar({ spec, index }: { spec: AvatarSpec; index: number }) {

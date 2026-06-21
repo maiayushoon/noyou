@@ -67,7 +67,7 @@ export function HeroOrb({
             : { duration: 6, repeat: Infinity, ease: "easeInOut" }
         }
       />
-      {/* A second, tighter cyan-tinted bloom for depth */}
+      {/* A second, tighter pale-gold-tinted bloom for depth */}
       <div
         aria-hidden
         className="pointer-events-none absolute rounded-full bg-ai-cyan/20 blur-xl"

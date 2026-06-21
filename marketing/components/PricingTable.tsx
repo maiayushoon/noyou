@@ -36,7 +36,7 @@ export default function PricingTable() {
 
             <a
               href={plan.cta.href}
-              className={`mt-5 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07070b] ${
+              className={`mt-5 inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#12100D] ${
                 plan.featured
                   ? "bg-ai-gradient text-white shadow-ai hover:-translate-y-0.5 focus-visible:ring-ai-indigo"
                   : "border border-white/10 text-slate-100 hover:border-white/20 hover:bg-white/[0.06] focus-visible:ring-ai-indigo"

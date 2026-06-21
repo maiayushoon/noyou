@@ -12,36 +12,38 @@ const config: Config = {
         // Direct, single-token references to the brand gradient stops so dark
         // surfaces can lean on the ai-* accent palette (focus rings, glows).
         ai: {
-          indigo: "#6366f1",
-          violet: "#8b5cf6",
-          cyan: "#22d3ee",
+          indigo: "#C8A24C",
+          violet: "#E8D7A8",
+          cyan: "#F0E3BE",
         },
+        // Brand ramp repointed navy -> warm gold (dark 950 .. pale 50).
         brand: {
-          DEFAULT: "#1f4e79",
-          50: "#eef4fb",
-          100: "#d6e4f3",
-          200: "#aec9e7",
-          300: "#7ea9d6",
-          400: "#4f87c2",
-          500: "#2f6aa8",
-          600: "#1f4e79",
-          700: "#1a4366",
-          800: "#163653",
-          900: "#122b43",
-          950: "#0b1b2b",
+          DEFAULT: "#C8A24C",
+          50: "#FAF4E4",
+          100: "#F4E8C9",
+          200: "#EAD6A2",
+          300: "#E0C57C",
+          400: "#D9B86A",
+          500: "#C8A24C",
+          600: "#A9853A",
+          700: "#86692E",
+          800: "#5F4B22",
+          900: "#3C3017",
+          950: "#241D0E",
         },
+        // Accent ramp repointed teal -> champagne/gold.
         accent: {
-          DEFAULT: "#16b8a6",
-          50: "#effcf9",
-          100: "#c9f6ee",
-          200: "#96ecde",
-          300: "#5cdac9",
-          400: "#2fc2b2",
-          500: "#16b8a6",
-          600: "#0d8b80",
-          700: "#107068",
-          800: "#125954",
-          900: "#134a47",
+          DEFAULT: "#D9B86A",
+          50: "#FBF6E8",
+          100: "#F6ECCF",
+          200: "#F0E3BE",
+          300: "#E8D7A8",
+          400: "#DFC68A",
+          500: "#D9B86A",
+          600: "#C8A24C",
+          700: "#A9853A",
+          800: "#86692E",
+          900: "#5F4B22",
         },
       },
       fontFamily: {
@@ -61,27 +63,27 @@ const config: Config = {
         content: "72rem",
       },
       borderRadius: {
-        xl: "0.875rem",
+        xl: "1rem",
         "2xl": "1.25rem",
       },
       backgroundImage: {
-        // Signature AI brand gradient: indigo -> violet -> cyan.
+        // Signature brand gradient: champagne -> gold.
         "ai-gradient":
-          "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #22d3ee 100%)",
+          "linear-gradient(135deg, #F0DFB0 0%, #D9B86A 48%, #C8A24C 100%)",
         "ai-gradient-soft":
-          "linear-gradient(135deg, rgba(99,102,241,0.22) 0%, rgba(139,92,246,0.18) 50%, rgba(34,211,238,0.22) 100%)",
-        // Very subtle radial glow washes for deep, near-black page depth.
+          "linear-gradient(135deg, rgba(240,223,176,0.10) 0%, rgba(217,184,106,0.10) 48%, rgba(200,162,76,0.10) 100%)",
+        // Very subtle warm gold radial glow washes for deep, warm charcoal depth.
         "ai-radial":
-          "radial-gradient(60rem 40rem at 50% -10%, rgba(99,102,241,0.10), transparent 60%), radial-gradient(50rem 36rem at 100% 0%, rgba(34,211,238,0.06), transparent 55%)",
+          "radial-gradient(60rem 40rem at 50% -10%, rgba(200,162,76,0.06), transparent 60%), radial-gradient(50rem 36rem at 100% 0%, rgba(200,162,76,0.06), transparent 55%)",
       },
       boxShadow: {
         card: "0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35)",
         lift: "0 12px 40px rgba(0, 0, 0, 0.45)",
-        // Glowing halo for the 3D centerpiece and gradient buttons.
-        ai: "0 18px 60px -12px rgba(99, 102, 241, 0.55), 0 8px 24px -8px rgba(34, 211, 238, 0.4)",
-        // Soft accent glow used on hover for sleek glass surfaces.
-        "ai-glow": "0 0 40px -8px rgba(139, 92, 246, 0.45)",
-        hairline: "0 0 0 1px rgba(255, 255, 255, 0.08)",
+        // Glowing gold halo for the 3D centerpiece and gradient buttons.
+        ai: "0 18px 60px -12px rgba(200, 162, 76, 0.40), 0 8px 24px -8px rgba(216, 184, 106, 0.30)",
+        // Soft gold glow used on hover for sleek glass surfaces.
+        "ai-glow": "0 0 44px -10px rgba(216, 184, 106, 0.40)",
+        hairline: "0 0 0 1px rgba(245, 238, 228, 0.09)",
       },
       keyframes: {
         "fade-up": {

@@ -74,15 +74,15 @@ export default function ReputationOrb() {
       {/* Glowing blurred gradient orbs behind the centerpiece. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-6 top-6 h-56 w-56 rounded-full bg-indigo-500/40 blur-3xl"
+        className="pointer-events-none absolute -left-6 top-6 h-56 w-56 rounded-full bg-[#C8A24C]/40 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-4 bottom-2 h-52 w-52 rounded-full bg-cyan-400/35 blur-3xl"
+        className="pointer-events-none absolute -right-4 bottom-2 h-52 w-52 rounded-full bg-[#E8D7A8]/35 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/35 blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D9B86A]/35 blur-3xl"
       />
 
       <motion.div
@@ -117,19 +117,19 @@ export default function ReputationOrb() {
         >
           <svg
             viewBox="0 0 240 240"
-            className="h-[78%] w-[78%] drop-shadow-[0_18px_40px_rgba(99,102,241,0.35)]"
+            className="h-[78%] w-[78%] drop-shadow-[0_18px_40px_rgba(200,162,76,0.35)]"
             aria-hidden="true"
           >
             <defs>
               <linearGradient id="orb-ring" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#6366f1" />
-                <stop offset="50%" stopColor="#8b5cf6" />
-                <stop offset="100%" stopColor="#22d3ee" />
+                <stop offset="0%" stopColor="#C8A24C" />
+                <stop offset="50%" stopColor="#E8D7A8" />
+                <stop offset="100%" stopColor="#F0E3BE" />
               </linearGradient>
               <radialGradient id="orb-core" cx="50%" cy="42%" r="65%">
-                <stop offset="0%" stopColor="#1a1a2e" />
-                <stop offset="70%" stopColor="#101019" />
-                <stop offset="100%" stopColor="#0b0b14" />
+                <stop offset="0%" stopColor="#241D0E" />
+                <stop offset="70%" stopColor="#1A160F" />
+                <stop offset="100%" stopColor="#12100D" />
               </radialGradient>
             </defs>
 
@@ -189,10 +189,10 @@ export default function ReputationOrb() {
             x: reduceMotion ? 0 : shiftMid,
           }}
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-300">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-200">
             Reputation
           </span>
-          <span className="bg-gradient-to-br from-indigo-400 via-violet-400 to-cyan-300 bg-clip-text text-6xl font-black leading-none text-transparent sm:text-7xl">
+          <span className="bg-gradient-to-br from-[#F0DFB0] via-[#E8D7A8] to-[#C8A24C] bg-clip-text text-6xl font-black leading-none text-transparent sm:text-7xl">
             {SCORE}
           </span>
           <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-bold text-emerald-300 ring-1 ring-emerald-500/30">
@@ -232,7 +232,7 @@ export default function ReputationOrb() {
             y: reduceMotion ? 0 : shiftFrontY,
           }}
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-500 text-white">
+          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[#E8D7A8] to-[#C8A24C] text-white">
             <Eye className="h-4 w-4" aria-hidden="true" />
           </span>
           <span className="text-left">
@@ -247,7 +247,7 @@ export default function ReputationOrb() {
 
         {/* Small sparkle accent. */}
         <motion.div
-          className="absolute right-10 top-2 text-violet-400"
+          className="absolute right-10 top-2 text-amber-200"
           style={{ transform: "translateZ(90px)" }}
           animate={reduceMotion ? undefined : { rotate: [0, 12, 0], scale: [1, 1.12, 1] }}
           transition={

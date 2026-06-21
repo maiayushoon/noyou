@@ -118,8 +118,8 @@ export default function TrendsPage() {
                   <AreaChart data={scoreSeries} margin={{ left: -18, right: 8, top: 8 }}>
                     <defs>
                       <linearGradient id="scoreFill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#6366f1" stopOpacity={0.35} />
-                        <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
+                        <stop offset="0%" stopColor="#C8A24C" stopOpacity={0.35} />
+                        <stop offset="100%" stopColor="#C8A24C" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <XAxis
@@ -140,7 +140,7 @@ export default function TrendsPage() {
                     <Area
                       type="monotone"
                       dataKey="score"
-                      stroke="#6366f1"
+                      stroke="#C8A24C"
                       strokeWidth={2.5}
                       fill="url(#scoreFill)"
                     />
@@ -177,8 +177,8 @@ export default function TrendsPage() {
                         axisLine={false}
                         width={32}
                       />
-                      <Tooltip content={<ChartTooltip suffix=" mentions" />} cursor={{ fill: "rgba(99,102,241,0.06)" }} />
-                      <Bar dataKey="count" fill="#8b5cf6" radius={[4, 4, 0, 0]} maxBarSize={40} />
+                      <Tooltip content={<ChartTooltip suffix=" mentions" />} cursor={{ fill: "rgba(200,162,76,0.06)" }} />
+                      <Bar dataKey="count" fill="#E8D7A8" radius={[4, 4, 0, 0]} maxBarSize={40} />
                     </BarChart>
                   </ResponsiveContainer>
                 )}
@@ -207,7 +207,7 @@ export default function TrendsPage() {
                       axisLine={false}
                       width={32}
                     />
-                    <Tooltip content={<ChartTooltip suffix="" />} cursor={{ fill: "rgba(99,102,241,0.06)" }} />
+                    <Tooltip content={<ChartTooltip suffix="" />} cursor={{ fill: "rgba(200,162,76,0.06)" }} />
                     <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={56}>
                       {sentimentData.map((d) => (
                         <Cell key={d.key} fill={SENTIMENT_COLORS[d.key]} />
@@ -227,7 +227,7 @@ export default function TrendsPage() {
                 <CardTitle>Mentions by source</CardTitle>
               </CardHeader>
               <CardContent>
-                <DistributionList data={sourceData} color="#6366f1" emptyLabel="No mentions yet" />
+                <DistributionList data={sourceData} color="#C8A24C" emptyLabel="No mentions yet" />
               </CardContent>
             </Card>
           </FadeIn>

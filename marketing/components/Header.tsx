@@ -8,7 +8,7 @@ import { NAV_LINKS, SITE } from "@/lib/content";
  */
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-[#07070b]/80 backdrop-blur supports-[backdrop-filter]:bg-[#07070b]/60">
+    <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-[#12100D]/80 backdrop-blur supports-[backdrop-filter]:bg-[#12100D]/60">
       <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
@@ -49,7 +49,7 @@ export default function Header() {
           </a>
           <a
             href={`${SITE.appUrl}/signup`}
-            className="inline-flex items-center justify-center rounded-lg bg-ai-gradient px-4 py-2 text-sm font-semibold text-white shadow-ai transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+            className="inline-flex items-center justify-center rounded-lg bg-ai-gradient px-4 py-2 text-sm font-semibold text-white shadow-ai transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ai-indigo focus-visible:ring-offset-2"
           >
             Get started
           </a>
@@ -75,7 +75,7 @@ export default function Header() {
               <line x1="3" y1="18" x2="21" y2="18" />
             </svg>
           </summary>
-          <div className="absolute right-0 mt-2 w-56 rounded-xl border border-white/[0.08] bg-[#0c0c12]/95 p-2 shadow-lift backdrop-blur-md">
+          <div className="absolute right-0 mt-2 w-56 rounded-xl border border-white/[0.08] bg-[#1A160F]/95 p-2 shadow-lift backdrop-blur-md">
             <nav aria-label="Mobile" className="flex flex-col">
               {NAV_LINKS.map((link) => (
                 <Link

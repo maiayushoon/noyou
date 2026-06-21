@@ -248,7 +248,7 @@ function LeaderRow({ entry, rank }: { entry: BenchmarkEntry; rank: number }) {
       className={cn(
         "rounded-xl border p-4 transition-colors",
         entry.is_you
-          ? "border-ai-indigo/40 bg-ai-gradient-soft shadow-[0_0_40px_-12px_rgba(139,92,246,0.45)]"
+          ? "border-ai-indigo/40 bg-ai-gradient-soft shadow-[0_0_40px_-12px_rgba(216,184,106,0.45)]"
           : "border-white/[0.08] bg-white/[0.03] hover:border-white/[0.12]"
       )}
     >
